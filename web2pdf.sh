@@ -32,3 +32,24 @@ THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 # END IMPORTS #
 
 # BEGIN web2pdf.sh #
+
+DEFINE_string 'url' 'https://www.gnu.org/licenses/gpl-3.0-standalone.html' 'The URL you wish to convert into a document' u
+
+# parse command line
+FLAGS "$@" || exit 1
+eval set -- "${FLAGS_ARGV}"
+
+
+export URL="${FLAGS_url}"
+
+export WEB2PDF_DIR="${HOME}/.web2pdf"
+
+mkdirifnotexist "$WEB2PDF_DIR"
+
+generate_markdown ${URL}
+
+
+
+
+
+

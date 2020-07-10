@@ -33,6 +33,7 @@ THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 # BEGIN helper_functions.sh #
 
 export WEB2PDF_DIR="/tmp/web2pdf"
+export OUTPUT_DIR="${HOME}/.web2pdf"
 
 # _echo_err
 # args:
@@ -48,11 +49,10 @@ function _echo_debug() {
 	fi
 }
 
-
 function pandoc_get_md() {
 	local URL=${1}
 	local OUT_FILE=${1}
-	pandoc -f html -t markdown -o $OUT_FILE "${URL}"
+	pandoc -f html -t markdown -o "$OUT_FILE" "${URL}"
 }
 
 function mkdirifnotexist () {
@@ -102,11 +102,64 @@ function pylist_get_range() {
 
 function create_dirs_from_list() {
     local DIRS=${1}
-    _echo_debug "DIRS=${DIRS}"
+    _echo_err "DIRS=${DIRS}"
     local PATH_DIR=${2}
     for i in ${DIRS} ; do
 	PATH_DIR="${PATH_DIR}/$i"
-	_echo_debug "Making directory ${PATH_DIR}"
+	_echo_err "Making directory ${PATH_DIR}"
 	mkdirifnotexist "${PATH_DIR}"
     done
 }
+
+function curl_to_file() {
+	local URL=${1}
+	local OUTPUT_FILE=${2}
+	_echo_err "curl -s ${URL} -o ${OUTPUT_FILE}"
+	curl -s ${URL} -o ${OUTPUT_FILE}
+}
+
+function url_to_dir_list() {
+	local URL=${1}
+	URL_LIST="$(echo ${URL} | sed -e 's/\:\/\//\//g' | tr "\/" " ")" # breaking urls into lists by / separator
+	echo $URL_LIST
+}
+
+function create_dirs_from_url() {
+	local URL=${1}
+	local URL_LIST="$(url_to_dir_list $URL)"
+	local LAST_FOLDER="$(pylist_get "${URL_LIST}" "-1")"
+        create_dirs_from_list "$(pylist_get_range "${URL_LIST}" "0" "-1")" "$OUTPUT_DIR"
+	echo "${OUTPUT_DIR}/$(echo $(pylist_get_range "${URL_LIST}" "0" "") | sed -e 's/ /\//g')"
+}
+
+
+
+function generate_markdown() {
+	local URL=${1}
+	local INTERMED=markdown
+	local OUTPUT_FILE="$(create_dirs_from_url ${URL})"
+
+	_echo_err "Called with:"
+	_echo_err "URL=${URL}"
+	_echo_err "OUTPUT_FILE=${OUTPUT_FILE}"
+	_echo_err "running curl..."
+
+	curl_to_file "${URL}" "${OUTPUT_FILE}"
+
+	_echo_err "running html to ${INTERMED}"
+
+	pandoc -f html -t ${INTERMED} \
+	       -o "${OUTPUT_FILE}.md" \
+	       "${OUTPUT_FILE}"
+
+	_echo_err "checking to see if file was successfully created..."
+
+	if [ -f "${OUTPUT_FILE}.md" ] ; then
+	    _echo_err "Yes! Completed."
+	else
+	    _echo_err "File not found! An error must have occurred when running pandoc."
+	fi
+
+}
+
+mkdirifnotexist ${WEB2PDF_DIR}
