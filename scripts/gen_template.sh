@@ -4,7 +4,7 @@ CURRDIR=${PWD}/scripts/currdir.sh
 YEAR="2020"
 AUTHOR="Tristan Miano"
 EMAIL="jacobeus@protonmail.com"
-IMPORTS="shFlags/shflags helper_functions.sh"
+IMPORTS="shFlags/shflags helper_functions.sh default_vars.sh"
 
 function echof() {
 	echo "${1}" >> $NEW_FILE
@@ -31,14 +31,16 @@ done < $CURRDIR
 
 echof ""
 echof ""
-echof "# IMPORTS #"
+echof "# BEGIN IMPORTS #"
 
 for i in $IMPORTS ; do echof ". \${THIS_DIR}/$i" ; done
 
 echof "# END IMPORTS #"
 echof ""
 echof "# BEGIN $NEW_FILE #"
-
+echof ""
+echof ""
+echof "# END $NEW_FILE #"
 
 
 

@@ -28,40 +28,20 @@ THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 # IMPORTS #
 . ${THIS_DIR}/shFlags/shflags
-. ${THIS_DIR}/helper_functions.sh
-. ${THIS_DIR}/default_vars.sh
 # END IMPORTS #
 
-# BEGIN web2pdf.sh #
+# BEGIN default_vars.sh #
+export WEB2PDF_TMP_DIR="/tmp/web2pdf"
+export WEB2PDF_DIR="${HOME}/.web2pdf"
 
-DEFINE_string 'url' '' 'The URL you wish to convert into a document' u
-DEFINE_string 'markdown' 'markdown' 'Markdown type. Either markdown (pandoc style) or gfm (GitHub style).' m
-DEFINE_boolean 'verbose' 'true' 'Turn on verbose messages.' v
+export USER_AGENT_TOR="Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"
+export HTTP_ACCEPT_HEADERS_TOR="text/html, */*; q=0.01 gzip, deflate, br en-US,en;q=0.5"
+export USER_AGENT_FIREFOX="Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0"
+export HTTP_ACCEPT_HEADERS_FIREFOX="text/html, */*; q=0.01 gzip, deflate, br en-US,en;q=0.5"
 
-# parse command line
-FLAGS "$@" || exit 1
-eval set -- "${FLAGS_ARGV}"
+export DEFAULT_TIMEZONE="UTC"
+export DEFAULT_LANG="en-US"
+export DEFAULT_PLATFORM="Linux x86_64"
 
-
-export URL="${FLAGS_url}"
-export MARKDOWN="${FLAGS_markdown}"
-
-if [ -z "${URL}" ] ; then
-	_echo_err "You must at least provide a URL string using the flag --url/-u."
-	exit 1
-fi
-
-if [ "${FLAGS_verbose}" == "1" ] ; then
-	export VERBOSE="true"
-fi
-
-mkdirifnotexist "${WEB2PDF_TMP_DIR}"
-mkdirifnotexist "${WEB2PDF_DIR}"
-
-OUTPUT_MD=$(generate_markdown ${URL} ${MARKDOWN})
-OUTPUT_TEX=$(generate_latex_from_file ${OUTPUT_MD} ${MARKDOWN})
-
-
-
-
-
+export USER_AGENT_DEFAULT="${USER_AGENT_TOR}"
+export HTTP_ACCEPT_HEADERS_DEFAULT="${HTTP_ACCEPT_HEADERS_TOR}"
