@@ -138,6 +138,9 @@ function generate_markdown() {
 	local URL=${1}
 	local INTERMED=$(if [ "${2}" == "gfm" ] ; then echo "gfm" ; else echo "markdown" ; fi)
 	local OUTPUT_FILE="$(create_dirs_from_url ${URL})"
+	if [[ ! "${OUTPUT_FILE}" =~ ".*.html" ]] ; then
+		OUTPUT_FILE="${OUTPUT_FILE}.html"
+	fi
 
 	_echo_err "Generating markdown file from curled URL with:"
 	_echo_err "URL=${URL}"
@@ -189,4 +192,70 @@ function generate_latex_from_file() {
 	    _echo_err "File not found! An error must have occurred when running pandoc."
 	    exit 1
 	fi
+}
+
+function compile_pdf() {
+	local TEX_FILE=${1}
+	local ENGINE=$(if [ -z "${2}" ] ; then echo "xelatex" ; else echo "${2}" ; fi)
+	local OUTPUT_FILE="${TEX_FILE}.pdf"
+
+        _echo_err "Generating PDF with:"
+        _echo_err "TEX_FILE=${TEX_FILE}"
+        _echo_err "ENGINE=$ENGINE"
+        _echo_err "OUTPUT_FILE=${OUTPUT_FILE}"
+	_echo_err "pandoc -o "${OUTPUT_FILE}" --pdf-engine="${ENGINE}" "${TEX_FILE}""
+
+        pandoc -o "${OUTPUT_FILE}" \
+        	--pdf-engine="${ENGINE}" \
+               "${TEX_FILE}"
+
+        _echo_err "Checking to see if pdf was successfully created..."
+
+        if [ -f "${OUTPUT_FILE}" ] ; then
+            _echo_err "Yes! Completed."
+            echo "${OUTPUT_FILE}"
+        else
+            _echo_err "File not found! An error must have occurred when running pandoc."
+	    #Since this is called with recursive_compile, we do not exit on error. We assume we should keep going.
+            #exit 1
+        fi
+
+}
+
+function recursive_compile() {
+	local ROOT_DIR=$(if [ -z "${1}" ] ; then echo "${WEB2PDF_DIR}" ; else echo "${1}" ; fi)
+	for i in $(ls $ROOT_DIR) ; do
+		if [ -d "$ROOT_DIR/$i" ] ; then
+			#we are in a directory, go down.
+			recursive_compile "$ROOT_DIR/$i"
+		else
+			#Then it's a file. But, we need to make sure it is a TeX file.
+			if [[ -f "$ROOT_DIR/$i" && "$(echo "$i" | grep -c tex)" != "0" ]] ; then
+				compile_pdf "$ROOT_DIR/$i"
+			fi
+		fi
+	done
+}
+
+function search_sub_urls_from_file() {
+	local FILE=${1}
+	local PREFIX=${2}
+	local SUBURLS="${WEB2PDF_TMP_DIR}/sub_urls.txt"
+	if [ -f "${SUBURLS}" ] ; then
+		rm -rf "${SUBURLS}"
+		touch "${SUBURLS}"
+	fi
+	for i in $(cat $FILE | grep ".html" | sed -e "s/.html.*/.html/g" | sed -e "s/.*(\//\//g") ; do
+		local COUNT=$(grep -c "${PREFIX}${i}" "$FILE")
+		if [ "$COUNT" == "0" ] ; then
+			_echo_err "checking-in possible sub-url: ${PREFIX}${i}"
+			echo "${PREFIX}${i}" >> "${SUBURLS}"
+		fi
+	done
+	while IFS= read -r line ; do
+		echo "fetching url: $line"
+		local MKDN=$(generate_markdown $line "gfm")
+		generate_latex_from_file $MKDN "gfm"
+	done < "${SUBURLS}"
+	rm -rf "${SUBURLS}"
 }

@@ -35,13 +35,22 @@ THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 # BEGIN web2pdf.sh #
 
 DEFINE_string 'url' '' 'The URL you wish to convert into a document' u
-DEFINE_string 'markdown' 'markdown' 'Markdown type. Either markdown (pandoc style) or gfm (GitHub style).' m
+DEFINE_string 'markdown' 'gfm' 'Markdown type. Either markdown (pandoc style) or gfm (GitHub style).' m
 DEFINE_boolean 'verbose' 'true' 'Turn on verbose messages.' v
+DEFINE_boolean 'recurse' 'true' 'Recurse through sub-links.' r
+DEFINE_boolean 'compile' 'true' 'Compile all collected TeX files into PDF documents. Recurses through your HOME/.web2pdf root directory.' c
 
 # parse command line
 FLAGS "$@" || exit 1
 eval set -- "${FLAGS_ARGV}"
 
+if [ "${FLAGS_verbose}" == "1" ] ; then
+	export VERBOSE="true"
+fi
+
+if [ "${FLAGS_compile}" == "1" ] ; then
+	recursive_compile
+fi
 
 export URL="${FLAGS_url}"
 export MARKDOWN="${FLAGS_markdown}"
@@ -51,8 +60,10 @@ if [ -z "${URL}" ] ; then
 	exit 1
 fi
 
-if [ "${FLAGS_verbose}" == "1" ] ; then
-	export VERBOSE="true"
+if [ "${FLAGS_recurse}" == "1" ] ; then
+	export RECURSE="true"
+else
+	export RECURSE="false"
 fi
 
 mkdirifnotexist "${WEB2PDF_TMP_DIR}"
@@ -61,6 +72,9 @@ mkdirifnotexist "${WEB2PDF_DIR}"
 OUTPUT_MD=$(generate_markdown ${URL} ${MARKDOWN})
 OUTPUT_TEX=$(generate_latex_from_file ${OUTPUT_MD} ${MARKDOWN})
 
+if [ "$RECURSE" == "true" ] ; then
+	search_sub_urls_from_file "$OUTPUT_MD" "$URL"
+fi
 
 
 
