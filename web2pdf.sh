@@ -36,6 +36,7 @@ THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 DEFINE_string 'url' '' 'The URL you wish to convert into a document' u
 DEFINE_string 'markdown' 'gfm' 'Markdown type. Either markdown (pandoc style) or gfm (GitHub style).' m
+DEFINE_string 'browser' 'default' 'The string(s) used to represent the browser type: tor, firefox, default, or null (empty).' b
 DEFINE_boolean 'verbose' 'true' 'Turn on verbose messages.' v
 DEFINE_boolean 'recurse' 'true' 'Recurse through sub-links.' r
 DEFINE_boolean 'compile' 'true' 'Compile all collected TeX files into PDF documents. Recurses through your HOME/.web2pdf root directory.' c
@@ -69,11 +70,12 @@ fi
 mkdirifnotexist "${WEB2PDF_TMP_DIR}"
 mkdirifnotexist "${WEB2PDF_DIR}"
 
-OUTPUT_MD=$(generate_markdown ${URL} ${MARKDOWN})
+OUTPUT_MD=$(generate_markdown ${URL} ${MARKDOWN} ${FLAGS_browser} ${FLAGS_browser})
 OUTPUT_TEX=$(generate_latex_from_file ${OUTPUT_MD} ${MARKDOWN})
+OUTPUT_PDF=$(compile_pdf ${OUTPUT_TEX} "xelatex")
 
 if [ "$RECURSE" == "true" ] ; then
-	search_sub_urls_from_file "$OUTPUT_MD" "$URL"
+	search_sub_urls_from_file "$OUTPUT_TEX" "$URL"
 fi
 
 

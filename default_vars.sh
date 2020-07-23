@@ -34,6 +34,9 @@ THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 export WEB2PDF_TMP_DIR="/tmp/web2pdf"
 export WEB2PDF_DIR="${HOME}/.web2pdf"
 
+export USER_AGENT_NULL=""
+export HTTP_ACCEPT_HEADERS_NULL=""
+
 export USER_AGENT_TOR="Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"
 export HTTP_ACCEPT_HEADERS_TOR="text/html, */*; q=0.01 gzip, deflate, br en-US,en;q=0.5"
 export USER_AGENT_FIREFOX="Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0"
@@ -45,3 +48,38 @@ export DEFAULT_PLATFORM="Linux x86_64"
 
 export USER_AGENT_DEFAULT="${USER_AGENT_TOR}"
 export HTTP_ACCEPT_HEADERS_DEFAULT="${HTTP_ACCEPT_HEADERS_TOR}"
+
+function select_user_agent() {
+	case ${1} in
+	"tor")
+		echo "${USER_AGENT_TOR}"
+	;;
+	"firefox")
+		echo "${USER_AGENT_FIREFOX}"
+	;;
+	"default")
+		echo "${USER_AGENT_DEFAULT}"
+	;;
+	*)
+  		echo "${USER_AGENT_NULL}"
+	;;
+	esac
+}
+
+function select_http_accept() {
+        case ${1} in
+        "tor")
+                echo "${HTTP_ACCEPT_HEADERS_TOR}"
+        ;;
+        "firefox")
+                echo "${HTTP_ACCEPT_HEADERS_FIREFOX}"
+        ;;
+        "default")
+                echo "${HTTP_ACCEPT_HEADERS_DEFAULT}"
+        ;;
+        *)
+                echo "${HTTP_ACCEPT_HEADERS_NULL}"
+        ;;
+        esac
+}
+

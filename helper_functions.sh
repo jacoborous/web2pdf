@@ -126,7 +126,7 @@ function url_to_dir_list() {
 
 function create_dirs_from_url() {
 	local URL=${1}
-	local URL_LIST="$(url_to_dir_list $URL)"
+	local URL_LIST="$(get_date) $(url_to_dir_list $URL)"
 	local LAST_FOLDER="$(pylist_get "${URL_LIST}" "-1")"
         create_dirs_from_list "$(pylist_get_range "${URL_LIST}" "0" "-1")" "$WEB2PDF_DIR"
 	echo "${WEB2PDF_DIR}/$(echo $(pylist_get_range "${URL_LIST}" "0" "") | sed -e 's/ /\//g')"
@@ -137,6 +137,8 @@ function create_dirs_from_url() {
 function generate_markdown() {
 	local URL=${1}
 	local INTERMED=$(if [ "${2}" == "gfm" ] ; then echo "gfm" ; else echo "markdown" ; fi)
+	local USER_AGENT=$(select_user_agent ${3})
+	local HTTP_ACCEPT_HEADERS=$(select_http_accept ${4})
 	local OUTPUT_FILE="$(create_dirs_from_url ${URL})"
 	if [[ ! "${OUTPUT_FILE}" =~ ".*.html" ]] ; then
 		OUTPUT_FILE="${OUTPUT_FILE}.html"
@@ -147,7 +149,7 @@ function generate_markdown() {
 	_echo_err "INTERMED=${INTERMED}"
 	_echo_err "OUTPUT_FILE=${OUTPUT_FILE}"
 
-	curl_to_file "${URL}" "${OUTPUT_FILE}" "${USER_AGENT_DEFAULT}" "${HTTP_ACCEPT_HEADERS_DEFAULT}"
+	curl_to_file "${URL}" "${OUTPUT_FILE}" "${USER_AGENT}" "${HTTP_ACCEPT_HEADERS}"
 
 	_echo_debug "running html to ${INTERMED}"
 
@@ -162,7 +164,7 @@ function generate_markdown() {
 	    echo "${OUTPUT_FILE}.md"
 	else
 	    _echo_err "File not found! An error must have occurred when running pandoc."
-	    exit 1
+	    #exit 1
 	fi
 
 }
@@ -190,7 +192,7 @@ function generate_latex_from_file() {
 	    echo "${OUTPUT_FILE}"
 	else
 	    _echo_err "File not found! An error must have occurred when running pandoc."
-	    exit 1
+	    #exit 1
 	fi
 }
 
@@ -216,7 +218,6 @@ function compile_pdf() {
             echo "${OUTPUT_FILE}"
         else
             _echo_err "File not found! An error must have occurred when running pandoc."
-	    #Since this is called with recursive_compile, we do not exit on error. We assume we should keep going.
             #exit 1
         fi
 
@@ -238,24 +239,49 @@ function recursive_compile() {
 }
 
 function search_sub_urls_from_file() {
+	_echo_debug "Searching through file for URLs and links..."
 	local FILE=${1}
 	local PREFIX=${2}
 	local SUBURLS="${WEB2PDF_TMP_DIR}/sub_urls.txt"
 	if [ -f "${SUBURLS}" ] ; then
 		rm -rf "${SUBURLS}"
-		touch "${SUBURLS}"
 	fi
-	for i in $(cat $FILE | grep ".html" | sed -e "s/.html.*/.html/g" | sed -e "s/.*(\//\//g") ; do
+	touch "${SUBURLS}"
+	for i in $(cat $FILE | grep ".html" | sed -e "s/.html.*/.html/g" | sed -e "s/.*(\//\//g" | egrep -v "#|[|]|(|)|{|}") ; do
 		local COUNT=$(grep -c "${PREFIX}${i}" "$FILE")
 		if [ "$COUNT" == "0" ] ; then
 			_echo_err "checking-in possible sub-url: ${PREFIX}${i}"
 			echo "${PREFIX}${i}" >> "${SUBURLS}"
 		fi
 	done
+	for i in $(cat $FILE | egrep "<a href=\"" | sed -e "s/.*<a href=\"//g" | sed -e "s/\".*//g" | egrep -v "#|[|]|(|)|{|}") ; do
+		local COUNT=$(grep -c "${PREFIX}${i}" "$FILE")
+                if [ "$COUNT" == "0" ] ; then
+                        _echo_err "checking-in possible sub-url: ${i}"
+                        echo "${i}" >> "${SUBURLS}"
+                fi
+        done
+	for i in $(filter_links_tex $FILE) ; do
+		local COUNT=$(grep -c "${PREFIX}${i}" "$FILE")
+                if [ "$COUNT" == "0" ] ; then
+                        _echo_err "checking-in possible sub-url: ${i}"
+                        echo "${i}" >> "${SUBURLS}"
+                fi
+	done
 	while IFS= read -r line ; do
 		echo "fetching url: $line"
 		local MKDN=$(generate_markdown $line "gfm")
-		generate_latex_from_file $MKDN "gfm"
+		local TEX=$(generate_latex_from_file $MKDN "gfm")
+		local PDF=$(compile_pdf $TEX "xelatex")
 	done < "${SUBURLS}"
 	rm -rf "${SUBURLS}"
+}
+
+function filter_links_tex() {
+	local FILE=${1}
+	echo $(cat $FILE | egrep "\href{" | egrep "http" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
+}
+
+function get_date() {
+	echo $(date -u +%Y-%m-%d)
 }
