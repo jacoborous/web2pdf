@@ -40,6 +40,7 @@ DEFINE_string 'browser' 'default' 'The string(s) used to represent the browser t
 DEFINE_boolean 'verbose' 'true' 'Turn on verbose messages.' v
 DEFINE_boolean 'recurse' 'true' 'Recurse through sub-links.' r
 DEFINE_boolean 'compile' 'true' 'Compile all collected TeX files into PDF documents. Recurses through your HOME/.web2pdf root directory.' c
+DEFINE_string 'compiledir' "$WEB2PDF_DIR" 'Root directory to recurse through for compilation.' d
 
 # parse command line
 FLAGS "$@" || exit 1
@@ -50,7 +51,7 @@ if [ "${FLAGS_verbose}" == "1" ] ; then
 fi
 
 if [ "${FLAGS_compile}" == "1" ] ; then
-	recursive_compile
+	recursive_compile "${FLAGS_compiledir}"
 fi
 
 export URL="${FLAGS_url}"

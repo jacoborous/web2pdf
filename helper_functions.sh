@@ -232,7 +232,9 @@ function recursive_compile() {
 		else
 			#Then it's a file. But, we need to make sure it is a TeX file.
 			if [[ -f "$ROOT_DIR/$i" && "$(echo "$i" | grep -c tex)" != "0" ]] ; then
-				compile_pdf "$ROOT_DIR/$i"
+				if [[ "$(echo "$i" | grep -c pdf)" == "0"  ]] ; then
+					compile_pdf "$ROOT_DIR/$i"
+				fi
 			fi
 		fi
 	done
