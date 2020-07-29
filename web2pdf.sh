@@ -39,6 +39,7 @@ DEFINE_string 'markdown' 'gfm' 'Markdown type. Either markdown (pandoc style) or
 DEFINE_string 'browser' 'default' 'The string(s) used to represent the browser type: tor, firefox, default, or null (empty).' b
 DEFINE_boolean 'verbose' 'true' 'Turn on verbose messages.' v
 DEFINE_boolean 'recurse' 'true' 'Recurse through sub-links.' r
+DEFINE_boolean 'outpdf' 'true' 'Use this flag to specify that a PDF document should be generated after the markdown and latex files. Expensive!' p
 DEFINE_boolean 'compile' 'true' 'Compile all collected TeX files into PDF documents. Recurses through your HOME/.web2pdf root directory.' c
 DEFINE_string 'compiledir' "$WEB2PDF_DIR" 'Root directory to recurse through for compilation.' d
 
@@ -71,12 +72,14 @@ fi
 mkdirifnotexist "${WEB2PDF_TMP_DIR}"
 mkdirifnotexist "${WEB2PDF_DIR}"
 
-OUTPUT_MD=$(generate_markdown ${URL} ${MARKDOWN} ${FLAGS_browser} ${FLAGS_browser})
-OUTPUT_TEX=$(generate_latex_from_file ${OUTPUT_MD} ${MARKDOWN})
-OUTPUT_PDF=$(compile_pdf ${OUTPUT_TEX} "xelatex")
+OUTPUT_FILES=$(generate_all ${URL} ${MARKDOWN} ${FLAGS_browser} "xelatex" ${FLAGS_outpdf})
+OUTPUT_TEX=$(get_elem 2 "${OUTPUT_FILES}")
+
+_echo_err "FILES: ${OUTPUT_FILES}"
+_echo_debug "FINAL: ${OUTPUT_TEX}"
 
 if [ "$RECURSE" == "true" ] ; then
-	search_sub_urls_from_file "$OUTPUT_TEX" "$URL"
+	search_sub_urls_from_file "$OUTPUT_TEX" "$URL" "${FLAGS_browser}" "${FLAGS_browser} ${FLAGS_outpdf}"
 fi
 
 

@@ -27,9 +27,9 @@ THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 
 # BEGIN IMPORTS #
-. ${THIS_DIR}/shFlags/shflags
-. ${THIS_DIR}/helper_functions.sh
-. ${THIS_DIR}/default_vars.sh
+. ${THIS_DIR}/../../shFlags/shflags
+. ${THIS_DIR}/../../helper_functions.sh
+. ${THIS_DIR}/../../default_vars.sh
 # END IMPORTS #
 
 # BEGIN twitter.sh #
