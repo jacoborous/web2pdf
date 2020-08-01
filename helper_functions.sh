@@ -78,17 +78,15 @@ function pylist_get() {
     local EXPR=${1}
     local INDEX=${2}
     if [ -z "${EXPR}" ] ; then
-	_echo_debug "Error: expression does not exist!"
+	_echo_err "Error: expression does not exist!"
 	exit;
     fi
-    _echo_debug "Getting element $INDEX from: $EXPR"
     local PY_FILE="${WEB2PDF_TMP_DIR}/py_list.py"
     if [ -f "${PY_FILE}" ] ; then rm -rf "${PY_FILE}" ; fi
     local PY_SCRIPT="text_to_split = \"${EXPR}\"\nsplit_list = text_to_split.split()\nprint(split_list[${INDEX}])"
     touch "${PY_FILE}"
     chmod -R ugo+rwx "${PY_FILE}"
     printf "${PY_SCRIPT}" >> "${PY_FILE}"
-    _echo_debug "$(python ${PY_FILE})"
 }
 
 function pylist_get_range() {
@@ -96,7 +94,7 @@ function pylist_get_range() {
     local INDEX1="${2}"
     local INDEX2="${3}"
     if [ -z "${EXPR}" ] ; then
-        _echo_debug "Error: expression does not exist!"
+        _echo_err "Error: expression does not exist!"
         exit;
     fi
     local PY_FILE="${WEB2PDF_TMP_DIR}/pylist_get_range.py"
@@ -110,11 +108,11 @@ function pylist_get_range() {
 
 function create_dirs_from_list() {
     local DIRS=${1}
-    _echo_err "DIRS=${DIRS}"
+    _echo_debug "DIRS=${DIRS}"
     local PATH_DIR=${2}
     for i in ${DIRS} ; do
 	PATH_DIR="${PATH_DIR}/$i"
-	_echo_err "Making directory ${PATH_DIR}"
+	_echo_debug "Making directory ${PATH_DIR}"
 	mkdirifnotexist "${PATH_DIR}"
     done
 }
@@ -138,10 +136,19 @@ function create_dirs_from_url() {
 	local URL=${1}
 	local URL_LIST="$(url_to_dir_list $URL)"
 	local LAST_FOLDER="$(pylist_get "${URL_LIST}" "-1")"
-        create_dirs_from_list "$(pylist_get_range "${URL_LIST}" "0" "-1")" "$WEB2PDF_DIR"
+        create_dirs_from_list "$(pylist_get_range "${URL_LIST}" "0" "")" "$WEB2PDF_DIR"
 	echo "${WEB2PDF_DIR}/$(echo $(pylist_get_range "${URL_LIST}" "0" "") | sed -e 's/ /\//g')"
 }
 
+function get_url_domain() {
+	local URL=${1}
+	local LIST=$(url_to_dir_list ${URL})
+	local FIRST=$(get_elem 1 "${LIST}")
+	local SECOND=$(get_elem 2 "${LIST}")
+	local DOMAIN="${FIRST}://${SECOND}"
+	_echo_debug "DOMAIN=${DOMAIN}"
+	echo "${DOMAIN}"
+}
 
 
 function generate_markdown() {
@@ -150,8 +157,9 @@ function generate_markdown() {
 	local USER_AGENT=$(select_user_agent ${3})
 	local HTTP_ACCEPT_HEADERS=$(select_http_accept ${4})
 	local OUTPUT_FILE="$(create_dirs_from_url ${URL})"
-	if [[ ! "${OUTPUT_FILE}" =~ ".*.html" ]] ; then
-		OUTPUT_FILE="${OUTPUT_FILE}"
+
+	if [ -d "${OUTPUT_FILE}" ] ; then
+		OUTPUT_FILE="${OUTPUT_FILE}.html"
 	fi
 
 	_echo_err "Generating markdown file from curled URL with:"
@@ -159,8 +167,6 @@ function generate_markdown() {
 	_echo_err "OUTPUT_FILE=${OUTPUT_FILE}"
 
 	curl_to_file "${URL}" "${OUTPUT_FILE}" "${USER_AGENT}" "${HTTP_ACCEPT_HEADERS}"
-
-	_echo_debug "running html to ${INTERMED}"
 
 	pandoc -f html -t "${INTERMED}" \
 	       -o "${OUTPUT_FILE}.md" \
@@ -185,11 +191,8 @@ function generate_latex_from_file() {
 	local OUTPUT_FILE="${FILE}.tex"
 
 	_echo_err "Generating Latex with:"
-	_echo_err "FILE=${FILE}"
-	_echo_err "INTERMED=$INTERMED"
+	_echo_debug "FILE=${FILE}"
 	_echo_err "OUTPUT_FILE=${OUTPUT_FILE}"
-
-	_echo_debug "running ${INTERMED} to latex..."
 
 	pandoc -f "${INTERMED}" -t "latex" \
 	       -o "${OUTPUT_FILE}" \
@@ -239,10 +242,13 @@ function generate_all() {
 	local BROWSER=${3}
 	local ENGINE=${4}
 	local DO_PDF=${5}
+	local DO_RECURSE=${6}
 	local OUTPUT_MD=$(generate_markdown ${URL} ${MARKDOWN} ${BROWSER} ${BROWSER})
 	local OUTPUT_TEX=$(generate_latex_from_file ${OUTPUT_MD} ${MARKDOWN})
 	local OUTPUT_PDF=$(if [[ "${DO_PDF}" == "true" ]] ; then compile_pdf ${OUTPUT_TEX} ${ENGINE} ; fi)
-	echo "${OUTPUT_MD} ${OUTPUT_TEX} ${OUTPUT_PDF}"
+	if [ "${DO_RECURSE}" == "true" ] ; then
+		search_sub_urls_from_file "${OUTPUT_TEX}" "${URL}" "${BROWSER}" "${ENGINE}" "${DO_PDF}" "${DO_RECURSE}"
+	fi
 }
 
 function recursive_compile() {
@@ -260,6 +266,34 @@ function recursive_compile() {
 			fi
 		fi
 	done
+}
+
+
+function clean_tmps() {
+	if [ -f "$WEB2PDF_URLS" ] ; then
+        	_echo_debug "Removing previous $WEB2PDF_URLS"
+        	rm -rf "$WEB2PDF_URLS"
+	fi
+	touch "$WEB2PDF_URLS"
+	if [ -f "$WEB2PDF_URLS_DONE" ] ; then
+        	_echo_debug "Removing previous $WEB2PDF_URLS_DONE"
+        	rm -rf "$WEB2PDF_URLS_DONE"
+	fi
+	touch "$WEB2PDF_URLS_DONE"
+}
+
+function process_url() {
+	local URL=${1}
+	local TODO="$WEB2PDF_URLS"
+	local DONE="$WEB2PDF_URLS_DONE"
+
+	mv "$TODO" "${TODO}.backup"
+
+	cat "${TODO}.backup" | egrep -x -v "$URL" > "${TODO}"
+
+	echo "$URL" >> "$DONE"
+
+	rm -rf "${TODO}.backup"
 }
 
 
@@ -290,7 +324,6 @@ function get_elem() {
 	touch $TMP_FILE
         chmod +rw $TMP_FILE
 	for i in ${LIST} ; do
-		_echo_debug "echo ${i} >> ${TMP_FILE}"
                 echo "${i}" >> "${TMP_FILE}"
         done
 	_echo_debug "sed -n \"${INDEX} p\" \"${TMP_FILE}\""
@@ -302,14 +335,17 @@ function get_elem() {
 
 function filter_links_https() {
 	local FILE=${1}
-	echo $(cat $FILE | egrep "\href{https" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
+	echo $(cat $FILE | egrep "\href{http" | egrep -v "?=|@" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
 }
 
+function filter_links_none() {
+        local FILE=${1}
+        echo $(cat $FILE | egrep "\href{[a-zA-Z0-9]" | egrep -v "http|?=|@" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
+}
 
 function filter_links_slash() {
         local FILE=${1}
-        local LINKS=$(cat $FILE | egrep "\href{/" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
-	_echo_debug "LINKS=${LINKS}"
+        local LINKS=$(cat $FILE | egrep "\href{/[a-zA-Z0-9]" | egrep -v "?=|@" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
 	echo "${LINKS}"
 }
 
@@ -321,32 +357,52 @@ function get_date() {
 
 function search_sub_urls_from_file() {
 	local FILE=${1}
-	local PREFIX=${2}
-	_echo_debug "Searching through $FILE for sub-urls. Prefix: $PREFIX"
-	local SUBURLS="${WEB2PDF_TMP_DIR}/sub_urls"
-	while [ -f "${SUBURLS}" ] ; do
-		SUBURLS="${SUBURLS}1"
-	done
-	_echo_debug "Creating temp file $SUBURLS"
-	touch "${SUBURLS}"
+	local PREFIX=$(get_url_domain ${2})
+	local CONTINUE="false"
+	_echo_err "Searching through $FILE for sub-urls. Prefix: $PREFIX"
+	local SUBURLS="${WEB2PDF_URLS}"
 	for i in $(filter_links_slash $FILE) ; do
-                local COUNT=$(grep -c "${PREFIX}${i}" "$FILE")
-                if [ "$COUNT" == "0" ] ; then
-                        _echo_err "checking-in possible sub-url: ${PREFIX}${i}"
-                        echo "${PREFIX}${i}" >> "${SUBURLS}"
+		local NEW_URL="${PREFIX}${i}"
+                local COUNT=$(grep -c "${NEW_URL}" "$SUBURLS")
+		local COUNT_DONE=$(grep -c "${NEW_URL}" "${WEB2PDF_URLS_DONE}")
+		if [[ "${COUNT_DONE}" == "0" && "${COUNT}" == "0" ]] ; then
+                        _echo_err "checking-in possible sub-url: ${NEW_URL}"
+			CONTINUE="true"
+                        echo "${NEW_URL}" >> "${SUBURLS}"
                 fi
         done
 	for i in $(filter_links_https $FILE) ; do
-		local COUNT=$(grep -c "${PREFIX}${i}" "$FILE")
-                if [ "$COUNT" == "0" ] ; then
-                        _echo_err "checking-in possible sub-url: ${i}"
-                        echo "${i}" >> "${SUBURLS}"
+		local NEW_URL="${i}"
+                local COUNT=$(grep -c "${NEW_URL}" "${SUBURLS}")
+                local COUNT_DONE=$(grep -c "${NEW_URL}" "${WEB2PDF_URLS_DONE}")
+                if [[ "${COUNT_DONE}" == "0" && "${COUNT}" == "0" && "${NEW_URL}" =~ "${PREFIX}*" ]] ; then
+                        _echo_err "checking-in possible sub-url: ${NEW_URL}"
+                        CONTINUE="true"
+                        echo "${NEW_URL}" >> "${SUBURLS}"
                 fi
 	done
-	while IFS= read -r line ; do
-		echo "fetching url: $line"
-		generate_all $line "gfm" ${3} ${4} ${5}
-	done < "${SUBURLS}"
-	rm -rf "${SUBURLS}"
+	for i in $(filter_links_none $FILE) ; do
+		local NEW_URL="${PREFIX}${i}"
+                local COUNT=$(grep -c "${NEW_URL}" "$SUBURLS")
+                local COUNT_DONE=$(grep -c "${NEW_URL}" "${WEB2PDF_URLS_DONE}")
+                if [[ "${COUNT_DONE}" == "0" && "${COUNT}" == "0" ]] ; then
+                        _echo_err "checking-in possible sub-url: ${NEW_URL}"
+                        CONTINUE="true"
+                        echo "${NEW_URL}" >> "${SUBURLS}"
+                fi
+        done
+	local TODO_COUNT=$(grep -c ".*" "${SUBURLS}")
+	_echo_debug "Num URLs left to process: ${TODO_COUNT}"
+	if [[ "${CONTINUE}" == "true" || "${TODO_COUNT}" != "0" ]] ; then
+		while IFS= read -r line ; do
+			_echo_debug "fetching url: $line"
+			process_url "$line"
+			generate_all $line "gfm" ${3} ${4} ${5} ${6}
+		done < "${SUBURLS}"
+	else
+		_echo_err "None left to process, program complete."
+		clean_tmps
+		exit 0
+	fi
 }
 

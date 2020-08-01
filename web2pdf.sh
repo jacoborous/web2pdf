@@ -84,15 +84,9 @@ fi
 mkdirifnotexist "${WEB2PDF_TMP_DIR}"
 mkdirifnotexist "${WEB2PDF_DIR}"
 
-OUTPUT_FILES=$(generate_all "${URL}" "${MARKDOWN}" "${FLAGS_browser}" "xelatex" "${FLAGS_outpdf}")
-OUTPUT_TEX=$(get_elem 2 "${OUTPUT_FILES}")
+clean_tmps
 
-_echo_debug "FILES: ${OUTPUT_FILES}"
-_echo_debug "FINAL: ${OUTPUT_TEX}"
-
-if [ "$RECURSE" == "true" ] ; then
-	search_sub_urls_from_file "$OUTPUT_TEX" "$URL" "${FLAGS_browser}" "${FLAGS_browser} ${FLAGS_outpdf}"
-fi
+generate_all "${URL}" "${MARKDOWN}" "${FLAGS_browser}" "xelatex" "${FLAGS_outpdf}" "${RECURSE}"
 
 
 
