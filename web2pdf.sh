@@ -36,12 +36,14 @@ THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 DEFINE_string 'url' '' 'The URL you wish to convert into a document' u
 DEFINE_string 'markdown' 'gfm' 'Markdown type. Either markdown (pandoc style) or gfm (GitHub style).' m
-DEFINE_string 'browser' 'default' 'The string(s) used to represent the browser type: tor, firefox, default, or null (empty).' b
+DEFINE_string 'browser' 'default' 'The string(s) used to represent the browser type: tor, firefox, chrome, default, or null (empty).' b
 DEFINE_boolean 'verbose' 'true' 'Turn on verbose messages.' v
+DEFINE_string 'outroot' "${WEB2PDF_DIR}" "The root directory that documents will be placed under." o
+DEFINE_boolean "sepdate" "true" "Whether to create an extra folder using the current date at the top of the output root." s
 DEFINE_boolean 'recurse' 'true' 'Recurse through sub-links.' r
 DEFINE_boolean 'outpdf' 'true' 'Use this flag to specify that a PDF document should be generated after the markdown and latex files. Expensive!' p
-DEFINE_boolean 'compile' 'true' 'Compile all collected TeX files into PDF documents. Recurses through your HOME/.web2pdf root directory.' c
-DEFINE_string 'compiledir' "$WEB2PDF_DIR" 'Root directory to recurse through for compilation.' d
+DEFINE_boolean 'compile' 'true' "Compile all collected TeX files into PDF documents. Recurses through your \"\-\-compiledir\" directory." c
+DEFINE_string 'compiledir' "${WEB2PDF_DIR}" 'Root directory to recurse through for compilation.' d
 
 # parse command line
 FLAGS "$@" || exit 1
@@ -49,6 +51,16 @@ eval set -- "${FLAGS_ARGV}"
 
 if [ "${FLAGS_verbose}" == "1" ] ; then
 	export VERBOSE="true"
+fi
+
+if [ ! -z "${FLAGS_outroot}" ] ; then
+	_echo_err "Setting output root to ${FLAGS_outroot}"
+	export WEB2PDF_DIR="${FLAGS_outroot}"
+fi
+
+if [ "${FLAGS_sepdate}" == "1" ] ; then
+	_echo_err "Placing dirs under ${WEB2PDF_DIR}/$(get_date)"
+        export WEB2PDF_DIR="${WEB2PDF_DIR}/$(get_date)"
 fi
 
 if [ "${FLAGS_compile}" == "1" ] ; then
@@ -72,10 +84,10 @@ fi
 mkdirifnotexist "${WEB2PDF_TMP_DIR}"
 mkdirifnotexist "${WEB2PDF_DIR}"
 
-OUTPUT_FILES=$(generate_all ${URL} ${MARKDOWN} ${FLAGS_browser} "xelatex" ${FLAGS_outpdf})
+OUTPUT_FILES=$(generate_all "${URL}" "${MARKDOWN}" "${FLAGS_browser}" "xelatex" "${FLAGS_outpdf}")
 OUTPUT_TEX=$(get_elem 2 "${OUTPUT_FILES}")
 
-_echo_err "FILES: ${OUTPUT_FILES}"
+_echo_debug "FILES: ${OUTPUT_FILES}"
 _echo_debug "FINAL: ${OUTPUT_TEX}"
 
 if [ "$RECURSE" == "true" ] ; then

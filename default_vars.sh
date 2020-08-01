@@ -41,6 +41,9 @@ export USER_AGENT_TOR="Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Fir
 export HTTP_ACCEPT_HEADERS_TOR="text/html, */*; q=0.01 gzip, deflate, br en-US,en;q=0.5"
 export USER_AGENT_FIREFOX="Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0"
 export HTTP_ACCEPT_HEADERS_FIREFOX="text/html, */*; q=0.01 gzip, deflate, br en-US,en;q=0.5"
+export USER_AGENT_CHROME="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4215.0 Safari/537.36"
+export HTTP_ACCEPT_HEADERS_CHROME="text/html, */*; q=0.01 gzip, deflate, br en-US,en;q=0.9"
+
 
 export DEFAULT_TIMEZONE="UTC"
 export DEFAULT_LANG="en-US"
@@ -60,6 +63,9 @@ function select_user_agent() {
 	"default")
 		echo "${USER_AGENT_DEFAULT}"
 	;;
+	"chrome")
+		echo "${USER_AGENT_CHROME}"
+	;;
 	*)
   		echo "${USER_AGENT_NULL}"
 	;;
@@ -73,6 +79,9 @@ function select_http_accept() {
         ;;
         "firefox")
                 echo "${HTTP_ACCEPT_HEADERS_FIREFOX}"
+        ;;
+	"chrome")
+                echo "${HTTP_ACCEPT_HEADERS_CHROME}"
         ;;
         "default")
                 echo "${HTTP_ACCEPT_HEADERS_DEFAULT}"

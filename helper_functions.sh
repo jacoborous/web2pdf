@@ -136,7 +136,7 @@ function url_to_dir_list() {
 
 function create_dirs_from_url() {
 	local URL=${1}
-	local URL_LIST="$(get_date) $(url_to_dir_list $URL)"
+	local URL_LIST="$(url_to_dir_list $URL)"
 	local LAST_FOLDER="$(pylist_get "${URL_LIST}" "-1")"
         create_dirs_from_list "$(pylist_get_range "${URL_LIST}" "0" "-1")" "$WEB2PDF_DIR"
 	echo "${WEB2PDF_DIR}/$(echo $(pylist_get_range "${URL_LIST}" "0" "") | sed -e 's/ /\//g')"
@@ -151,12 +151,11 @@ function generate_markdown() {
 	local HTTP_ACCEPT_HEADERS=$(select_http_accept ${4})
 	local OUTPUT_FILE="$(create_dirs_from_url ${URL})"
 	if [[ ! "${OUTPUT_FILE}" =~ ".*.html" ]] ; then
-		OUTPUT_FILE="${OUTPUT_FILE}.html"
+		OUTPUT_FILE="${OUTPUT_FILE}"
 	fi
 
 	_echo_err "Generating markdown file from curled URL with:"
 	_echo_err "URL=${URL}"
-	_echo_err "INTERMED=${INTERMED}"
 	_echo_err "OUTPUT_FILE=${OUTPUT_FILE}"
 
 	curl_to_file "${URL}" "${OUTPUT_FILE}" "${USER_AGENT}" "${HTTP_ACCEPT_HEADERS}"
@@ -171,6 +170,7 @@ function generate_markdown() {
 
 	if [ -f "${OUTPUT_FILE}.md" ] ; then
 	    _echo_err "Yes! Completed."
+	    rm -rf "${OUTPUT_FILE}"
 	    echo "${OUTPUT_FILE}.md"
 	else
 	    _echo_err "File not found! An error must have occurred when running pandoc."
