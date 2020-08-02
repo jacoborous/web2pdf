@@ -33,6 +33,46 @@ THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 # BEGIN helper_functions.sh #
 
+function select_user_agent() {
+        case ${1} in
+        "tor")
+                echo "${USER_AGENT_TOR}"
+        ;;
+        "firefox")
+                echo "${USER_AGENT_FIREFOX}"
+        ;;
+        "default")
+                echo "${USER_AGENT_DEFAULT}"
+        ;;
+        "chrome")
+                echo "${USER_AGENT_CHROME}"
+        ;;
+        *)
+                echo "${USER_AGENT_NULL}"
+        ;;
+        esac
+}
+
+function select_http_accept() {
+        case ${1} in
+        "tor")
+                echo "${HTTP_ACCEPT_HEADERS_TOR}"
+        ;;
+        "firefox")
+                echo "${HTTP_ACCEPT_HEADERS_FIREFOX}"
+        ;;
+        "chrome")
+                echo "${HTTP_ACCEPT_HEADERS_CHROME}"
+        ;;
+        "default")
+                echo "${HTTP_ACCEPT_HEADERS_DEFAULT}"
+        ;;
+        *)
+                echo "${HTTP_ACCEPT_HEADERS_NULL}"
+        ;;
+        esac
+}
+
 # _echo_err
 # args:
 #     An error string to pipe to stderr.
@@ -162,9 +202,7 @@ function generate_markdown() {
 		OUTPUT_FILE="${OUTPUT_FILE}.html"
 	fi
 
-	_echo_err "Generating markdown file from curled URL with:"
-	_echo_err "URL=${URL}"
-	_echo_err "OUTPUT_FILE=${OUTPUT_FILE}"
+	_echo_err "Pulling page from ${URL}, translating to ${INTERMED}, output: ${OUTPUT_FILE}"
 
 	curl_to_file "${URL}" "${OUTPUT_FILE}" "${USER_AGENT}" "${HTTP_ACCEPT_HEADERS}"
 
@@ -172,15 +210,13 @@ function generate_markdown() {
 	       -o "${OUTPUT_FILE}.md" \
 	       "${OUTPUT_FILE}"
 
-	_echo_err "Checking to see if file was successfully created..."
-
 	if [ -f "${OUTPUT_FILE}.md" ] ; then
-	    _echo_err "Yes! Completed."
-	    rm -rf "${OUTPUT_FILE}"
+	    _echo_err "${INTERMED} file successfully generated."
+	    rm -rf "${OUTPUT_FILE}" #delete HTML webpage, takes up unneccessary space.
 	    echo "${OUTPUT_FILE}.md"
 	else
 	    _echo_err "File not found! An error must have occurred when running pandoc."
-	    #exit 1
+	    echo "0"
 	fi
 
 }
@@ -190,22 +226,18 @@ function generate_latex_from_file() {
 	local INTERMED=${2}
 	local OUTPUT_FILE="${FILE}.tex"
 
-	_echo_err "Generating Latex with:"
-	_echo_debug "FILE=${FILE}"
-	_echo_err "OUTPUT_FILE=${OUTPUT_FILE}"
+	_echo_err "Translating ${FILE} to LaTeX, output: ${OUTPUT_FILE}"
 
 	pandoc -f "${INTERMED}" -t "latex" \
 	       -o "${OUTPUT_FILE}" \
 	       "${FILE}"
 
-	_echo_err "Checking to see if file was successfully created..."
-
 	if [ -f "${OUTPUT_FILE}" ] ; then
-	    _echo_err "Yes! Completed."
+	    _echo_err "LaTeX file successfully generated."
 	    echo "${OUTPUT_FILE}"
 	else
-	    _echo_err "File not found! An error must have occurred when running pandoc."
-	    #exit 1
+	    _echo_err "Error: LaTeX file failed to generate. An error must have occurred when running pandoc."
+	    echo "0"
 	fi
 }
 
@@ -234,21 +266,6 @@ function compile_pdf() {
             #exit 1
         fi
 
-}
-
-function generate_all() {
-	local URL=${1}
-	local MARKDOWN=${2}
-	local BROWSER=${3}
-	local ENGINE=${4}
-	local DO_PDF=${5}
-	local DO_RECURSE=${6}
-	local OUTPUT_MD=$(generate_markdown ${URL} ${MARKDOWN} ${BROWSER} ${BROWSER})
-	local OUTPUT_TEX=$(generate_latex_from_file ${OUTPUT_MD} ${MARKDOWN})
-	local OUTPUT_PDF=$(if [[ "${DO_PDF}" == "true" ]] ; then compile_pdf ${OUTPUT_TEX} ${ENGINE} ; fi)
-	if [ "${DO_RECURSE}" == "true" ] ; then
-		search_sub_urls_from_file "${OUTPUT_TEX}" "${URL}" "${BROWSER}" "${ENGINE}" "${DO_PDF}" "${DO_RECURSE}"
-	fi
 }
 
 function recursive_compile() {
@@ -326,26 +343,24 @@ function get_elem() {
 	for i in ${LIST} ; do
                 echo "${i}" >> "${TMP_FILE}"
         done
-	_echo_debug "sed -n \"${INDEX} p\" \"${TMP_FILE}\""
 	local ELEM=$(sed -n "${INDEX} p" "${TMP_FILE}")
-	_echo_debug "ELEM=$ELEM"
         rm -rf $TMP_FILE
 	echo "$ELEM"
 }
 
 function filter_links_https() {
 	local FILE=${1}
-	echo $(cat $FILE | egrep "\href{http" | egrep -v "?=|@" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
+	echo $(cat $FILE | egrep "\href{http" | egrep -v "?=|@|\(|\)|\%|\#" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
 }
 
 function filter_links_none() {
         local FILE=${1}
-        echo $(cat $FILE | egrep "\href{[a-zA-Z0-9]" | egrep -v "http|?=|@" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
+        echo $(cat $FILE | egrep "\href{[a-zA-Z0-9]" | egrep -v "http|?=|@|\(|\)|\%|\#" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
 }
 
 function filter_links_slash() {
         local FILE=${1}
-        local LINKS=$(cat $FILE | egrep "\href{/[a-zA-Z0-9]" | egrep -v "?=|@" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
+        local LINKS=$(cat $FILE | egrep "\href{/[a-zA-Z0-9]" | egrep -v "?=|@|\(|\)|\%|\#" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
 	echo "${LINKS}"
 }
 
@@ -353,56 +368,3 @@ function filter_links_slash() {
 function get_date() {
 	echo $(date -u +%Y-%m-%d)
 }
-
-
-function search_sub_urls_from_file() {
-	local FILE=${1}
-	local PREFIX=$(get_url_domain ${2})
-	local CONTINUE="false"
-	_echo_err "Searching through $FILE for sub-urls. Prefix: $PREFIX"
-	local SUBURLS="${WEB2PDF_URLS}"
-	for i in $(filter_links_slash $FILE) ; do
-		local NEW_URL="${PREFIX}${i}"
-                local COUNT=$(grep -c "${NEW_URL}" "$SUBURLS")
-		local COUNT_DONE=$(grep -c "${NEW_URL}" "${WEB2PDF_URLS_DONE}")
-		if [[ "${COUNT_DONE}" == "0" && "${COUNT}" == "0" ]] ; then
-                        _echo_err "checking-in possible sub-url: ${NEW_URL}"
-			CONTINUE="true"
-                        echo "${NEW_URL}" >> "${SUBURLS}"
-                fi
-        done
-	for i in $(filter_links_https $FILE) ; do
-		local NEW_URL="${i}"
-                local COUNT=$(grep -c "${NEW_URL}" "${SUBURLS}")
-                local COUNT_DONE=$(grep -c "${NEW_URL}" "${WEB2PDF_URLS_DONE}")
-                if [[ "${COUNT_DONE}" == "0" && "${COUNT}" == "0" && "${NEW_URL}" =~ "${PREFIX}*" ]] ; then
-                        _echo_err "checking-in possible sub-url: ${NEW_URL}"
-                        CONTINUE="true"
-                        echo "${NEW_URL}" >> "${SUBURLS}"
-                fi
-	done
-	for i in $(filter_links_none $FILE) ; do
-		local NEW_URL="${PREFIX}${i}"
-                local COUNT=$(grep -c "${NEW_URL}" "$SUBURLS")
-                local COUNT_DONE=$(grep -c "${NEW_URL}" "${WEB2PDF_URLS_DONE}")
-                if [[ "${COUNT_DONE}" == "0" && "${COUNT}" == "0" ]] ; then
-                        _echo_err "checking-in possible sub-url: ${NEW_URL}"
-                        CONTINUE="true"
-                        echo "${NEW_URL}" >> "${SUBURLS}"
-                fi
-        done
-	local TODO_COUNT=$(grep -c ".*" "${SUBURLS}")
-	_echo_debug "Num URLs left to process: ${TODO_COUNT}"
-	if [[ "${CONTINUE}" == "true" || "${TODO_COUNT}" != "0" ]] ; then
-		while IFS= read -r line ; do
-			_echo_debug "fetching url: $line"
-			process_url "$line"
-			generate_all $line "gfm" ${3} ${4} ${5} ${6}
-		done < "${SUBURLS}"
-	else
-		_echo_err "None left to process, program complete."
-		clean_tmps
-		exit 0
-	fi
-}
-

@@ -16,6 +16,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 # 
 
+if [ -z $_DEFAULT_VARS ] ; then
 
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do
@@ -54,43 +55,7 @@ export DEFAULT_PLATFORM="Linux x86_64"
 export USER_AGENT_DEFAULT="${USER_AGENT_TOR}"
 export HTTP_ACCEPT_HEADERS_DEFAULT="${HTTP_ACCEPT_HEADERS_TOR}"
 
-function select_user_agent() {
-	case ${1} in
-	"tor")
-		echo "${USER_AGENT_TOR}"
-	;;
-	"firefox")
-		echo "${USER_AGENT_FIREFOX}"
-	;;
-	"default")
-		echo "${USER_AGENT_DEFAULT}"
-	;;
-	"chrome")
-		echo "${USER_AGENT_CHROME}"
-	;;
-	*)
-  		echo "${USER_AGENT_NULL}"
-	;;
-	esac
-}
 
-function select_http_accept() {
-        case ${1} in
-        "tor")
-                echo "${HTTP_ACCEPT_HEADERS_TOR}"
-        ;;
-        "firefox")
-                echo "${HTTP_ACCEPT_HEADERS_FIREFOX}"
-        ;;
-	"chrome")
-                echo "${HTTP_ACCEPT_HEADERS_CHROME}"
-        ;;
-        "default")
-                echo "${HTTP_ACCEPT_HEADERS_DEFAULT}"
-        ;;
-        *)
-                echo "${HTTP_ACCEPT_HEADERS_NULL}"
-        ;;
-        esac
-}
+export _DEFAULT_VARS=1
 
+fi

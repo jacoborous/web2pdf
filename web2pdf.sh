@@ -37,19 +37,19 @@ THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 DEFINE_string 'url' '' 'The URL you wish to convert into a document' u
 DEFINE_string 'markdown' 'gfm' 'Markdown type. Either markdown (pandoc style) or gfm (GitHub style).' m
 DEFINE_string 'browser' 'default' 'The string(s) used to represent the browser type: tor, firefox, chrome, default, or null (empty).' b
-DEFINE_boolean 'verbose' 'true' 'Turn on verbose messages.' v
+DEFINE_boolean 'verbose' '1' 'Turn on verbose messages.' v
 DEFINE_string 'outroot' "${WEB2PDF_DIR}" "The root directory that documents will be placed under." o
-DEFINE_boolean "sepdate" "true" "Whether to create an extra folder using the current date at the top of the output root." s
-DEFINE_boolean 'recurse' 'true' 'Recurse through sub-links.' r
-DEFINE_boolean 'outpdf' 'true' 'Use this flag to specify that a PDF document should be generated after the markdown and latex files. Expensive!' p
-DEFINE_boolean 'compile' 'true' "Compile all collected TeX files into PDF documents. Recurses through your \"\-\-compiledir\" directory." c
+DEFINE_boolean "sepdate" "1" "Whether to create an extra folder using the current date at the top of the output root." s
+DEFINE_boolean 'recurse' "1" 'Recurse through sub-links.' r
+DEFINE_boolean 'outpdf' "1" 'Use this flag to specify that a PDF document should be generated after the markdown and latex files. Expensive!' p
+DEFINE_boolean 'compile' "1" "Compile all collected TeX files into PDF documents. Recurses through your \"\-\-compiledir\" directory." c
 DEFINE_string 'compiledir' "${WEB2PDF_DIR}" 'Root directory to recurse through for compilation.' d
 
 # parse command line
 FLAGS "$@" || exit 1
 eval set -- "${FLAGS_ARGV}"
 
-if [ "${FLAGS_verbose}" == "1" ] ; then
+if [ "${FLAGS_verbose}" == "0" ] ; then
 	export VERBOSE="true"
 fi
 
@@ -58,12 +58,12 @@ if [ ! -z "${FLAGS_outroot}" ] ; then
 	export WEB2PDF_DIR="${FLAGS_outroot}"
 fi
 
-if [ "${FLAGS_sepdate}" == "1" ] ; then
+if [ "${FLAGS_sepdate}" == "0" ] ; then
 	_echo_err "Placing dirs under ${WEB2PDF_DIR}/$(get_date)"
         export WEB2PDF_DIR="${WEB2PDF_DIR}/$(get_date)"
 fi
 
-if [ "${FLAGS_compile}" == "1" ] ; then
+if [ "${FLAGS_compile}" == "0" ] ; then
 	recursive_compile "${FLAGS_compiledir}"
 fi
 
@@ -75,18 +75,27 @@ if [ -z "${URL}" ] ; then
 	exit 1
 fi
 
-if [ "${FLAGS_recurse}" == "1" ] ; then
-	export RECURSE="true"
+if [ "${FLAGS_recurse}" == "0" ] ; then
+	RECURSE=--arg_recurse
 else
-	export RECURSE="false"
+	RECURSE=--noarg_recurse
 fi
+_echo_debug "RECURSE=$RECURSE"
+
+if [ "${FLAGS_outpdf}" == "0" ] ; then
+        OUTPDF=--arg_makepdf
+else
+        OUTPDF=--noarg_makepdf
+fi
+_echo_debug "OUTPDF=$OUTPDF"
 
 mkdirifnotexist "${WEB2PDF_TMP_DIR}"
 mkdirifnotexist "${WEB2PDF_DIR}"
 
 clean_tmps
 
-generate_all "${URL}" "${MARKDOWN}" "${FLAGS_browser}" "xelatex" "${FLAGS_outpdf}" "${RECURSE}"
+_echo_debug "${THIS_DIR}/generate_all.sh --arg_url=\"${URL}\" --arg_intermed=\"${MARKDOWN}\" --arg_browser=\"${FLAGS_browser}\" ${OUTPDF} ${RECURSE}"
+${THIS_DIR}/generate_all.sh --arg_url="${URL}" --arg_intermed="${MARKDOWN}" --arg_browser="${FLAGS_browser}" ${OUTPDF} ${RECURSE}
 
 
 
