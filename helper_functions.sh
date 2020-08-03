@@ -16,6 +16,8 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 #
 
+SUBJECT=helper_functions
+VERSION=0.01
 
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do
@@ -73,6 +75,16 @@ function select_http_accept() {
         esac
 }
 
+# _exec_pid
+# args: command
+#	A command to track with a pid file.
+function exec_pid() {
+	local PID_FILE=/var/run/$1.pid
+	echo $$ > ${PID_FILE}
+	exec "$@"
+	echo "$(cat ${PID_FILE})"
+}
+
 # _echo_err
 # args:
 #     An error string to pipe to stderr.
@@ -101,6 +113,10 @@ function pandoc_get_md() {
 	local URL=${1}
 	local OUT_FILE=${1}
 	pandoc -f html -t markdown -o "$OUT_FILE" "${URL}"
+}
+
+function make_directory() {
+	create_dirs_from_list "$(dir_to_folder_list ${1})"
 }
 
 function mkdirifnotexist () {
@@ -133,11 +149,15 @@ function pylist_get_range() {
     local EXPR="${1}"
     local INDEX1="${2}"
     local INDEX2="${3}"
+    _echo_debug "pylist_get_range args: ${1} ${2} ${3}"
     if [ -z "${EXPR}" ] ; then
         _echo_err "Error: expression does not exist!"
         exit;
     fi
     local PY_FILE="${WEB2PDF_TMP_DIR}/pylist_get_range.py"
+    if [ -f "${PY_FILE}" ] ; then
+	rm -rf "${PY_FILE}"
+    fi
     local PY_SCRIPT="text_to_split = \"${EXPR}\"\nsplit_list = text_to_split.split()\nprint(split_list[${INDEX1}:${INDEX2}])"
     touch "${PY_FILE}"
     chmod -R ugo+rwx "${PY_FILE}"
@@ -170,6 +190,12 @@ function url_to_dir_list() {
 	local URL=${1}
 	URL_LIST="$(echo ${URL} | sed -e 's/\:\/\//\//g' | tr "\/" " ")" # breaking urls into lists by / separator
 	echo $URL_LIST
+}
+
+function dir_to_folder_list() {
+	local DIR=${1}
+	DIR_LIST="$(echo ${DIR} | tr "\/" " ")"
+	echo "$DIR_LIST"
 }
 
 function create_dirs_from_url() {

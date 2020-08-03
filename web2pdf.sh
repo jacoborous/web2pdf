@@ -1,21 +1,22 @@
 #!/bin/bash
 
 # Copyright (C) 2020 Tristan Miano <jacobeus@protonmail.com>
-# 
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
-# 
 
+SUBJECT=web2pdf
+VERSION=0.1
 
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do
@@ -56,11 +57,13 @@ fi
 if [ ! -z "${FLAGS_outroot}" ] ; then
 	_echo_err "Setting output root to ${FLAGS_outroot}"
 	export WEB2PDF_DIR="${FLAGS_outroot}"
+	export WEB2PDF_TMP_DIR="/tmp${WEB2PDF_DIR}"
 fi
 
 if [ "${FLAGS_sepdate}" == "0" ] ; then
 	_echo_err "Placing dirs under ${WEB2PDF_DIR}/$(get_date)"
         export WEB2PDF_DIR="${WEB2PDF_DIR}/$(get_date)"
+	export WEB2PDF_TMP_DIR="/tmp${WEB2PDF_DIR}"
 fi
 
 if [ "${FLAGS_compile}" == "0" ] ; then
@@ -89,12 +92,11 @@ else
 fi
 _echo_debug "OUTPDF=$OUTPDF"
 
-mkdirifnotexist "${WEB2PDF_TMP_DIR}"
-mkdirifnotexist "${WEB2PDF_DIR}"
+make_directory "${WEB2PDF_TMP_DIR}"
+make_directory "${WEB2PDF_DIR}"
 
 clean_tmps
 
-_echo_debug "${THIS_DIR}/generate_all.sh --arg_url=\"${URL}\" --arg_intermed=\"${MARKDOWN}\" --arg_browser=\"${FLAGS_browser}\" ${OUTPDF} ${RECURSE}"
 ${THIS_DIR}/generate_all.sh --arg_url="${URL}" --arg_intermed="${MARKDOWN}" --arg_browser="${FLAGS_browser}" ${OUTPDF} ${RECURSE}
 
 
