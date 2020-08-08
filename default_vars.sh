@@ -33,9 +33,10 @@ THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 # BEGIN default_vars.sh #
 export WEB2PDF_TMP_DIR="/tmp/web2pdf"
+export WEB2PDF_DIR="${HOME}/.web2pdf"
+
 export WEB2PDF_URLS="${WEB2PDF_TMP_DIR}/url_list"
 export WEB2PDF_URLS_DONE="${WEB2PDF_URLS}_done"
-export WEB2PDF_DIR="${HOME}/.web2pdf"
 
 export USER_AGENT_NULL=""
 export HTTP_ACCEPT_HEADERS_NULL=""

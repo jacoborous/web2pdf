@@ -79,10 +79,15 @@ function select_http_accept() {
 # args: command
 #	A command to track with a pid file.
 function exec_pid() {
-	local PID_FILE=/var/run/$1.pid
+	make_directory /var/run/web2pdf
+	local ID=0
+	while [ -f "/var/run/web2pdf/$ID.pid" ] ; do
+		ID=$(($ID+1))
+	done
+	PID_FILE=/var/run/web2pdf/$ID.pid
+	trap "rm -f $PID_FILE" ERR EXIT SIGINT SIGKILL SIGTERM SIGQUIT
 	echo $$ > ${PID_FILE}
 	exec "$@"
-	echo "$(cat ${PID_FILE})"
 }
 
 # _echo_err
@@ -313,7 +318,7 @@ function recursive_compile() {
 
 
 function clean_tmps() {
-	if [ -f "$WEB2PDF_URLS" ] ; then
+	if [ -f "${WEB2PDF_URLS}" ] ; then
         	_echo_debug "Removing previous $WEB2PDF_URLS"
         	rm -rf "$WEB2PDF_URLS"
 	fi
@@ -327,12 +332,12 @@ function clean_tmps() {
 
 function process_url() {
 	local URL=${1}
-	local TODO="$WEB2PDF_URLS"
-	local DONE="$WEB2PDF_URLS_DONE"
+	local TODO="${WEB2PDF_URLS}"
+	local DONE="${WEB2PDF_URLS_DONE}"
 
 	mv "$TODO" "${TODO}.backup"
 
-	cat "${TODO}.backup" | egrep -x -v "$URL" > "${TODO}"
+	cat "${TODO}.backup" | egrep -x -v "${URL}" > "${TODO}"
 
 	echo "$URL" >> "$DONE"
 

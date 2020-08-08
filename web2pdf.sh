@@ -50,6 +50,8 @@ DEFINE_string 'compiledir' "${WEB2PDF_DIR}" 'Root directory to recurse through f
 FLAGS "$@" || exit 1
 eval set -- "${FLAGS_ARGV}"
 
+RUNID=$(date +%s)
+
 if [ "${FLAGS_verbose}" == "0" ] ; then
 	export VERBOSE="true"
 fi
@@ -57,13 +59,17 @@ fi
 if [ ! -z "${FLAGS_outroot}" ] ; then
 	_echo_err "Setting output root to ${FLAGS_outroot}"
 	export WEB2PDF_DIR="${FLAGS_outroot}"
-	export WEB2PDF_TMP_DIR="/tmp${WEB2PDF_DIR}"
+	export WEB2PDF_TMP_DIR="/tmp${WEB2PDF_DIR}/${RUNID}"
+	export WEB2PDF_URLS="${WEB2PDF_TMP_DIR}/url_list"
+	export WEB2PDF_URLS_DONE="${WEB2PDF_URLS}_done"
 fi
 
 if [ "${FLAGS_sepdate}" == "0" ] ; then
 	_echo_err "Placing dirs under ${WEB2PDF_DIR}/$(get_date)"
         export WEB2PDF_DIR="${WEB2PDF_DIR}/$(get_date)"
-	export WEB2PDF_TMP_DIR="/tmp${WEB2PDF_DIR}"
+	export WEB2PDF_TMP_DIR="/tmp${WEB2PDF_DIR}/${RUNID}"
+	export WEB2PDF_URLS="${WEB2PDF_TMP_DIR}/url_list"
+	export WEB2PDF_URLS_DONE="${WEB2PDF_URLS}_done"
 fi
 
 if [ "${FLAGS_compile}" == "0" ] ; then
@@ -97,7 +103,7 @@ make_directory "${WEB2PDF_DIR}"
 
 clean_tmps
 
-${THIS_DIR}/generate_all.sh --arg_url="${URL}" --arg_intermed="${MARKDOWN}" --arg_browser="${FLAGS_browser}" ${OUTPDF} ${RECURSE}
+exec_pid ${THIS_DIR}/generate_all.sh --arg_url="${URL}" --arg_intermed="${MARKDOWN}" --arg_browser="${FLAGS_browser}" ${OUTPDF} ${RECURSE}
 
 
 
