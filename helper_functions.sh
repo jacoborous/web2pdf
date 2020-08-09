@@ -442,17 +442,17 @@ function get_elem() {
 
 function filter_links_https() {
 	local FILE=${1}
-	echo $(cat $FILE | egrep "\href{http" | egrep -v "?=|@|\(|\)|\%|\#" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
+	echo $(cat $FILE | egrep "\href{http" | egrep -v "=|@|\(|\)|\%|\#" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
 }
 
 function filter_links_none() {
         local FILE=${1}
-        echo $(cat $FILE | egrep "\href{[a-zA-Z0-9]" | egrep -v "http|?=|@|\(|\)|\%|\#" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
+        echo $(cat $FILE | egrep "\href{[a-zA-Z0-9]" | egrep -v "http|=|@|\(|\)|\%|\#" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
 }
 
 function filter_links_slash() {
         local FILE=${1}
-        local LINKS=$(cat $FILE | egrep "\href{/[a-zA-Z0-9]" | egrep -v "?=|@|\(|\)|\%|\#" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
+        local LINKS=$(cat $FILE | egrep "\href{/[a-zA-Z0-9]" | egrep -v "=|@|\(|\)|\%|\#" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
 	echo "${LINKS}"
 }
 
