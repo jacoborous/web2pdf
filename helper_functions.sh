@@ -105,6 +105,7 @@ function daemonize() {
         close-fds       # 5. close unneeded fds
         exec setsid "$@"
     ) &
+    echo $! >> ${WEB2PDF_PID_DIR}/web2pdf.pid
 }
 
 # daemonize without setsid, keeps the child in the jobs table
@@ -121,7 +122,9 @@ function daemonize-job() {
             exec "$@"
         fi
     ) &
-    disown -h $!       # 2.2.3. guard against HUP (in parent)
+    local PID=$!
+    echo $PID >> ${WEB2PDF_PID_DIR}/web2pdf.pid
+    disown -h $PID       # 2.2.3. guard against HUP (in parent)
 }
 
 # _echo_err

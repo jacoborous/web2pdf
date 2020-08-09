@@ -8,7 +8,7 @@ for i in $(find ${PID_DIR} -iname '*.pid' ) ; do
 	while IFS= read -r line ; do
 		if [ ! -z "${line}" ] ; then
 			echo "Killing job ${i}, process ${line}"
-			kill -s QUIT "${line}" >/dev/null 2>&1
+			kill -s TERM "${line}" >/dev/null 2>&1
 		fi
 	done < "${i}"
 	rm -rf "${i}" >/dev/null 2>&1
