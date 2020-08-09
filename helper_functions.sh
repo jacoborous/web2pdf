@@ -14,7 +14,6 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
-#
 
 SUBJECT=helper_functions
 VERSION=0.01
@@ -79,15 +78,50 @@ function select_http_accept() {
 # args: command
 #	A command to track with a pid file.
 function exec_pid() {
-	make_directory /var/run/web2pdf
-	local ID=0
-	while [ -f "/var/run/web2pdf/$ID.pid" ] ; do
-		ID=$(($ID+1))
-	done
-	PID_FILE=/var/run/web2pdf/$ID.pid
-	trap "rm -f $PID_FILE" ERR EXIT SIGINT SIGKILL SIGTERM SIGQUIT
-	echo $$ > ${PID_FILE}
-	exec "$@"
+	local PID_FILE="${WEB2PDF_PID_DIR}/web2pdf.pid"
+	eval "$@" 2>&1 &
+	echo $! >> ${PID_FILE}
+}
+
+#http://blog.n01se.net/blog-n01se-net-p-145.html
+# redirect tty fds to /dev/null
+function redirect-std() {
+    [[ -t 0 ]] && exec </dev/null
+    [[ -t 1 ]] && exec >/dev/null
+    [[ -t 2 ]] && exec 2>/dev/null
+}
+
+# close all non-std* fds
+function close-fds() {
+    eval exec {3..255}\>\&-
+}
+
+# full daemonization of external command with setsid
+function daemonize() {
+    (                   # 1. fork
+        redirect-std    # 2.1. redirect stdin/stdout/stderr before setsid
+        cd /            # 3. ensure cwd isn't a mounted fs
+        # umask 0       # 4. umask (leave this to caller)
+        close-fds       # 5. close unneeded fds
+        exec setsid "$@"
+    ) &
+}
+
+# daemonize without setsid, keeps the child in the jobs table
+function daemonize-job() {
+    (                   # 1. fork
+        redirect-std    # 2.2.1. redirect stdin/stdout/stderr
+        trap '' 1 2     # 2.2.2. guard against HUP and INT (in child)
+        cd /            # 3. ensure cwd isn't a mounted fs
+        # umask 0       # 4. umask (leave this to caller)
+        close-fds       # 5. close unneeded fds
+        if [[ $(type -t "$1") != file ]]; then
+            "$@"
+        else
+            exec "$@"
+        fi
+    ) &
+    disown -h $!       # 2.2.3. guard against HUP (in parent)
 }
 
 # _echo_err
@@ -105,10 +139,11 @@ function _echo_debug() {
 }
 
 function next() {
-	local LIST=${1}
+	local LIST="${1}"
 	for i in $LIST ; do
-		if [ ! -z $i ] ; then
-			echo "$i"
+		shift 1
+		if [ ! -z $1 ] ; then
+			echo "$1"
 			return;
 		fi
 	done
@@ -117,7 +152,8 @@ function next() {
 function pandoc_get_md() {
 	local URL=${1}
 	local OUT_FILE=${1}
-	pandoc -f html -t markdown -o "$OUT_FILE" "${URL}"
+	local MDN=${3}
+	pandoc -f html -t ${MDN} --standalone --self-contained -o "${OUT_FILE}" "${URL}"
 }
 
 function make_directory() {
@@ -134,40 +170,52 @@ function mkdirifnotexist () {
 	fi
 }
 
+function func_temp() {
+	local FILE=$1
+	ID=0
+	while [ -f $FILE ] ; do
+		FILE="${1}.$ID"
+		ID=$(($ID+1))
+	done
+	touch $FILE
+	chmod ugo+rwx $FILE
+	trap "rm -rf $FILE" ERR EXIT QUIT KILL TERM
+}
+
 
 function pylist_get() {
+
     local EXPR=${1}
     local INDEX=${2}
+
     if [ -z "${EXPR}" ] ; then
 	_echo_err "Error: expression does not exist!"
 	exit;
     fi
-    local PY_FILE="${WEB2PDF_TMP_DIR}/py_list.py"
-    if [ -f "${PY_FILE}" ] ; then rm -rf "${PY_FILE}" ; fi
+
+    local RAND_NAME="${RANDOM}.py"
+    local PY_FILE="${WEB2PDF_TMP_DIR}/${RAND_NAME}"
+    func_temp $PY_FILE
     local PY_SCRIPT="text_to_split = \"${EXPR}\"\nsplit_list = text_to_split.split()\nprint(split_list[${INDEX}])"
-    touch "${PY_FILE}"
-    chmod -R ugo+rwx "${PY_FILE}"
     printf "${PY_SCRIPT}" >> "${PY_FILE}"
+    echo $(python ${PY_FILE} 2>&1)
 }
 
 function pylist_get_range() {
-    local EXPR="${1}"
-    local INDEX1="${2}"
-    local INDEX2="${3}"
-    _echo_debug "pylist_get_range args: ${1} ${2} ${3}"
-    if [ -z "${EXPR}" ] ; then
-        _echo_err "Error: expression does not exist!"
-        exit;
-    fi
-    local PY_FILE="${WEB2PDF_TMP_DIR}/pylist_get_range.py"
-    if [ -f "${PY_FILE}" ] ; then
-	rm -rf "${PY_FILE}"
-    fi
-    local PY_SCRIPT="text_to_split = \"${EXPR}\"\nsplit_list = text_to_split.split()\nprint(split_list[${INDEX1}:${INDEX2}])"
-    touch "${PY_FILE}"
-    chmod -R ugo+rwx "${PY_FILE}"
-    printf "${PY_SCRIPT}" >| "${PY_FILE}"
-    echo "$(echo $(python ${PY_FILE}) | sed -e 's/.*\[//g' | sed -e 's/\].*//g' | sed -e 's/,//g' | sed -e "s/'//g")"
+    	local EXPR="${1}"
+    	local INDEX1="${2}"
+    	local INDEX2="${3}"
+
+    	if [ -z "${EXPR}" ] ; then
+        	_echo_err "Error: missing argument"
+		return 1;
+    	fi
+
+    	local PY_FILE="${WEB2PDF_TMP_DIR}/${RANDOM}.py"
+	func_temp $PY_FILE
+    	local PY_SCRIPT="text_to_split = \"${EXPR}\"\nsplit_list = text_to_split.split()\nprint(split_list[${INDEX1}:${INDEX2}])"
+    	printf "${PY_SCRIPT}" >| "${PY_FILE}"
+    	echo "$(echo $(python ${PY_FILE}) | sed -e 's/.*\[//g' | sed -e 's/\].*//g' | sed -e 's/,//g' | sed -e "s/'//g")"
 }
 
 
@@ -177,7 +225,6 @@ function create_dirs_from_list() {
     local PATH_DIR=${2}
     for i in ${DIRS} ; do
 	PATH_DIR="${PATH_DIR}/$i"
-	_echo_debug "Making directory ${PATH_DIR}"
 	mkdirifnotexist "${PATH_DIR}"
     done
 }
@@ -365,12 +412,23 @@ function unique_set() {
 	echo "$SET"
 }
 
+function random_digits() {
+	local LEN=${1}
+	local STR=""
+	ID=$(($LEN))
+	while [ $ID -gt 0 ] ; do
+		STR="${RANDOM}${STR}"
+		ID=$(($ID-1))
+	done
+	echo "$STR"
+}
+
 function get_elem() {
 	local INDEX=${1}
 	local LIST=${2}
-	local TMP_FILE="${WEB2PDF_TMP_DIR}/tmplist"
-	touch $TMP_FILE
-        chmod +rw $TMP_FILE
+	local NAME="$(random_digits 4)"
+	local TMP_FILE="${WEB2PDF_TMP_DIR}/${NAME}"
+	func_temp $TMP_FILE
 	for i in ${LIST} ; do
                 echo "${i}" >> "${TMP_FILE}"
         done
