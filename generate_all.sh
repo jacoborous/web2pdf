@@ -63,53 +63,35 @@ fi
 
 # BEGIN generate_all.sh #
 
+function check_in_links() {
+	local FILE="${1}"
+	if [ ! -f $FILE ] ; then
+		_echo_err "Error: $FILE does not exist."
+		exit 1;
+	fi
+	for i in $(filter_links_from_latex $FILE) ; do
+                NEW_URL="${i}"
+                COUNT=$(grep -c ${NEW_URL} ${WEB2PDF_URLS}) # not checked in yet
+                COUNT_DONE=$(grep -c ${NEW_URL} ${WEB2PDF_URLS_DONE}) # and not already finished
+                if [ "${COUNT_DONE}" == "0" ] ; then
+                        if [ "${COUNT}" == "0" ] ; then
+                                _echo_err "checking-in possible sub-arg_url: ${NEW_URL}"
+                                echo "${NEW_URL}" >> "${WEB2PDF_URLS}"
+                        fi
+                fi
+        done
+}
+
+
 function search_sub_urls_from_file() {
         local FILE=${1}
         local PREFIX=$(get_url_domain ${2})
         local CONTINUE="false"
         _echo_err "Searching through $FILE for sub-arg_urls. Prefix: $PREFIX"
-        for i in $(filter_links_slash $FILE) ; do
-                NEW_URL="${PREFIX}${i}"
-                COUNT=$(grep -c ${NEW_URL} ${WEB2PDF_URLS})
-                COUNT_DONE=$(grep -c ${NEW_URL} ${WEB2PDF_URLS_DONE})
-                if [ "${COUNT_DONE}" == "0" ] ; then
-			if [ "${COUNT}" == "0" ] ; then
-                        	_echo_err "checking-in possible sub-arg_url: ${NEW_URL}"
-                        	CONTINUE="true"
-                        	echo "${NEW_URL}" >> "${WEB2PDF_URLS}"
-			fi
-                fi
-        done
-        for i in $(filter_links_https $FILE) ; do
-                NEW_URL="${i}"
-                COUNT=$(grep -c ${NEW_URL} ${WEB2PDF_URLS})
-                COUNT_DONE=$(grep -c ${NEW_URL} ${WEB2PDF_URLS_DONE})
-		COUNT_PREFIX=$(echo ${NEW_URL} | grep -c ${PREFIX})
-                if [ "${COUNT_DONE}" == "0" ] ; then
-	                if [ "${COUNT}" == "0" ] ; then
-				if [ "${COUNT_PREFIX}" != "0" ] ; then
-                	        	_echo_err "checking-in possible sub-arg_url: ${NEW_URL}"
-                        		CONTINUE="true"
-                        		echo "${NEW_URL}" >> "${WEB2PDF_URLS}"
-                		fi
-			fi
-		fi
-        done
-        for i in $(filter_links_none $FILE) ; do
-                NEW_URL="${PREFIX}${i}"
-                COUNT=$(grep -c "${NEW_URL}" "$WEB2PDF_URLS")
-                COUNT_DONE=$(grep -c "${NEW_URL}" "${WEB2PDF_URLS_DONE}")
-                if [ "${COUNT_DONE}" == "0" ] ; then
-                        if [ "${COUNT}" == "0" ] ; then
-                        	_echo_err "checking-in possible sub-arg_url: ${NEW_URL}"
-                        	CONTINUE="true"
-                        	echo "${NEW_URL}" >> "${WEB2PDF_URLS}"
-                	fi
-		fi
-        done
+	check_in_links $FILE
         local TODO_COUNT=$(grep -c ".*" "${WEB2PDF_URLS}")
         local DONE_COUNT=$(grep -c ".*" "${WEB2PDF_URLS_DONE}")
-        _echo_err "Num arg_urls left to process: ${TODO_COUNT}; Num processed: ${DONE_COUNT}"
+        _echo_err "To-do: ${TODO_COUNT}; Done: ${DONE_COUNT}"
         if [ "${TODO_COUNT}" != "0" ] ; then
                 while IFS= read -r line ; do
                         _echo_debug "fetching arg_url: $line"

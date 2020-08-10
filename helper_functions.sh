@@ -440,22 +440,136 @@ function get_elem() {
 	echo "$ELEM"
 }
 
-function filter_links_https() {
-	local FILE=${1}
-	echo $(cat $FILE | egrep "\href{http" | egrep -v "=|@|\(|\)|\%|\#" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
+function str_len() {
+	local STR="${1}"
+	local LEN=$(echo $STR | grep -o . | egrep -c '.*')
+	echo $((${LEN}))
 }
 
-function filter_links_none() {
-        local FILE=${1}
-        echo $(cat $FILE | egrep "\href{[a-zA-Z0-9]" | egrep -v "http|=|@|\(|\)|\%|\#" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
+function char_at() {
+	local STR="${1}"
+	local INDEX=$((${2}))
+	local LEN=$(($(str_len $STR)))
+	if [[ $INDEX -lt $LEN ]] ; then
+		local ZIND=$(($INDEX+1))
+		echo $STR | grep -o . | sed -n '$ZINDp'
+		return;
+	else
+		_echo_err "Warning: Index out of bounds: string: $STR (length: $LEN), index: $INDEX. Reminder that char_at() uses 0-based indexing."
+		echo ""
+		return;
+	fi
 }
 
-function filter_links_slash() {
-        local FILE=${1}
-        local LINKS=$(cat $FILE | egrep "\href{/[a-zA-Z0-9]" | egrep -v "=|@|\(|\)|\%|\#" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g")
-	echo "${LINKS}"
+function str_get_substr() {
+	local STR="${1}"
+        local INDEX1=$((${2} + 1))
+	if [ ! -z ${3} ] ; then
+		local INDEX2=$((${3} + 1))
+		echo "$STR" | grep -o . | sed -n '$INDEX1;$INDEX2p'
+		return;
+	fi
+        local LEN=$(($(str_len $STR)))
+        if [[ $INDEX1 -lt $LEN ]] ; then
+                echo $STR | grep -o . | sed -n '$INDEX1p'
+		return;
+        else
+                _echo_err "Warning: Index out of bounds: string: $STR (length: $LEN), index: $INDEX. Reminder that char_at() uses 0-based indexing."
+                echo ""
+		return;
+        fi
 }
 
+function str_begins_with() {
+	local STR="${1}"
+	local BEGINS_WITH="${2}"
+	local LEN=$(str_len $STR)
+	local BEGINLEN=$(str_len $BEGINS_WITH)
+	if [ $BEGINLEN -gt $LEN ] ; then
+		echo "false"
+	else
+		local BEGINSTR="$(str_get_substr 0 $BEGINLEN)"
+		if [ "$BEGINSTR" == "$BEGINS_WITH" ] ; then
+			echo "true"
+			return;
+		else
+			echo "false"
+			return;
+		fi
+	fi
+}
+
+function str_split() {
+	local STR="${1}"
+	local SPLIT="${2}"
+	echo $STR | sed -e "s/$SPLIT/ /g"
+}
+
+# Returns the first expression enclosed between
+# an LH string and an RH string passed as args.
+# If one or both can't be found then the full
+# string will be returned.
+function str_enclosed() {
+	local STR="${3}"
+	local LH="${1}"
+	local RH="${2}"
+	echo $STR \
+		| sed -e "s/.*${LH}/ /g" \
+		| sed -e "s/${RH}.*/ /g"
+}
+
+function _fold_1() {
+	local CONTEXT=${1}
+	shift 1
+	while [ ! -z ${@} ] ; do
+		exec sedsid "$CONTEXT ${@}"
+		shift 1
+	fi
+}
+
+function _counter() {
+	if [ $# == 0 ] ; then
+		echo "_counter 0"
+	elif [ $# == 1 ] ; then
+		echo "_counter $(($1))"
+	else
+		local COUNT=$(($1+1))
+		shift 1
+		echo "_counter $COUNT $@"
+	fi
+}
+
+function _map_1() {
+	local CONTEXT=${1}
+        shift 1
+        while [ ! -z ${1} ] ; do
+                exec sedsid "$CONTEXT ${1}"
+                shift 1
+        fi
+}
+
+function str_has_substr() {
+	local STR="${1}"
+	local SUBSTR="${2}"
+	local OCCURS=$(( $(echo $(str_split "$STR" "$SUBSTR") | egrep -c ".*") ))
+	if [ $OCCURS -gt 0 ] ; then echo "true" ; else echo "false" ; fi
+}
+
+function str_escape() {
+	printf '%q\n' "${1}"
+}
+
+function filter_links_from_latex() {
+	local FILE="${1}"
+	local DOMAIN="${2}"
+	grep "\href{" | str_enclosed "\href{" "}" | sed -e "s/${DOMAIN}//g" | grep -v "://" | sed -e "s/\//${DOMAIN}\//"
+}
+
+function filter_ext_links_from_latex() {
+        local FILE="${1}"
+        local DOMAIN="${2}"
+        grep "\href{" | str_enclosed "\href{" "}" | grep -v "${DOMAIN}" | grep "://"
+}
 
 function get_date() {
 	echo $(date -u +%Y-%m-%d)

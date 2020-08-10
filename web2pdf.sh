@@ -98,4 +98,3 @@ make_directory "${WEB2PDF_DIR}"
 clean_tmps
 
 daemonize ${THIS_DIR}/generate_all.sh --arg_url="${URL}" --arg_intermed="${MARKDOWN}" --arg_browser="${FLAGS_browser}" ${OUTPDF} ${RECURSE}
-echo $! >> ${WEB2PDF_PID_DIR}/web2pdf.pid

@@ -46,7 +46,7 @@ mkdir -p $WEB2PDF_PID_DIR
 
 export WEB2PDF_DIR="${HOME}/.web2pdf"
 
-export WEB2PDF_URLS="${WEB2PDF_TMP_DIR}/url_list"
+export WEB2PDF_URLS="${WEB2PDF_TMP_DIR}/${RANDOM}.urls"
 export WEB2PDF_URLS_DONE="${WEB2PDF_URLS}_done"
 
 export USER_AGENT_NULL=""

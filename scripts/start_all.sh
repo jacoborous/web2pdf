@@ -1,12 +1,7 @@
 #!/bin/bash
 
-OUTPUT_ROOT=${1}
-URLS=${2}
-BROWSER=${3}
-
-WEB2PDF_VARS=../default_vars.sh
-
-. ${WEB2PDF_VARS}
+. /etc/web2pdf/web2pdf.conf
+. ${WEB2PDF_SCRIPTS}/default_vars.sh
 
 echo "Starting..."
 
@@ -33,18 +28,17 @@ fi
 
 ID=0
 while IFS= read -r line ; do
-	web2pdf -r -o ${OUTPUT_ROOT} -u ${line} -b ${BROWSER} > ${WEB2PDF_LOG_DIR}/web2pdf_${ID}.log 2>&1 &
+	OUTPUT_ROOT=$(echo $line | sed -e "s/.* //g")
+	URL=$(echo $line | sed -e "s/ .*//g")
+	${WEB2PDF_SCRIPTS}/web2pdf.sh -r -o ${OUTPUT_ROOT} -u ${URL} -b ${BROWSER} > ${WEB2PDF_LOG_DIR}/web2pdf_${ID}.log 2>&1 &
 	PID=$!
 	echo ${PID} >> ${PID_FILE}
 	echo "Launched job ${RUNID} / ${ID} with process ID $PID"
+	${WEB2PDF_AUTOCOMMIT} > ${WEB2PDF_LOG_DIR}/autocommit_${ID}.log 2>&1 &
+	PID=$!
+	echo ${PID} >> ${PID_FILE}
+	echo "Launched autocommit task for job ${ID} with process ID $PID"
 	ID=$(($ID+1))
-done < ${URLS}
-
-echo "Started!"
-
-echo "Starting automated commit process..."
-
-${OUTPUT_ROOT}/autocommit.sh > ${WEB2PDF_LOG_DIR}/autocommit.log 2>&1 &
-echo $! >> ${PID_FILE}
+done < ${WEB2PDF_TARGETS}
 
 echo "Start-up complete. All tracked PIDs: "$(echo $(cat ${PID_FILE}))" "
