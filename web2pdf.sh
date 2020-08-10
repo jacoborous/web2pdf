@@ -95,6 +95,4 @@ _echo_debug "OUTPDF=$OUTPDF"
 
 make_directory "${WEB2PDF_DIR}"
 
-clean_tmps
-
 daemonize ${THIS_DIR}/generate_all.sh --arg_url="${URL}" --arg_intermed="${MARKDOWN}" --arg_browser="${FLAGS_browser}" ${OUTPDF} ${RECURSE}

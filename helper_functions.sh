@@ -174,15 +174,11 @@ function mkdirifnotexist () {
 }
 
 function func_temp() {
-	local FILE=$1
-	ID=0
-	while [ -f $FILE ] ; do
-		FILE="${1}.$ID"
-		ID=$(($ID+1))
-	done
+	local FILE="${1}"
 	touch $FILE
 	chmod ugo+rwx $FILE
 	trap "rm -rf $FILE" ERR EXIT QUIT KILL TERM
+	echo $FILE
 }
 
 
@@ -193,7 +189,7 @@ function pylist_get() {
 
     if [ -z "${EXPR}" ] ; then
 	_echo_err "Error: expression does not exist!"
-	exit;
+	exit 1;
     fi
 
     local RAND_NAME="${RANDOM}.py"
@@ -201,7 +197,7 @@ function pylist_get() {
     func_temp $PY_FILE
     local PY_SCRIPT="text_to_split = \"${EXPR}\"\nsplit_list = text_to_split.split()\nprint(split_list[${INDEX}])"
     printf "${PY_SCRIPT}" >> "${PY_FILE}"
-    echo $(python ${PY_FILE} 2>&1)
+    echo "$(python ${PY_FILE})"
 }
 
 function pylist_get_range() {
@@ -211,13 +207,13 @@ function pylist_get_range() {
 
     	if [ -z "${EXPR}" ] ; then
         	_echo_err "Error: missing argument"
-		return 1;
+		exit 1;
     	fi
 
     	local PY_FILE="${WEB2PDF_TMP_DIR}/${RANDOM}.py"
 	func_temp $PY_FILE
     	local PY_SCRIPT="text_to_split = \"${EXPR}\"\nsplit_list = text_to_split.split()\nprint(split_list[${INDEX1}:${INDEX2}])"
-    	printf "${PY_SCRIPT}" >| "${PY_FILE}"
+    	printf "${PY_SCRIPT}" >> "${PY_FILE}"
     	echo "$(echo $(python ${PY_FILE}) | sed -e 's/.*\[//g' | sed -e 's/\].*//g' | sed -e 's/,//g' | sed -e "s/'//g")"
 }
 
@@ -233,28 +229,28 @@ function create_dirs_from_list() {
 }
 
 function curl_to_file() {
-	local URL=${1}
-	local OUTPUT_FILE=${2}
-	local USER_AGENT=${3}
-	local HTTP_HEADER=${4}
+	local URL="${1}"
+	local OUTPUT_FILE="${2}"
+	local USER_AGENT="${3}"
+	local HTTP_HEADER="${4}"
 	_echo_debug "curl -s -A \"${USER_AGENT}\" -H \"${HTTP_HEADER}\" --url \"${URL}\" -o ${OUTPUT_FILE}"
 	curl -s -A "${USER_AGENT}" -H "${HTTP_HEADER}" --url "${URL}" -o "${OUTPUT_FILE}"
 }
 
 function url_to_dir_list() {
-	local URL=${1}
+	local URL="${1}"
 	URL_LIST="$(echo ${URL} | sed -e 's/\:\/\//\//g' | tr "\/" " ")" # breaking urls into lists by / separator
 	echo $URL_LIST
 }
 
 function dir_to_folder_list() {
-	local DIR=${1}
+	local DIR="${1}"
 	DIR_LIST="$(echo ${DIR} | tr "\/" " ")"
 	echo "$DIR_LIST"
 }
 
 function create_dirs_from_url() {
-	local URL=${1}
+	local URL="${1}"
 	local URL_LIST="$(url_to_dir_list $URL)"
 	local LAST_FOLDER="$(pylist_get "${URL_LIST}" "-1")"
         create_dirs_from_list "$(pylist_get_range "${URL_LIST}" "0" "")" "$WEB2PDF_DIR"
@@ -262,7 +258,7 @@ function create_dirs_from_url() {
 }
 
 function get_url_domain() {
-	local URL=${1}
+	local URL="${1}"
 	local LIST=$(url_to_dir_list ${URL})
 	local FIRST=$(get_elem 1 "${LIST}")
 	local SECOND=$(get_elem 2 "${LIST}")
@@ -273,7 +269,7 @@ function get_url_domain() {
 
 
 function generate_markdown() {
-	local URL=${1}
+	local URL="${1}"
 	local INTERMED=$(if [ "${2}" == "gfm" ] ; then echo "gfm" ; else echo "markdown" ; fi)
 	local USER_AGENT=$(select_user_agent ${3})
 	local HTTP_ACCEPT_HEADERS=$(select_http_accept ${4})
@@ -287,9 +283,7 @@ function generate_markdown() {
 
 	curl_to_file "${URL}" "${OUTPUT_FILE}" "${USER_AGENT}" "${HTTP_ACCEPT_HEADERS}"
 
-	pandoc -f html -t "${INTERMED}" \
-	       -o "${OUTPUT_FILE}.md" \
-	       "${OUTPUT_FILE}"
+	pandoc -f html -t "${INTERMED}" -o "${OUTPUT_FILE}.md" "${OUTPUT_FILE}" >/dev/null 2>&1
 
 	if [ -f "${OUTPUT_FILE}.md" ] ; then
 	    _echo_err "${INTERMED} file successfully generated."
@@ -303,15 +297,13 @@ function generate_markdown() {
 }
 
 function generate_latex_from_file() {
-	local FILE=${1}
-	local INTERMED=${2}
+	local FILE="${1}"
+	local INTERMED="${2}"
 	local OUTPUT_FILE="${FILE}.tex"
 
 	_echo_err "Translating ${FILE} to LaTeX, output: ${OUTPUT_FILE}"
 
-	pandoc -f "${INTERMED}" -t "latex" \
-	       -o "${OUTPUT_FILE}" \
-	       "${FILE}"
+	pandoc -f "${INTERMED}" -t "latex" -o "${OUTPUT_FILE}" "${FILE}" >/dev/null 2>&1
 
 	if [ -f "${OUTPUT_FILE}" ] ; then
 	    _echo_err "LaTeX file successfully generated."
@@ -333,9 +325,7 @@ function compile_pdf() {
         _echo_err "OUTPUT_FILE=${OUTPUT_FILE}"
 	_echo_debug "pandoc -o "${OUTPUT_FILE}" --pdf-engine="${ENGINE}" "${TEX_FILE}""
 
-        pandoc -o "${OUTPUT_FILE}" \
-        	--pdf-engine="${ENGINE}" \
-               "${TEX_FILE}"
+        pandoc -o "${OUTPUT_FILE}" --pdf-engine="${ENGINE}" "${TEX_FILE}" >/dev/null 2>&1
 
         _echo_err "Checking to see if pdf was successfully created..."
 
@@ -344,7 +334,7 @@ function compile_pdf() {
             echo "${OUTPUT_FILE}"
         else
             _echo_err "File not found! An error must have occurred when running pandoc."
-            #exit 1
+            echo "0"
         fi
 
 }
@@ -367,31 +357,44 @@ function recursive_compile() {
 }
 
 
-function clean_tmps() {
-	if [ -f "${WEB2PDF_URLS}" ] ; then
-        	_echo_debug "Removing previous $WEB2PDF_URLS"
-        	rm -rf "$WEB2PDF_URLS"
-	fi
-	touch "$WEB2PDF_URLS"
-	if [ -f "$WEB2PDF_URLS_DONE" ] ; then
-        	_echo_debug "Removing previous $WEB2PDF_URLS_DONE"
-        	rm -rf "$WEB2PDF_URLS_DONE"
-	fi
-	touch "$WEB2PDF_URLS_DONE"
+function process_url() {
+	local URL="${1}"
+	local TODO="${2}"
+	local DONE="${3}"
+
+	while [ -f ${TODO}.lock ] ; do
+                sleep 1 &
+                wait
+        done
+        touch ${TODO}.lock && trap "rm -rf ${TODO}.lock" ERR EXIT TERM QUIT KILL
+
+	mv ${TODO} ${TODO}.backup
+
+	cat ${TODO}.backup | egrep -x -v "${URL}" > ${TODO}
+
+	append_to_file_ifnexists "${DONE}" "${URL}"
+
+	rm -rf ${TODO}.backup
+	rm -rf ${TODO}.lock
 }
 
-function process_url() {
-	local URL=${1}
-	local TODO="${WEB2PDF_URLS}"
-	local DONE="${WEB2PDF_URLS_DONE}"
+function append_to_file_ifnexists() {
+	local FILE="${1}"
+	local ELEM="${2}"
+	while [ -f ${FILE}.lock ] ; do
+		sleep 1 &
+		wait
+	done
+	touch ${FILE}.lock && trap "rm -rf ${FILE}.lock" ERR EXIT TERM QUIT KILL
+	while IFS= read -r line; do
+		if [ "$line" == "$ELEM" ] ; then
+			rm -rf ${FILE}.lock
+			return;
+		fi
+	done < ${FILE}
 
-	mv "$TODO" "${TODO}.backup"
-
-	cat "${TODO}.backup" | egrep -x -v "${URL}" > "${TODO}"
-
-	echo "$URL" >> "$DONE"
-
-	rm -rf "${TODO}.backup"
+	echo ${ELEM} >> ${FILE}
+	rm -rf ${FILE}.lock
 }
 
 
@@ -427,7 +430,7 @@ function random_digits() {
 }
 
 function get_elem() {
-	local INDEX=${1}
+	local INDEX=$((${1}))
 	local LIST=${2}
 	local NAME="$(random_digits 4)"
 	local TMP_FILE="${WEB2PDF_TMP_DIR}/${NAME}"
@@ -436,7 +439,6 @@ function get_elem() {
                 echo "${i}" >> "${TMP_FILE}"
         done
 	local ELEM=$(sed -n "${INDEX} p" "${TMP_FILE}")
-        rm -rf $TMP_FILE
 	echo "$ELEM"
 }
 
@@ -510,12 +512,12 @@ function str_split() {
 # If one or both can't be found then the full
 # string will be returned.
 function str_enclosed() {
-	local STR="${3}"
 	local LH="${1}"
 	local RH="${2}"
-	echo $STR \
-		| sed -e "s/.*${LH}/ /g" \
-		| sed -e "s/${RH}.*/ /g"
+	local STR="${3}"
+	_echo_err "LH=$LH RH=$RH STR=$STR"
+	_echo_err "${STR}" | sed -e "s/.*${LH}/ /g" | sed -e "s/${RH}.*/ /g"
+	echo "$STR" | sed -e "s/.*${LH}/ /g" | sed -e "s/${RH}.*/ /g"
 }
 
 function _fold_1() {
@@ -556,19 +558,23 @@ function str_has_substr() {
 }
 
 function str_escape() {
-	printf '%q\n' "${1}"
+	local repled=$(echo "${1}" | sed -e "s/\//</g")
+	local final=$(printf '%q\n' $repled | sed -e "s/</\//g")
+	echo $final
 }
 
 function filter_links_from_latex() {
-	local FILE="${1}"
-	local DOMAIN="${2}"
-	grep "\href{" | str_enclosed "\href{" "}" | sed -e "s/${DOMAIN}//g" | grep -v "://" | sed -e "s/\//${DOMAIN}\//"
+	local FILE="$(printf '%q\n' ${1})"
+	local DOMAIN="$(str_escape ${2})"
+	local COMMAND="cat $FILE | grep '\href{' | sed -e 's/.*\href{//g' | sed -e 's/}.*//g' | sed -e 's/${DOMAIN}//g' | grep -v '://' | sed -e 's/\//${DOMAIN}\//' "
+	_echo_err "$COMMAND"
+	eval "$COMMAND"
 }
 
 function filter_ext_links_from_latex() {
-        local FILE="${1}"
-        local DOMAIN="${2}"
-        grep "\href{" | str_enclosed "\href{" "}" | grep -v "${DOMAIN}" | grep "://"
+        local FILE="$(printf '%q\n' ${1})"
+        local DOMAIN="$(str_escape ${2})"
+        echo $(cat $FILE | grep "\href{" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g" | grep -v "${DOMAIN}" | grep "://")
 }
 
 function get_date() {

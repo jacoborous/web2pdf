@@ -25,11 +25,13 @@ else
 	exit 1;
 fi
 
+BROWSER=chrome
 
 ID=0
 while IFS= read -r line ; do
 	OUTPUT_ROOT=$(echo $line | sed -e "s/.* //g")
 	URL=$(echo $line | sed -e "s/ .*//g")
+	echo "Got job: URL=$URL OUTPUT_ROOT=$OUTPUT_ROOT"
 	${WEB2PDF_SCRIPTS}/web2pdf.sh -r -o ${OUTPUT_ROOT} -u ${URL} -b ${BROWSER} > ${WEB2PDF_LOG_DIR}/web2pdf_${ID}.log 2>&1 &
 	PID=$!
 	echo ${PID} >> ${PID_FILE}

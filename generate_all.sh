@@ -63,20 +63,30 @@ fi
 
 # BEGIN generate_all.sh #
 
+WEB2PDF_URLS="${WEB2PDF_TMP_DIR}/${BASHPID}.urls"
+WEB2PDF_URLS_DONE="${WEB2PDF_URLS}.done"
+
+touch $WEB2PDF_URLS
+touch $WEB2PDF_URLS_DONE
+
+trap "rm -rf $WEB2PDF_URLS" EXIT KILL TERM
+trap "rm -rf $WEB2PDF_URLS_DONE" EXIT KILL TERM
+
 function check_in_links() {
 	local FILE="${1}"
+	local DOMAIN="${2}"
 	if [ ! -f $FILE ] ; then
 		_echo_err "Error: $FILE does not exist."
 		exit 1;
 	fi
-	for i in $(filter_links_from_latex $FILE) ; do
+	for i in $(filter_links_from_latex $FILE $DOMAIN) ; do
                 NEW_URL="${i}"
                 COUNT=$(grep -c ${NEW_URL} ${WEB2PDF_URLS}) # not checked in yet
                 COUNT_DONE=$(grep -c ${NEW_URL} ${WEB2PDF_URLS_DONE}) # and not already finished
                 if [ "${COUNT_DONE}" == "0" ] ; then
                         if [ "${COUNT}" == "0" ] ; then
-                                _echo_err "checking-in possible sub-arg_url: ${NEW_URL}"
-                                echo "${NEW_URL}" >> "${WEB2PDF_URLS}"
+                                _echo_err "checking-in possible sub-url: ${NEW_URL}"
+                                append_to_file_ifnexists "${WEB2PDF_URLS}" "${NEW_URL}"
                         fi
                 fi
         done
@@ -84,36 +94,39 @@ function check_in_links() {
 
 
 function search_sub_urls_from_file() {
-        local FILE=${1}
-        local PREFIX=$(get_url_domain ${2})
+        local FILE="${1}"
+        local PREFIX=$(get_url_domain "${2}")
         local CONTINUE="false"
-        _echo_err "Searching through $FILE for sub-arg_urls. Prefix: $PREFIX"
-	check_in_links $FILE
+        _echo_err "Searching through $FILE for URLs to add to ${WEB2PDF_URLS}. Prefix: $PREFIX"
+	check_in_links "$FILE" "$PREFIX"
         local TODO_COUNT=$(grep -c ".*" "${WEB2PDF_URLS}")
         local DONE_COUNT=$(grep -c ".*" "${WEB2PDF_URLS_DONE}")
         _echo_err "To-do: ${TODO_COUNT}; Done: ${DONE_COUNT}"
         if [ "${TODO_COUNT}" != "0" ] ; then
-                while IFS= read -r line ; do
-                        _echo_debug "fetching arg_url: $line"
-                        process_url "$line"
-                        generate_all $line "gfm" ${3} ${4} ${5} ${6}
-                done < "${WEB2PDF_URLS}"
+                #while IFS= read -r line ; do
+		for line in $(cat ${WEB2PDF_URLS}) ; do
+                        _echo_err "fetching URL: $line"
+                        process_url "$line" ${WEB2PDF_URLS} ${WEB2PDF_URLS_DONE}
+                        generate_all "$line" "gfm" ${3} ${4} ${5} ${6}
+                #done < "${WEB2PDF_URLS}"
+		done
         else
                 _echo_err "None left to process, program complete."
-                clean_tmps
                 exit 0
         fi
 }
 
 function generate_all() {
-        local arg_url=${1}
+        local arg_url="${1}"
         local MARKDOWN=${2}
         local arg_browser=${3}
         local ENGINE=${4}
         local DO_PDF=${5}
         local DO_arg_recurse=${6}
         local OUTPUT_MD=$(generate_markdown ${arg_url} ${MARKDOWN} ${arg_browser} ${arg_browser})
+	if [ "${OUTPUT_MD}" == "0" ] ; then return; fi
         local OUTPUT_TEX=$(generate_latex_from_file ${OUTPUT_MD} ${MARKDOWN})
+	if [ "${OUTPUT_TEX}" == "0" ] ; then return; fi
         local OUTPUT_PDF=$(if [[ "${DO_PDF}" == "true" ]] ; then compile_pdf ${OUTPUT_TEX} ${ENGINE} ; fi)
         if [ "${DO_arg_recurse}" == "true" ] ; then
                 search_sub_urls_from_file "${OUTPUT_TEX}" "${arg_url}" "${arg_browser}" "${ENGINE}" "${DO_PDF}" "${DO_arg_recurse}"
