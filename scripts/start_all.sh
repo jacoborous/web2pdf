@@ -34,7 +34,7 @@ while IFS= read -r line ; do
 	PID=$!
 	echo ${PID} >> ${PID_FILE}
 	echo "Launched job ${RUNID} / ${ID} with process ID $PID"
-	${WEB2PDF_AUTOCOMMIT} > ${WEB2PDF_LOG_DIR}/autocommit_${ID}.log 2>&1 &
+	${WEB2PDF_AUTOCOMMIT} ${OUTPUT_ROOT} 3600 > ${WEB2PDF_LOG_DIR}/autocommit_${ID}.log 2>&1 &
 	PID=$!
 	echo ${PID} >> ${PID_FILE}
 	echo "Launched autocommit task for job ${ID} with process ID $PID"

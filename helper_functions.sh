@@ -524,7 +524,7 @@ function _fold_1() {
 	while [ ! -z ${@} ] ; do
 		exec sedsid "$CONTEXT ${@}"
 		shift 1
-	fi
+	done
 }
 
 function _counter() {
@@ -545,7 +545,7 @@ function _map_1() {
         while [ ! -z ${1} ] ; do
                 exec sedsid "$CONTEXT ${1}"
                 shift 1
-        fi
+        done
 }
 
 function str_has_substr() {
