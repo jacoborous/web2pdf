@@ -30,6 +30,7 @@ THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 # IMPORTS #
 . ${THIS_DIR}/shFlags/shflags
 . ${THIS_DIR}/default_vars.sh
+. ${THIS_DIR}/imports/stringmanip.sh
 # END IMPORTS #
 
 # BEGIN helper_functions.sh #
@@ -153,9 +154,9 @@ function next() {
 }
 
 function pandoc_get_md() {
-	local URL=${1}
-	local OUT_FILE=${1}
-	local MDN=${3}
+	local URL="${1}"
+	local OUT_FILE="${1}"
+	local MDN="${3}"
 	pandoc -f html -t ${MDN} --standalone --self-contained -o "${OUT_FILE}" "${URL}"
 }
 
@@ -178,7 +179,6 @@ function func_temp() {
 	touch $FILE
 	chmod ugo+rwx $FILE
 	trap "rm -rf $FILE" ERR EXIT QUIT KILL TERM
-	echo $FILE
 }
 
 
@@ -194,6 +194,7 @@ function pylist_get() {
 
     local RAND_NAME="${RANDOM}.py"
     local PY_FILE="${WEB2PDF_TMP_DIR}/${RAND_NAME}"
+    _echo_debug "Creating temp py file: $PY_FILE"
     func_temp $PY_FILE
     local PY_SCRIPT="text_to_split = \"${EXPR}\"\nsplit_list = text_to_split.split()\nprint(split_list[${INDEX}])"
     printf "${PY_SCRIPT}" >> "${PY_FILE}"
@@ -211,6 +212,7 @@ function pylist_get_range() {
     	fi
 
     	local PY_FILE="${WEB2PDF_TMP_DIR}/${RANDOM}.py"
+	_echo_debug "Creating temp py file: $PY_FILE"
 	func_temp $PY_FILE
     	local PY_SCRIPT="text_to_split = \"${EXPR}\"\nsplit_list = text_to_split.split()\nprint(split_list[${INDEX1}:${INDEX2}])"
     	printf "${PY_SCRIPT}" >> "${PY_FILE}"
@@ -240,7 +242,7 @@ function curl_to_file() {
 function url_to_dir_list() {
 	local URL="${1}"
 	URL_LIST="$(echo ${URL} | sed -e 's/\:\/\//\//g' | tr "\/" " ")" # breaking urls into lists by / separator
-	echo $URL_LIST
+	echo "$URL_LIST"
 }
 
 function dir_to_folder_list() {
@@ -251,8 +253,11 @@ function dir_to_folder_list() {
 
 function create_dirs_from_url() {
 	local URL="${1}"
+	_echo_debug "Creating dirs from: $URL"
 	local URL_LIST="$(url_to_dir_list $URL)"
+	_echo_debug "URL_LIST: $URL_LIST"
 	local LAST_FOLDER="$(pylist_get "${URL_LIST}" "-1")"
+	_echo_debug "LAST_FOLDER: $LAST_FOLDER"
         create_dirs_from_list "$(pylist_get_range "${URL_LIST}" "0" "")" "$WEB2PDF_DIR"
 	echo "${WEB2PDF_DIR}/$(echo $(pylist_get_range "${URL_LIST}" "0" "") | sed -e 's/ /\//g')"
 }
@@ -283,7 +288,7 @@ function generate_markdown() {
 
 	curl_to_file "${URL}" "${OUTPUT_FILE}" "${USER_AGENT}" "${HTTP_ACCEPT_HEADERS}"
 
-	pandoc -f html -t "${INTERMED}" -o "${OUTPUT_FILE}.md" "${OUTPUT_FILE}" >/dev/null 2>&1
+	pandoc -f html -t "${INTERMED}" -o "${OUTPUT_FILE}.md" "${OUTPUT_FILE}"
 
 	if [ -f "${OUTPUT_FILE}.md" ] ; then
 	    _echo_err "${INTERMED} file successfully generated."
@@ -303,7 +308,7 @@ function generate_latex_from_file() {
 
 	_echo_err "Translating ${FILE} to LaTeX, output: ${OUTPUT_FILE}"
 
-	pandoc -f "${INTERMED}" -t "latex" -o "${OUTPUT_FILE}" "${FILE}" >/dev/null 2>&1
+	pandoc -f "${INTERMED}" -t "latex" -o "${OUTPUT_FILE}" "${FILE}"
 
 	if [ -f "${OUTPUT_FILE}" ] ; then
 	    _echo_err "LaTeX file successfully generated."
@@ -325,7 +330,7 @@ function compile_pdf() {
         _echo_err "OUTPUT_FILE=${OUTPUT_FILE}"
 	_echo_debug "pandoc -o "${OUTPUT_FILE}" --pdf-engine="${ENGINE}" "${TEX_FILE}""
 
-        pandoc -o "${OUTPUT_FILE}" --pdf-engine="${ENGINE}" "${TEX_FILE}" >/dev/null 2>&1
+        pandoc -o "${OUTPUT_FILE}" --pdf-engine="${ENGINE}" "${TEX_FILE}"
 
         _echo_err "Checking to see if pdf was successfully created..."
 
@@ -370,7 +375,7 @@ function process_url() {
 
 	mv ${TODO} ${TODO}.backup
 
-	cat ${TODO}.backup | egrep -x -v "${URL}" > ${TODO}
+	cat ${TODO}.backup | egrep -x -v "${URL}" | sed -f $_SED_RMDUPLICATES > ${TODO}
 
 	append_to_file_ifnexists "${DONE}" "${URL}"
 
@@ -386,14 +391,11 @@ function append_to_file_ifnexists() {
 		wait
 	done
 	touch ${FILE}.lock && trap "rm -rf ${FILE}.lock" ERR EXIT TERM QUIT KILL
-	while IFS= read -r line; do
-		if [ "$line" == "$ELEM" ] ; then
-			rm -rf ${FILE}.lock
-			return;
-		fi
-	done < ${FILE}
 
-	echo ${ELEM} >> ${FILE}
+	EXISTS=$(($(cat ${FILE} | grep -c ${ELEM})))
+	if [ $EXISTS -eq 0 ] ; then
+		echo ${ELEM} >> ${FILE}
+	fi
 	rm -rf ${FILE}.lock
 }
 
@@ -466,39 +468,56 @@ function char_at() {
 function str_get_substr() {
 	local STR="${1}"
         local INDEX1=$((${2} + 1))
+        local LEN=$(($(str_len $STR)))
+
 	if [ ! -z ${3} ] ; then
 		local INDEX2=$((${3} + 1))
-		echo "$STR" | grep -o . | sed -n '$INDEX1;$INDEX2p'
-		return;
+		_echo_debug "STR: $STR LEN: $LEN INDEX1: $INDEX1 INDEX2: $INDEX2"
+		_echo_debug $(echo "$STR" | grep -o . | sed -n '${INDEX1};${INDEX2}p)')
+		echo "$STR" | grep -o . | sed -n '${INDEX1};${INDEX2}p'
+		return
 	fi
-        local LEN=$(($(str_len $STR)))
+
         if [[ $INDEX1 -lt $LEN ]] ; then
-                echo $STR | grep -o . | sed -n '$INDEX1p'
-		return;
+                echo "$STR" | grep -o . | sed -n "${INDEX1}p"
         else
-                _echo_err "Warning: Index out of bounds: string: $STR (length: $LEN), index: $INDEX. Reminder that char_at() uses 0-based indexing."
-                echo ""
-		return;
+                _echo_err "Warning: Index out of bounds: string: $STR (length: $LEN), index: $INDEX1. Reminder that char_at() uses 0-based indexing."
+		exit 1
         fi
 }
 
 function str_begins_with() {
 	local STR="${1}"
 	local BEGINS_WITH="${2}"
-	local LEN=$(str_len $STR)
-	local BEGINLEN=$(str_len $BEGINS_WITH)
+	local LEN=$(($(str_len $STR)))
+	local BEGINLEN=$(($(str_len $BEGINS_WITH)))
 	if [ $BEGINLEN -gt $LEN ] ; then
 		echo "false"
 	else
-		local BEGINSTR="$(str_get_substr 0 $BEGINLEN)"
+		local BEGINSTR="$(echo $STR | grep -o . | head -$ENDLEN)"
 		if [ "$BEGINSTR" == "$BEGINS_WITH" ] ; then
 			echo "true"
-			return;
 		else
 			echo "false"
-			return;
 		fi
 	fi
+}
+
+function str_ends_with() {
+        local STR="${1}"
+        local ENDS_WITH="${2}"
+        local LEN=$(($(str_len $STR)))
+        local ENDLEN=$(($(str_len $ENDS_WITH)))
+        if [ $ENDLEN -gt $LEN ] ; then
+                echo "false"
+        else
+                local ENDSTR="$(echo $STR | grep -o . | tail -$ENDLEN)"
+                if [ "$ENDSTR" == "$ENDS_WITH" ] ; then
+                        echo "true"
+                else
+                        echo "false"
+                fi
+        fi
 }
 
 function str_split() {
@@ -566,7 +585,7 @@ function str_escape() {
 function filter_links_from_latex() {
 	local FILE="$(printf '%q\n' ${1})"
 	local DOMAIN="$(str_escape ${2})"
-	local COMMAND="cat $FILE | grep '\href{' | sed -e 's/.*\href{//g' | sed -e 's/}.*//g' | sed -e 's/${DOMAIN}//g' | grep -v '://' | sed -e 's/\//${DOMAIN}\//' "
+	local COMMAND="cat $FILE | grep '\href{' | sed -e 's/.*\href{//g' | sed -e 's/}.*//g' | sed -E 's/(.*)\/$/\1/' | sed -E 's/(.*).html$/\1/' | sed -E 's/^\//${DOMAIN}\//g' | grep ${DOMAIN} | sed -f $_SED_RMDUPLICATES"
 	_echo_err "$COMMAND"
 	eval "$COMMAND"
 }

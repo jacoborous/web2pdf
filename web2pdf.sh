@@ -25,13 +25,14 @@ while [ -h "$SOURCE" ]; do
   [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
 done
 THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+export WEB2PDF_ROOT=${THIS_DIR}
 
 PARENT_PID=$$
 
 # IMPORTS #
-. ${THIS_DIR}/shFlags/shflags
-. ${THIS_DIR}/helper_functions.sh
-. ${THIS_DIR}/default_vars.sh
+. ${WEB2PDF_ROOT}/shFlags/shflags
+. ${WEB2PDF_ROOT}/helper_functions.sh
+. ${WEB2PDF_ROOT}/default_vars.sh
 # END IMPORTS #
 
 # BEGIN web2pdf.sh #
@@ -95,4 +96,4 @@ _echo_debug "OUTPDF=$OUTPDF"
 
 make_directory "${WEB2PDF_DIR}"
 
-daemonize ${THIS_DIR}/generate_all.sh --arg_url="${URL}" --arg_intermed="${MARKDOWN}" --arg_browser="${FLAGS_browser}" ${OUTPDF} ${RECURSE}
+${WEB2PDF_ROOT}/generate_all.sh --arg_url="${URL}" --arg_intermed="${MARKDOWN}" --arg_browser="${FLAGS_browser}" ${OUTPDF} ${RECURSE}

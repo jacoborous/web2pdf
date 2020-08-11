@@ -44,7 +44,7 @@ mkdir -p $WEB2PDF_TMP_DIR
 mkdir -p $WEB2PDF_LOG_DIR
 mkdir -p $WEB2PDF_PID_DIR
 
-export WEB2PDF_DIR="${HOME}/.web2pdf"
+export WEB2PDF_DIR="/usr/share/.web2pdf"
 
 export USER_AGENT_NULL=""
 export HTTP_ACCEPT_HEADERS_NULL=""

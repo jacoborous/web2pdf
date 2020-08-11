@@ -81,6 +81,13 @@ function check_in_links() {
 	fi
 	for i in $(filter_links_from_latex $FILE $DOMAIN) ; do
                 NEW_URL="${i}"
+		LEN=$(($(str_len $NEW_URL)))
+		if [ "$(str_ends_with "$NEW_URL" "/")" == "true" ] ; then
+			NEW_URL="$(str_get_substr "$NEW_URL" $(($LEN-2)))"
+		fi
+		if [ "$NEW_URL" == "$DOMAIN" ] ; then
+			continue #skip
+		fi
                 COUNT=$(grep -c ${NEW_URL} ${WEB2PDF_URLS}) # not checked in yet
                 COUNT_DONE=$(grep -c ${NEW_URL} ${WEB2PDF_URLS_DONE}) # and not already finished
                 if [ "${COUNT_DONE}" == "0" ] ; then
@@ -103,13 +110,19 @@ function search_sub_urls_from_file() {
         local DONE_COUNT=$(grep -c ".*" "${WEB2PDF_URLS_DONE}")
         _echo_err "To-do: ${TODO_COUNT}; Done: ${DONE_COUNT}"
         if [ "${TODO_COUNT}" != "0" ] ; then
-                #while IFS= read -r line ; do
-		for line in $(cat ${WEB2PDF_URLS}) ; do
-                        _echo_err "fetching URL: $line"
-                        process_url "$line" ${WEB2PDF_URLS} ${WEB2PDF_URLS_DONE}
-                        generate_all "$line" "gfm" ${3} ${4} ${5} ${6}
-                #done < "${WEB2PDF_URLS}"
-		done
+                while IFS= read -r line ; do
+			URL="$line"
+                        _echo_err "fetching URL: $URL"
+                        process_url "$URL" "${WEB2PDF_URLS}" "${WEB2PDF_URLS_DONE}"
+			_echo_err "Now before generate_all: $URL"
+                        ERR=$(generate_all "$URL" "gfm" ${3} ${4} ${5} ${6})
+			if [ $(($ERR)) -eq 1 ] ; then
+				_echo_err "Warning: The process for '$URL' returned an error code."
+				exit 1
+			else
+				_echo_err "Subprocess for '$URL' completed."
+			fi
+                done < "${WEB2PDF_URLS}"
         else
                 _echo_err "None left to process, program complete."
                 exit 0
@@ -118,21 +131,21 @@ function search_sub_urls_from_file() {
 
 function generate_all() {
         local arg_url="${1}"
-        local MARKDOWN=${2}
-        local arg_browser=${3}
-        local ENGINE=${4}
-        local DO_PDF=${5}
-        local DO_arg_recurse=${6}
-        local OUTPUT_MD=$(generate_markdown ${arg_url} ${MARKDOWN} ${arg_browser} ${arg_browser})
-	if [ "${OUTPUT_MD}" == "0" ] ; then return; fi
+        local MARKDOWN="${2}"
+        local arg_browser="${3}"
+        local ENGINE="${4}"
+        local DO_PDF="${5}"
+        local DO_arg_recurse="${6}"
+        local OUTPUT_MD=$(generate_markdown "${arg_url}" "${MARKDOWN}" ${arg_browser} ${arg_browser})
+	if [ "${OUTPUT_MD}" == "0" ] ; then return 1; fi
         local OUTPUT_TEX=$(generate_latex_from_file ${OUTPUT_MD} ${MARKDOWN})
-	if [ "${OUTPUT_TEX}" == "0" ] ; then return; fi
+	if [ "${OUTPUT_TEX}" == "0" ] ; then return 1; fi
         local OUTPUT_PDF=$(if [[ "${DO_PDF}" == "true" ]] ; then compile_pdf ${OUTPUT_TEX} ${ENGINE} ; fi)
         if [ "${DO_arg_recurse}" == "true" ] ; then
                 search_sub_urls_from_file "${OUTPUT_TEX}" "${arg_url}" "${arg_browser}" "${ENGINE}" "${DO_PDF}" "${DO_arg_recurse}"
         fi
 }
 
-generate_all ${arg_url} ${arg_intermed} ${arg_browser} "xelatex" ${arg_makepdf} ${arg_recurse}
+generate_all "${arg_url}" "${arg_intermed}" "${arg_browser}" "xelatex" "${arg_makepdf}" "${arg_recurse}"
 
 # END generate_all.sh #
