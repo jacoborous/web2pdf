@@ -585,7 +585,7 @@ function str_escape() {
 function filter_links_from_latex() {
 	local FILE="$(printf '%q\n' ${1})"
 	local DOMAIN="$(str_escape ${2})"
-	local COMMAND="cat $FILE | grep '\href{' | sed -e 's/.*\href{//g' | sed -e 's/}.*//g' | sed -E 's/(.*)\/$/\1/' | sed -E 's/(.*).html$/\1/' | sed -E 's/^\//${DOMAIN}\//g' | grep ${DOMAIN} | sed -f $_SED_RMDUPLICATES"
+	local COMMAND="cat $FILE | grep '\href{' | sed -e 's/.*\href{//g' | sed -e 's/}.*//g' | egrep -v '\\\\' | sed -E 's/(.*)\/$/\1/' | sed -E 's/(.*).html$/\1/' | sed -E 's/^\//${DOMAIN}\//g' | grep ${DOMAIN} | sed -f $_SED_RMDUPLICATES"
 	_echo_err "$COMMAND"
 	eval "$COMMAND"
 }
