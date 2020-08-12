@@ -194,7 +194,6 @@ function pylist_get() {
 
     local RAND_NAME="${RANDOM}.py"
     local PY_FILE="${WEB2PDF_TMP_DIR}/${RAND_NAME}"
-    _echo_debug "Creating temp py file: $PY_FILE"
     func_temp $PY_FILE
     local PY_SCRIPT="text_to_split = \"${EXPR}\"\nsplit_list = text_to_split.split()\nprint(split_list[${INDEX}])"
     printf "${PY_SCRIPT}" >> "${PY_FILE}"
@@ -212,7 +211,6 @@ function pylist_get_range() {
     	fi
 
     	local PY_FILE="${WEB2PDF_TMP_DIR}/${RANDOM}.py"
-	_echo_debug "Creating temp py file: $PY_FILE"
 	func_temp $PY_FILE
     	local PY_SCRIPT="text_to_split = \"${EXPR}\"\nsplit_list = text_to_split.split()\nprint(split_list[${INDEX1}:${INDEX2}])"
     	printf "${PY_SCRIPT}" >> "${PY_FILE}"
@@ -222,7 +220,6 @@ function pylist_get_range() {
 
 function create_dirs_from_list() {
     local DIRS=${1}
-    _echo_debug "DIRS=${DIRS}"
     local PATH_DIR=${2}
     for i in ${DIRS} ; do
 	PATH_DIR="${PATH_DIR}/$i"
@@ -235,7 +232,7 @@ function curl_to_file() {
 	local OUTPUT_FILE="${2}"
 	local USER_AGENT="${3}"
 	local HTTP_HEADER="${4}"
-	_echo_debug "curl -s -A \"${USER_AGENT}\" -H \"${HTTP_HEADER}\" --url \"${URL}\" -o ${OUTPUT_FILE}"
+	_echo_debug "curl -s -A \"${USER_AGENT}\" -H \"${HTTP_HEADER}\" --url \"${URL}\" -o \"${OUTPUT_FILE}\""
 	curl -s -A "${USER_AGENT}" -H "${HTTP_HEADER}" --url "${URL}" -o "${OUTPUT_FILE}"
 }
 
@@ -253,11 +250,8 @@ function dir_to_folder_list() {
 
 function create_dirs_from_url() {
 	local URL="${1}"
-	_echo_debug "Creating dirs from: $URL"
 	local URL_LIST="$(url_to_dir_list $URL)"
-	_echo_debug "URL_LIST: $URL_LIST"
 	local LAST_FOLDER="$(pylist_get "${URL_LIST}" "-1")"
-	_echo_debug "LAST_FOLDER: $LAST_FOLDER"
         create_dirs_from_list "$(pylist_get_range "${URL_LIST}" "0" "")" "$WEB2PDF_DIR"
 	echo "${WEB2PDF_DIR}/$(echo $(pylist_get_range "${URL_LIST}" "0" "") | sed -e 's/ /\//g')"
 }
@@ -268,7 +262,6 @@ function get_url_domain() {
 	local FIRST=$(get_elem 1 "${LIST}")
 	local SECOND=$(get_elem 2 "${LIST}")
 	local DOMAIN="${FIRST}://${SECOND}"
-	_echo_debug "DOMAIN=${DOMAIN}"
 	echo "${DOMAIN}"
 }
 
@@ -278,7 +271,7 @@ function generate_markdown() {
 	local INTERMED=$(if [ "${2}" == "gfm" ] ; then echo "gfm" ; else echo "markdown" ; fi)
 	local USER_AGENT=$(select_user_agent ${3})
 	local HTTP_ACCEPT_HEADERS=$(select_http_accept ${4})
-	local OUTPUT_FILE="$(create_dirs_from_url ${URL})"
+	local OUTPUT_FILE="$(printf '%q\n' $(create_dirs_from_url ${URL}))"
 
 	if [ -d "${OUTPUT_FILE}" ] ; then
 		OUTPUT_FILE="${OUTPUT_FILE}.html"
@@ -320,15 +313,14 @@ function generate_latex_from_file() {
 }
 
 function compile_pdf() {
-	local TEX_FILE=${1}
+	local TEX_FILE="${1}"
 	local ENGINE=$(if [ -z "${2}" ] ; then echo "xelatex" ; else echo "${2}" ; fi)
 	local OUTPUT_FILE="${TEX_FILE}.pdf"
 
         _echo_err "Generating PDF..."
         _echo_debug "TEX_FILE=${TEX_FILE}"
-        _echo_debug "ENGINE=$ENGINE"
         _echo_err "OUTPUT_FILE=${OUTPUT_FILE}"
-	_echo_debug "pandoc -o "${OUTPUT_FILE}" --pdf-engine="${ENGINE}" "${TEX_FILE}""
+	_echo_debug "pandoc -o ${OUTPUT_FILE} --pdf-engine=${ENGINE} ${TEX_FILE}"
 
         pandoc -o "${OUTPUT_FILE}" --pdf-engine="${ENGINE}" "${TEX_FILE}"
 
@@ -363,7 +355,7 @@ function recursive_compile() {
 
 
 function process_url() {
-	local URL="${1}"
+	local URL="$(printf '%q\n' ${1})"
 	local TODO="${2}"
 	local DONE="${3}"
 
@@ -375,7 +367,7 @@ function process_url() {
 
 	mv ${TODO} ${TODO}.backup
 
-	cat ${TODO}.backup | egrep -x -v "${URL}" | sed -f $_SED_RMDUPLICATES > ${TODO}
+	cat ${TODO}.backup | egrep -x -v "${URL}" | sed -n 'G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P' > ${TODO}
 
 	append_to_file_ifnexists "${DONE}" "${URL}"
 
@@ -385,17 +377,18 @@ function process_url() {
 
 function append_to_file_ifnexists() {
 	local FILE="${1}"
-	local ELEM="${2}"
+	local ELEM="$(printf '%q\n' ${2})"
 	while [ -f ${FILE}.lock ] ; do
 		sleep 1 &
 		wait
 	done
 	touch ${FILE}.lock && trap "rm -rf ${FILE}.lock" ERR EXIT TERM QUIT KILL
 
-	EXISTS=$(($(cat ${FILE} | grep -c ${ELEM})))
-	if [ $EXISTS -eq 0 ] ; then
-		echo ${ELEM} >> ${FILE}
-	fi
+	mv ${FILE} ${FILE}.backup
+	echo "${ELEM}" >> ${FILE}.backup
+	cat ${FILE}.backup | sed -n 'G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P' > ${FILE}
+
+	rm -rf ${FILE}.backup
 	rm -rf ${FILE}.lock
 }
 
@@ -587,7 +580,7 @@ function extract_href() {
 }
 
 function remove_dup_lines() {
-	cat ${1} | sed -n 'G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P'
+	echo "${1}" | sed -n 'G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P'
 }
 
 function add_domain_ifne() {
@@ -597,11 +590,11 @@ function add_domain_ifne() {
 }
 
 function filter_links_from_latex() {
-	local FILE="$(printf '%q\n' ${1})"
+	local FILE="${1}"
 	local DOMAIN="$(str_escape ${2})"
-	local CMD="cat $FILE | grep -e '\\href{' | sed -E 's/.*href\{(.*)\}\{(.*)/\1/g' | sed -n 'G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P' | sed -E 's/^\/(.*)/${DOMAIN}\/\1/g' | grep '${DOMAIN}'"
+	local CMD="cat '$FILE' | grep -e '\\\href{' | sed -E 's/.*href\{(.*)\}\{(.*)/\1/g' | sed -n 'G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P' | sed -E 's/^\/(.*)/${DOMAIN}\/\1/g' | grep '${DOMAIN}'"
 	_echo_debug "$CMD"
-	echo $(eval "$CMD")
+	echo $(eval $CMD)
 }
 
 function filter_ext_links_from_latex() {
