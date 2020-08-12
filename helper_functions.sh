@@ -367,7 +367,7 @@ function process_url() {
 
 	mv ${TODO} ${TODO}.backup
 
-	cat ${TODO}.backup | egrep -x -v "${URL}" | sed -n 'G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P' > ${TODO}
+	cat ${TODO}.backup | egrep -x -v "${URL}" | sort | sed -f $_SED_RMDUPLICATES > ${TODO}
 
 	append_to_file_ifnexists "${DONE}" "${URL}"
 
@@ -386,7 +386,7 @@ function append_to_file_ifnexists() {
 
 	mv ${FILE} ${FILE}.backup
 	echo "${ELEM}" >> ${FILE}.backup
-	cat ${FILE}.backup | sed -n 'G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P' > ${FILE}
+	cat ${FILE}.backup | sort | sed -f $_SED_RMDUPLICATES > ${FILE}
 
 	rm -rf ${FILE}.backup
 	rm -rf ${FILE}.lock
@@ -576,11 +576,11 @@ function str_escape() {
 }
 
 function extract_href() {
-	cat ${1} | grep -e "\\\href{" | sed -E 's/.*href\{(.*)\}\{(.*)/\1/g'
+	echo "${1}" | grep -e '\\\href{' | sed -E 's/.*href\{(.*)\}\{(.*)/\1/g'
 }
 
-function remove_dup_lines() {
-	echo "${1}" | sed -n 'G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P'
+function remove_duplicate_lines() {
+	cat "${1}" | sort | sed -f $_SED_RMDUPLICATES
 }
 
 function add_domain_ifne() {
@@ -592,7 +592,7 @@ function add_domain_ifne() {
 function filter_links_from_latex() {
 	local FILE="${1}"
 	local DOMAIN="$(str_escape ${2})"
-	local CMD="cat '$FILE' | grep -e '\\\href{' | sed -E 's/.*href\{(.*)\}\{(.*)/\1/g' | sed -n 'G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P' | sed -E 's/^\/(.*)/${DOMAIN}\/\1/g' | grep '${DOMAIN}'"
+	local CMD="cat '$FILE' | grep -e '\\\href{' | sed -E 's/.*href\{(.*)\}\{(.*)/\1/g' | sort | sed -f $_SED_RMDUPLICATES | sed -E 's/^\/(.*)/${DOMAIN}\/\1/g' | grep '${DOMAIN}' | sed -E 's/[\{\}].*//g' | sed -e 's/\\\#.*//g'"
 	_echo_debug "$CMD"
 	echo $(eval $CMD)
 }
