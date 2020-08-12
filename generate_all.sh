@@ -79,15 +79,8 @@ function check_in_links() {
 		_echo_err "Error: $FILE does not exist."
 		exit 1;
 	fi
-	for i in $(filter_links_from_latex $FILE $DOMAIN) ; do
+	for i in $(filter_links_from_latex "$FILE" "$DOMAIN") ; do
                 NEW_URL="${i}"
-		LEN=$(($(str_len $NEW_URL)))
-		if [ "$(str_ends_with "$NEW_URL" "/")" == "true" ] ; then
-			NEW_URL="$(str_get_substr "$NEW_URL" $(($LEN-2)))"
-		fi
-		if [ "$NEW_URL" == "$DOMAIN" ] ; then
-			continue #skip
-		fi
                 COUNT=$(grep -c ${NEW_URL} ${WEB2PDF_URLS}) # not checked in yet
                 COUNT_DONE=$(grep -c ${NEW_URL} ${WEB2PDF_URLS_DONE}) # and not already finished
                 if [ "${COUNT_DONE}" == "0" ] ; then

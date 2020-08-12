@@ -582,12 +582,26 @@ function str_escape() {
 	echo $final
 }
 
+function extract_href() {
+	cat ${1} | grep -e "\\\href{" | sed -E 's/.*href\{(.*)\}\{(.*)/\1/g'
+}
+
+function remove_dup_lines() {
+	cat ${1} | sed -n 'G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P'
+}
+
+function add_domain_ifne() {
+	local DOMAIN="${1}"
+	local FILE="${1}"
+	echo $(cat ${FILE} | sed -E 's/^\/(.*)/${DOMAIN}\/\1/g')
+}
+
 function filter_links_from_latex() {
 	local FILE="$(printf '%q\n' ${1})"
 	local DOMAIN="$(str_escape ${2})"
-	local COMMAND="cat $FILE | grep '\href{' | sed -e 's/.*\href{//g' | sed -e 's/}.*//g' | egrep -v '\\\\' | sed -E 's/(.*)\/$/\1/' | sed -E 's/(.*).html$/\1/' | sed -E 's/^\//${DOMAIN}\//g' | grep ${DOMAIN} | sed -f $_SED_RMDUPLICATES"
-	_echo_err "$COMMAND"
-	eval "$COMMAND"
+	local CMD="cat $FILE | grep -e '\\href{' | sed -E 's/.*href\{(.*)\}\{(.*)/\1/g' | sed -n 'G; s/\n/&&/; /^\([ -~]*\n\).*\n\1/d; s/\n//; h; P' | sed -E 's/^\/(.*)/${DOMAIN}\/\1/g' | grep '${DOMAIN}'"
+	_echo_debug "$CMD"
+	echo $(eval "$CMD")
 }
 
 function filter_ext_links_from_latex() {
