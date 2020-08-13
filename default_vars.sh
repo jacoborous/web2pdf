@@ -20,13 +20,8 @@
 
 if [ -z $_DEFAULT_VARS ] ; then
 
-SOURCE="${BASH_SOURCE[0]}"
-while [ -h "$SOURCE" ]; do
-  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
-  SOURCE="$(readlink "$SOURCE")"
-  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
-done
-THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+WEB2PDF_ROOT=$(web2pdf_root)
+WEB2PDF_SCRIPTS=$(web2pdf_scripts)
 
 PARENT_PID=$$
 
@@ -36,18 +31,27 @@ PARENT_PID=$$
 
 # BEGIN _DEFAULT_VARS BODY #
 
+export WEB2PDF_TMP_ROOT="/tmp/web2pdf"
+export WEB2PDF_LOG_ROOT="/var/log/web2pdf"
+export WEB2PDF_PID_ROOT="/var/run/web2pdf"
+
 export WEB2PDF_TMP_DIR="/tmp/web2pdf/${PARENT_PID}"
 export WEB2PDF_LOG_DIR="/var/log/web2pdf/${PARENT_PID}"
 export WEB2PDF_PID_DIR="/var/run/web2pdf/${PARENT_PID}"
+export WEB2PDF_PID_FILE="${WEB2PDF_PID_DIR}/web2pdf.pid"
 
 mkdir -p $WEB2PDF_TMP_DIR
 mkdir -p $WEB2PDF_LOG_DIR
 mkdir -p $WEB2PDF_PID_DIR
 
+touch $WEB2PDF_PID_FILE
+echo "${PARENT_PID}" >> $WEB2PDF_PID_FILE
+trap "kill -s TERM $(cat ${WEB2PDF_PID_FILE}) && rm -rf ${WEB2PDF_PID_DIR}" ERR EXIT TERM KILL QUIT
+
 export WEB2PDF_DIR="/usr/share/.web2pdf"
 
-export USER_AGENT_NULL=""
-export HTTP_ACCEPT_HEADERS_NULL=""
+export USER_AGENT_NULL=
+export HTTP_ACCEPT_HEADERS_NULL=
 
 export USER_AGENT_TOR="Mozilla/5.0 (Windows NT 10.0; rv:68.0) Gecko/20100101 Firefox/68.0"
 export HTTP_ACCEPT_HEADERS_TOR="text/html, */*; q=0.01 gzip, deflate, br en-US,en;q=0.5"

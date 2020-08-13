@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # Copyright (C) 2020 Tristan Miano <jacobeus@protonmail.com>
@@ -37,7 +38,7 @@ SUBJECT="stringmanip.sh"
 
 function remove_duplicate_lines() {
 	local FILE=${1}
-	cat $FILE | sed -f $_SED_RMDUPLICATES
+	cat $FILE | sort | sed -f $_SED_RMDUPLICATES
 }
 
 function str_len() {
@@ -178,20 +179,3 @@ function str_escape() {
 	echo $final
 }
 
-function filter_links_from_latex() {
-	local FILE="$(printf '%q\n' ${1})"
-	local DOMAIN="$(str_escape ${2})"
-	local COMMAND="cat $FILE | grep '\href{' | sed -e 's/.*\href{//g' | sed -e 's/}.*//g' | sed -e 's/${DOMAIN}//g' | grep -v '://' | sed -e 's/\//${DOMAIN}\//' " | sed -e "s/(.*)\//\1/g"
-	_echo_err "$COMMAND"
-	eval "$COMMAND"
-}
-
-function filter_ext_links_from_latex() {
-        local FILE="$(printf '%q\n' ${1})"
-        local DOMAIN="$(str_escape ${2})"
-        echo $(cat $FILE | grep "\href{" | sed -e "s/.*\href{//g" | sed -e "s/}.*//g" | grep -v "${DOMAIN}" | grep "://")
-}
-
-function get_date() {
-	echo $(date -u +%Y-%m-%d)
-}

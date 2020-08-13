@@ -18,14 +18,8 @@
 SUBJECT=web2pdf
 VERSION=0.1
 
-SOURCE="${BASH_SOURCE[0]}"
-while [ -h "$SOURCE" ]; do
-  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
-  SOURCE="$(readlink "$SOURCE")"
-  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
-done
-THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
-export WEB2PDF_ROOT=${THIS_DIR}
+WEB2PDF_ROOT=$(web2pdf_root)
+WEB2PDF_SCRIPTS=$(web2pdf_scripts)
 
 PARENT_PID=$$
 
