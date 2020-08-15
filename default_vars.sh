@@ -26,7 +26,7 @@ WEB2PDF_SCRIPTS=$(web2pdf_scripts)
 PARENT_PID=$$
 
 # BEGIN IMPORTS #
-. ${THIS_DIR}/shFlags/shflags
+. ${WEB2PDF_ROOT}/shFlags/shflags
 # END IMPORTS #
 
 # BEGIN _DEFAULT_VARS BODY #

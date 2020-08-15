@@ -24,9 +24,9 @@ WEB2PDF_SCRIPTS=$(web2pdf_scripts)
 PARENT_PID=$$
 
 # IMPORTS #
-. ${THIS_DIR}/shFlags/shflags
-. ${THIS_DIR}/default_vars.sh
-. ${THIS_DIR}/imports/stringmanip.sh
+. ${WEB2PDF_ROOT}/shFlags/shflags
+. ${WEB2PDF_ROOT}/default_vars.sh
+. ${WEB2PDF_ROOT}/imports/stringmanip.sh
 # END IMPORTS #
 
 # BEGIN helper_functions.sh #
@@ -457,7 +457,7 @@ function _map_1() {
 function filter_links_from_latex() {
 	local FILE="${1}"
 	local DOMAIN="$(str_escape ${2})"
-	local CMD="cat '$FILE' | grep -e '\\\href{' | sed -E 's/.*href\{(.*)\}\{(.*)/\1/g' | sort | sed -f $_SED_RMDUPLICATES | sed -E 's/^\/(.*)/${DOMAIN}\/\1/g' | grep '${DOMAIN}' | sed -E 's/[\{\}].*//g' | sed -e 's/\\\#.*//g'"
+	local CMD="cat '$FILE' | grep -e '\\\href{' | sed -E 's/.*href\{(.*)\}\{(.*)/\1/g' | sort | sed -f $_SED_RMDUPLICATES | sed -E 's/^\/(.*)/${DOMAIN}\/\1/g' | grep '${DOMAIN}' | sed -E 's/[\{\}].*//g' | sed -e 's/\\\#.*//g' | sed -E 's/(.*)\.html.*/\1/g'"
 	_echo_debug "$CMD"
 	echo $(eval $CMD)
 }

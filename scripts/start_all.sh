@@ -2,6 +2,7 @@
 
 WEB2PDF_ROOT=$(web2pdf_root)
 WEB2PDF_SCRIPTS=$(web2pdf_scripts)
+WEB2PDF_TARGETS=${1}
 
 . /etc/web2pdf/web2pdf.conf
 

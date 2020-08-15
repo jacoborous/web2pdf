@@ -28,8 +28,8 @@ fi
 
 echo "Installing to: ${PREFIX}/web2pdf"
 
-if [ ! -d ${PREFIX} ] ; then
-	mkdir -p ${PREFIX}
+if [ ! -d ${PREFIX}/web2pdf ] ; then
+	mkdir -p ${PREFIX}/web2pdf
 fi
 
 cp -r ${PWD} ${PREFIX}
