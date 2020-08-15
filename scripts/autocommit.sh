@@ -17,7 +17,7 @@ else
 		REMOTE_REF="local"
 	fi
 	touch ${PWD}/autocommit.lock
-	trap "kill -9 $(cat ${PWD}/autocommit.lock) && rm -rf ${PWD}/autocommit.lock" ERR EXIT TERM KILL QUIT
+	trap "kill -s TERM $(cat ${PWD}/autocommit.lock) && rm -rf ${PWD}/autocommit.lock" ERR EXIT TERM KILL QUIT
 fi
 
 echo "Starting automated GitHub commit daemon. Interval $INTERVAL."
@@ -26,7 +26,7 @@ echo "Remote ref: $REMOTE_REF"
 while [ 1 -lt 2 ] ; do
 	git add -A
 	git commit -a -m "Automated commit at: $(date)"
-	f [ "$REMOTE" != "0" ] ; then git push origin master ; fi
+	if [ "$REMOTE" != "0" ] ; then git push -u origin master ; fi
 	echo "Commit to $REMOTE_REF completed at $(date)."
 	sleep $INTERVAL &
 	echo $! >> ${PWD}/autocommit.lock

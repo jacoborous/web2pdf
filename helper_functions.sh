@@ -24,9 +24,9 @@ WEB2PDF_SCRIPTS=$(web2pdf_scripts)
 PARENT_PID=$$
 
 # IMPORTS #
-. ${THIS_DIR}/shFlags/shflags
-. ${THIS_DIR}/default_vars.sh
-. ${THIS_DIR}/imports/stringmanip.sh
+. ${WEB2PDF_ROOT}/shFlags/shflags
+. ${WEB2PDF_ROOT}/default_vars.sh
+. ${WEB2PDF_ROOT}/imports/stringmanip.sh
 # END IMPORTS #
 
 # BEGIN helper_functions.sh #
