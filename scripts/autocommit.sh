@@ -20,13 +20,13 @@ if [ -f ${OUTPUT_ROOT}/autocommit.lock ] ; then
 	exit;
 else
 	REMOTE=$(git remote 2>&1 | grep -c fatal)
-	if [ "$REMOTE" != "0" ] ; then
+	if [ "$REMOTE" == "0" ] ; then
 		REMOTE_REF=$(git remote get-url origin 2>&1)
 	else
 		REMOTE_REF="local"
 	fi
 	touch ${OUTPUT_ROOT}/autocommit.lock
-	trap "kill -s TERM $(cat ${OUTPUT_ROOT}/autocommit.lock) && rm -rf ${OUTPUT_ROOT}/autocommit.lock" ERR EXIT TERM KILL QUIT
+	trap "kill -9 $(cat ${OUTPUT_ROOT}/autocommit.lock) && rm -rf ${OUTPUT_ROOT}/autocommit.lock" ERR EXIT TERM KILL QUIT
 fi
 
 echo "Starting automated GitHub commit daemon. Interval $INTERVAL."
