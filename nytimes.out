@@ -616,3 +616,238 @@ To-do: 180; Done: 38
 fetching URL: https://www.nytimes.com/2017/01/02/world/asia/south-korea-scandal-choi-soon-sil-daughter.html
 Now before generate_all: https://www.nytimes.com/2017/01/02/world/asia/south-korea-scandal-choi-soon-sil-daughter.html
 Pulling page from https://www.nytimes.com/2017/01/02/world/asia/south-korea-scandal-choi-soon-sil-daughter.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/02/world/asia/south-korea-scandal-choi-soon-sil-daughter.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/02/world/asia/south-korea-scandal-choi-soon-sil-daughter.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/02/world/asia/south-korea-scandal-choi-soon-sil-daughter.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/02/world/asia/south-korea-scandal-choi-soon-sil-daughter.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 179; Done: 39
+fetching URL: https://www.nytimes.com/2017/03/09/world/asia/park-geun-hye-impeached-south-korea.html
+Now before generate_all: https://www.nytimes.com/2017/03/09/world/asia/park-geun-hye-impeached-south-korea.html
+Pulling page from https://www.nytimes.com/2017/03/09/world/asia/park-geun-hye-impeached-south-korea.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/03/09/world/asia/park-geun-hye-impeached-south-korea.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2017/03/09/world/asia/park-geun-hye-impeached-south-korea.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/03/09/world/asia/park-geun-hye-impeached-south-korea.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2017/03/09/world/asia/park-geun-hye-impeached-south-korea.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/2017/01/12/world/asia/south
+checking-in possible sub-url: https://www.nytimes.com/2017/03/06/world/asia/north-korea-thaad-missile-defense-us-china.html
+checking-in possible sub-url: https://www.nytimes.com/2017/03/07/world/asia/korea
+checking-in possible sub-url: https://www.nytimes.com/2017/03/07/world/asia/thaad-missile-defense-us-south-korea-china.html
+checking-in possible sub-url: https://www.nytimes.com/2017/03/09/business/jay-y-lee-samsung-trial.html
+checking-in possible sub-url: https://www.nytimes.com/es/2017/03/10/corea-del-sur-destituye-a-su-presidenta-y-se-reconfigura-el-panorama-politico-en-asia/
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 184; Done: 40
+fetching URL: https://www.nytimes.com/2017/01/12/world/asia/south
+Now before generate_all: https://www.nytimes.com/2017/01/12/world/asia/south
+Pulling page from https://www.nytimes.com/2017/01/12/world/asia/south, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/12/world/asia/south.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/12/world/asia/south.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/12/world/asia/south.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/12/world/asia/south.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 183; Done: 41
+fetching URL: https://www.nytimes.com/2017/03/06/world/asia/north-korea-thaad-missile-defense-us-china.html
+Now before generate_all: https://www.nytimes.com/2017/03/06/world/asia/north-korea-thaad-missile-defense-us-china.html
+Pulling page from https://www.nytimes.com/2017/03/06/world/asia/north-korea-thaad-missile-defense-us-china.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/03/06/world/asia/north-korea-thaad-missile-defense-us-china.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2017/03/06/world/asia/north-korea-thaad-missile-defense-us-china.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/03/06/world/asia/north-korea-thaad-missile-defense-us-china.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2017/03/06/world/asia/north-korea-thaad-missile-defense-us-china.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/2016/07/14/world/asia/south-korea-thaad-us.html
+checking-in possible sub-url: https://www.nytimes.com/2017/02/02/world/asia/james-mattis-us-korea-thaad.html
+checking-in possible sub-url: https://www.nytimes.com/2017/03/02/world/asia/china-north-south-korea.html
+checking-in possible sub-url: https://www.nytimes.com/2017/03/05/world/north-korea-ballistic-missiles.html
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+checking-in possible sub-url: https://www.nytimes.com/topic/destination/china?inline=nyt-geo
+checking-in possible sub-url: https://www.nytimes.com/topic/destination/south-korea?8qa
+To-do: 188; Done: 42
+fetching URL: https://www.nytimes.com/2016/07/14/world/asia/south-korea-thaad-us.html
+Now before generate_all: https://www.nytimes.com/2016/07/14/world/asia/south-korea-thaad-us.html
+Pulling page from https://www.nytimes.com/2016/07/14/world/asia/south-korea-thaad-us.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/07/14/world/asia/south-korea-thaad-us.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2016/07/14/world/asia/south-korea-thaad-us.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/07/14/world/asia/south-korea-thaad-us.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2016/07/14/world/asia/south-korea-thaad-us.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 187; Done: 43
+fetching URL: https://www.nytimes.com/2017/02/02/world/asia/james-mattis-us-korea-thaad.html
+Now before generate_all: https://www.nytimes.com/2017/02/02/world/asia/james-mattis-us-korea-thaad.html
+Pulling page from https://www.nytimes.com/2017/02/02/world/asia/james-mattis-us-korea-thaad.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/02/02/world/asia/james-mattis-us-korea-thaad.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2017/02/02/world/asia/james-mattis-us-korea-thaad.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/02/02/world/asia/james-mattis-us-korea-thaad.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2017/02/02/world/asia/james-mattis-us-korea-thaad.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/2017/01/01/world/asia/north-korea-intercontinental-ballistic-missile-test-kim-jong-un.html
+checking-in possible sub-url: https://www.nytimes.com/2017/01/02/world/asia/trump-twitter-north-korea-missiles-china.html
+checking-in possible sub-url: https://www.nytimes.com/2017/01/23/us/politics/tpp-trump-trade-nafta.html
+checking-in possible sub-url: https://www.nytimes.com/2017/01/30/world/asia/trump-north-korea-south.html
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 190; Done: 44
+fetching URL: https://www.nytimes.com/2017/01/01/world/asia/north-korea-intercontinental-ballistic-missile-test-kim-jong-un.html
+Now before generate_all: https://www.nytimes.com/2017/01/01/world/asia/north-korea-intercontinental-ballistic-missile-test-kim-jong-un.html
+Pulling page from https://www.nytimes.com/2017/01/01/world/asia/north-korea-intercontinental-ballistic-missile-test-kim-jong-un.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/01/world/asia/north-korea-intercontinental-ballistic-missile-test-kim-jong-un.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/01/world/asia/north-korea-intercontinental-ballistic-missile-test-kim-jong-un.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/01/world/asia/north-korea-intercontinental-ballistic-missile-test-kim-jong-un.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/01/world/asia/north-korea-intercontinental-ballistic-missile-test-kim-jong-un.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/2016/09/21/world/asia/north-korea-says-it-has-tested-a-new-long-range-rocket-engine.html
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 190; Done: 45
+fetching URL: https://www.nytimes.com/2016/09/21/world/asia/north-korea-says-it-has-tested-a-new-long-range-rocket-engine.html
+Now before generate_all: https://www.nytimes.com/2016/09/21/world/asia/north-korea-says-it-has-tested-a-new-long-range-rocket-engine.html
+Pulling page from https://www.nytimes.com/2016/09/21/world/asia/north-korea-says-it-has-tested-a-new-long-range-rocket-engine.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/09/21/world/asia/north-korea-says-it-has-tested-a-new-long-range-rocket-engine.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2016/09/21/world/asia/north-korea-says-it-has-tested-a-new-long-range-rocket-engine.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/09/21/world/asia/north-korea-says-it-has-tested-a-new-long-range-rocket-engine.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2016/09/21/world/asia/north-korea-says-it-has-tested-a-new-long-range-rocket-engine.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 189; Done: 46
+fetching URL: https://www.nytimes.com/2017/01/02/world/asia/trump-twitter-north-korea-missiles-china.html
+Now before generate_all: https://www.nytimes.com/2017/01/02/world/asia/trump-twitter-north-korea-missiles-china.html
+Pulling page from https://www.nytimes.com/2017/01/02/world/asia/trump-twitter-north-korea-missiles-china.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/02/world/asia/trump-twitter-north-korea-missiles-china.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/02/world/asia/trump-twitter-north-korea-missiles-china.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/02/world/asia/trump-twitter-north-korea-missiles-china.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/02/world/asia/trump-twitter-north-korea-missiles-china.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/2016/01/07/world/asia/north-korea-hydrogen-bomb-q-a.html
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 189; Done: 47
+fetching URL: https://www.nytimes.com/2016/01/07/world/asia/north-korea-hydrogen-bomb-q-a.html
+Now before generate_all: https://www.nytimes.com/2016/01/07/world/asia/north-korea-hydrogen-bomb-q-a.html
+Pulling page from https://www.nytimes.com/2016/01/07/world/asia/north-korea-hydrogen-bomb-q-a.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/01/07/world/asia/north-korea-hydrogen-bomb-q-a.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2016/01/07/world/asia/north-korea-hydrogen-bomb-q-a.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/01/07/world/asia/north-korea-hydrogen-bomb-q-a.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2016/01/07/world/asia/north-korea-hydrogen-bomb-q-a.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 188; Done: 48
+fetching URL: https://www.nytimes.com/2017/01/23/us/politics/tpp-trump-trade-nafta.html
+Now before generate_all: https://www.nytimes.com/2017/01/23/us/politics/tpp-trump-trade-nafta.html
+Pulling page from https://www.nytimes.com/2017/01/23/us/politics/tpp-trump-trade-nafta.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/23/us/politics/tpp-trump-trade-nafta.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/23/us/politics/tpp-trump-trade-nafta.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/23/us/politics/tpp-trump-trade-nafta.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/23/us/politics/tpp-trump-trade-nafta.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/2015/06/15/world/asia/the-trans-pacific-trade-deal-and-a-presidents-legacy.html
+checking-in possible sub-url: https://www.nytimes.com/2016/10/04/upshot/donald-trump-trashes-nafta-but-unwinding-it-would-come-at-a-huge-cost.html
+checking-in possible sub-url: https://www.nytimes.com/2016/12/21/us/politics/peter-navarro-carl-icahn-trump-china-trade.html
+checking-in possible sub-url: https://www.nytimes.com/2017/01/23/world/trump-ban-foreign-aid-abortions.html
+checking-in possible sub-url: https://www.nytimes.com/interactive/2016/business/tpp-explained-what-is-trans-pacific-partnership.html
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 192; Done: 49
+fetching URL: https://www.nytimes.com/2015/06/15/world/asia/the-trans-pacific-trade-deal-and-a-presidents-legacy.html
+Now before generate_all: https://www.nytimes.com/2015/06/15/world/asia/the-trans-pacific-trade-deal-and-a-presidents-legacy.html
+Pulling page from https://www.nytimes.com/2015/06/15/world/asia/the-trans-pacific-trade-deal-and-a-presidents-legacy.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2015/06/15/world/asia/the-trans-pacific-trade-deal-and-a-presidents-legacy.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2015/06/15/world/asia/the-trans-pacific-trade-deal-and-a-presidents-legacy.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2015/06/15/world/asia/the-trans-pacific-trade-deal-and-a-presidents-legacy.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2015/06/15/world/asia/the-trans-pacific-trade-deal-and-a-presidents-legacy.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 191; Done: 50
+fetching URL: https://www.nytimes.com/2016/10/04/upshot/donald-trump-trashes-nafta-but-unwinding-it-would-come-at-a-huge-cost.html
+Now before generate_all: https://www.nytimes.com/2016/10/04/upshot/donald-trump-trashes-nafta-but-unwinding-it-would-come-at-a-huge-cost.html
+Pulling page from https://www.nytimes.com/2016/10/04/upshot/donald-trump-trashes-nafta-but-unwinding-it-would-come-at-a-huge-cost.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/10/04/upshot/donald-trump-trashes-nafta-but-unwinding-it-would-come-at-a-huge-cost.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2016/10/04/upshot/donald-trump-trashes-nafta-but-unwinding-it-would-come-at-a-huge-cost.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/10/04/upshot/donald-trump-trashes-nafta-but-unwinding-it-would-come-at-a-huge-cost.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2016/10/04/upshot/donald-trump-trashes-nafta-but-unwinding-it-would-come-at-a-huge-cost.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+checking-in possible sub-url: https://www.nytimes.com/section/upshot
+To-do: 191; Done: 51
+fetching URL: https://www.nytimes.com/2016/12/21/us/politics/peter-navarro-carl-icahn-trump-china-trade.html
+Now before generate_all: https://www.nytimes.com/2016/12/21/us/politics/peter-navarro-carl-icahn-trump-china-trade.html
+Pulling page from https://www.nytimes.com/2016/12/21/us/politics/peter-navarro-carl-icahn-trump-china-trade.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/21/us/politics/peter-navarro-carl-icahn-trump-china-trade.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/21/us/politics/peter-navarro-carl-icahn-trump-china-trade.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/21/us/politics/peter-navarro-carl-icahn-trump-china-trade.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/21/us/politics/peter-navarro-carl-icahn-trump-china-trade.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/2016/11/24/us/politics/wilbur-ross-commerce-trump.html
+checking-in possible sub-url: https://www.nytimes.com/2016/12/12/business/dealbook/goldman-sachs-gary-cohn.html
+checking-in possible sub-url: https://www.nytimes.com/2016/12/12/us/politics/rex-tillerson-secretary-of-state-trump.html
+checking-in possible sub-url: https://www.nytimes.com/interactive/2016/12/05/us/politics/trump-cabinet-insiders-outsiders-millionaires.html
+checking-in possible sub-url: https://www.nytimes.com/interactive/2016/us/politics/donald-trump-administration.html
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 195; Done: 52
+fetching URL: https://www.nytimes.com/2016/11/24/us/politics/wilbur-ross-commerce-trump.html
+Now before generate_all: https://www.nytimes.com/2016/11/24/us/politics/wilbur-ross-commerce-trump.html
+Pulling page from https://www.nytimes.com/2016/11/24/us/politics/wilbur-ross-commerce-trump.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/24/us/politics/wilbur-ross-commerce-trump.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/24/us/politics/wilbur-ross-commerce-trump.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/24/us/politics/wilbur-ross-commerce-trump.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/24/us/politics/wilbur-ross-commerce-trump.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/by/julie-hirschfeld-davis
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 195; Done: 53
+fetching URL: https://www.nytimes.com/2016/12/12/business/dealbook/goldman-sachs-gary-cohn.html
+Now before generate_all: https://www.nytimes.com/2016/12/12/business/dealbook/goldman-sachs-gary-cohn.html
+Pulling page from https://www.nytimes.com/2016/12/12/business/dealbook/goldman-sachs-gary-cohn.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/12/business/dealbook/goldman-sachs-gary-cohn.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/12/business/dealbook/goldman-sachs-gary-cohn.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/12/business/dealbook/goldman-sachs-gary-cohn.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/12/business/dealbook/goldman-sachs-gary-cohn.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/2016/11/21/business/dealbook/michael-sherwood-goldman-sachss-co-head-of-europe-to-step-down.html
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+checking-in possible sub-url: https://www.nytimes.com/section/business/dealbook
+To-do: 196; Done: 54
+fetching URL: https://www.nytimes.com/2016/11/21/business/dealbook/michael-sherwood-goldman-sachss-co-head-of-europe-to-step-down.html
+Now before generate_all: https://www.nytimes.com/2016/11/21/business/dealbook/michael-sherwood-goldman-sachss-co-head-of-europe-to-step-down.html
+Pulling page from https://www.nytimes.com/2016/11/21/business/dealbook/michael-sherwood-goldman-sachss-co-head-of-europe-to-step-down.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/21/business/dealbook/michael-sherwood-goldman-sachss-co-head-of-europe-to-step-down.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/21/business/dealbook/michael-sherwood-goldman-sachss-co-head-of-europe-to-step-down.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/21/business/dealbook/michael-sherwood-goldman-sachss-co-head-of-europe-to-step-down.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/21/business/dealbook/michael-sherwood-goldman-sachss-co-head-of-europe-to-step-down.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 195; Done: 55
+fetching URL: https://www.nytimes.com/2016/12/12/us/politics/rex-tillerson-secretary-of-state-trump.html
+Now before generate_all: https://www.nytimes.com/2016/12/12/us/politics/rex-tillerson-secretary-of-state-trump.html
+Pulling page from https://www.nytimes.com/2016/12/12/us/politics/rex-tillerson-secretary-of-state-trump.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/12/us/politics/rex-tillerson-secretary-of-state-trump.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/12/us/politics/rex-tillerson-secretary-of-state-trump.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/12/us/politics/rex-tillerson-secretary-of-state-trump.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/12/us/politics/rex-tillerson-secretary-of-state-trump.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/2016/11/16/us/politics/donald-trump-cabinet-rudy-giuliani.html
+checking-in possible sub-url: https://www.nytimes.com/2016/11/20/us/politics/donald-trump-mitt-romney-secretary-state.html
+checking-in possible sub-url: https://www.nytimes.com/2016/11/24/us/politics/donald-trump-mitt-romney-rudy-giuliani-state.html
+checking-in possible sub-url: https://www.nytimes.com/2016/12/09/us/politics/rex-tillerson-secretary-of-state-exxon-donald-trump.html
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 198; Done: 56
+fetching URL: https://www.nytimes.com/2016/11/16/us/politics/donald-trump-cabinet-rudy-giuliani.html
+Now before generate_all: https://www.nytimes.com/2016/11/16/us/politics/donald-trump-cabinet-rudy-giuliani.html
+Pulling page from https://www.nytimes.com/2016/11/16/us/politics/donald-trump-cabinet-rudy-giuliani.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/16/us/politics/donald-trump-cabinet-rudy-giuliani.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/16/us/politics/donald-trump-cabinet-rudy-giuliani.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/16/us/politics/donald-trump-cabinet-rudy-giuliani.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/16/us/politics/donald-trump-cabinet-rudy-giuliani.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/interactive/2016/11/11/us/politics/what-trump-wants-to-change.html
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 198; Done: 57
+fetching URL: https://www.nytimes.com/2016/11/20/us/politics/donald-trump-mitt-romney-secretary-state.html
+Now before generate_all: https://www.nytimes.com/2016/11/20/us/politics/donald-trump-mitt-romney-secretary-state.html
+Pulling page from https://www.nytimes.com/2016/11/20/us/politics/donald-trump-mitt-romney-secretary-state.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/20/us/politics/donald-trump-mitt-romney-secretary-state.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/20/us/politics/donald-trump-mitt-romney-secretary-state.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/20/us/politics/donald-trump-mitt-romney-secretary-state.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/20/us/politics/donald-trump-mitt-romney-secretary-state.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 197; Done: 58
+fetching URL: https://www.nytimes.com/2016/11/24/us/politics/donald-trump-mitt-romney-rudy-giuliani-state.html
+Now before generate_all: https://www.nytimes.com/2016/11/24/us/politics/donald-trump-mitt-romney-rudy-giuliani-state.html
+Pulling page from https://www.nytimes.com/2016/11/24/us/politics/donald-trump-mitt-romney-rudy-giuliani-state.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/24/us/politics/donald-trump-mitt-romney-rudy-giuliani-state.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/24/us/politics/donald-trump-mitt-romney-rudy-giuliani-state.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/24/us/politics/donald-trump-mitt-romney-rudy-giuliani-state.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2016/11/24/us/politics/donald-trump-mitt-romney-rudy-giuliani-state.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 196; Done: 59
+fetching URL: https://www.nytimes.com/2016/12/09/us/politics/rex-tillerson-secretary-of-state-exxon-donald-trump.html
+Now before generate_all: https://www.nytimes.com/2016/12/09/us/politics/rex-tillerson-secretary-of-state-exxon-donald-trump.html
+Pulling page from https://www.nytimes.com/2016/12/09/us/politics/rex-tillerson-secretary-of-state-exxon-donald-trump.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/09/us/politics/rex-tillerson-secretary-of-state-exxon-donald-trump.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/09/us/politics/rex-tillerson-secretary-of-state-exxon-donald-trump.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/09/us/politics/rex-tillerson-secretary-of-state-exxon-donald-trump.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2016/12/09/us/politics/rex-tillerson-secretary-of-state-exxon-donald-trump.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 195; Done: 60
+fetching URL: https://www.nytimes.com/2017/01/23/world/trump-ban-foreign-aid-abortions.html
+Now before generate_all: https://www.nytimes.com/2017/01/23/world/trump-ban-foreign-aid-abortions.html
+Pulling page from https://www.nytimes.com/2017/01/23/world/trump-ban-foreign-aid-abortions.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/23/world/trump-ban-foreign-aid-abortions.html.html

@@ -294,3 +294,260 @@ To-do: 124; Done: 14
 fetching URL: https://www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-unemployment-claims.html
 Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-unemployment-claims.html
 Pulling page from https://www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-unemployment-claims.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-unemployment-claims.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-unemployment-claims.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-unemployment-claims.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-unemployment-claims.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/19/business/coronavirus-unemployment-states.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/25/us/politics/whats-in-coronavirus-stimulus-bill.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/26/us/coronavirus-louisiana-new-orleans.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/04/03/upshot/coronavirus-jobless-rate-great-depression.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/article/coronavirus-stimulus-package-questions-answers.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/ben-casselman
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/patricia-cohen
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/tiffany-hsu
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?name=styln-coronavirus-markets
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/news-event/coronavirus?name=styln-coronavirus-markets
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 131; Done: 15
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/03/19/business/coronavirus-unemployment-states.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/03/19/business/coronavirus-unemployment-states.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/03/19/business/coronavirus-unemployment-states.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/19/business/coronavirus-unemployment-states.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/19/business/coronavirus-unemployment-states.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/19/business/coronavirus-unemployment-states.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/19/business/coronavirus-unemployment-states.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/16/nyregion/coronavirus-new-york-update.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/tara-siegel-bernard
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2020/03/19/upshot/coronavirus-jobless-claims-states.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?name=styln-coronavirus-markets
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/news-event/coronavirus?name=styln-coronavirus-markets
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 133; Done: 16
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/03/16/nyregion/coronavirus-new-york-update.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/03/16/nyregion/coronavirus-new-york-update.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/03/16/nyregion/coronavirus-new-york-update.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/16/nyregion/coronavirus-new-york-update.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/16/nyregion/coronavirus-new-york-update.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/16/nyregion/coronavirus-new-york-update.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/16/nyregion/coronavirus-new-york-update.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2013/07/24/dining/reviews/restaurant-review-daniel-on-the-upper-east-side.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/15/nyregion/coronavirus-nyc-shutdown.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/15/nyregion/nyc-schools-closed.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/16/nyregion/Coronavirus-nyc-economy-.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/16/nyregion/nyc-closing-bars-restaurants-coronavirus.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/16/nyregion/nyc-schools-closed-coronavirus.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/17/nyregion/coronavirus-new-york-update.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?name=styln-coronavirus-national
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/news-event/coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/news-event/coronavirus?name=styln-coronavirus-national
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 139; Done: 17
+fetching URL: https://www.nytimes3xbfgragh.onion/2013/07/24/dining/reviews/restaurant-review-daniel-on-the-upper-east-side.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2013/07/24/dining/reviews/restaurant-review-daniel-on-the-upper-east-side.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2013/07/24/dining/reviews/restaurant-review-daniel-on-the-upper-east-side.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2013/07/24/dining/reviews/restaurant-review-daniel-on-the-upper-east-side.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2013/07/24/dining/reviews/restaurant-review-daniel-on-the-upper-east-side.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2013/07/24/dining/reviews/restaurant-review-daniel-on-the-upper-east-side.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2013/07/24/dining/reviews/restaurant-review-daniel-on-the-upper-east-side.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/pete-wells
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/slideshow/2013/07/24/dining/20130724-REST.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 140; Done: 18
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/03/15/nyregion/coronavirus-nyc-shutdown.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/03/15/nyregion/coronavirus-nyc-shutdown.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/03/15/nyregion/coronavirus-nyc-shutdown.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/15/nyregion/coronavirus-nyc-shutdown.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/15/nyregion/coronavirus-nyc-shutdown.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/15/nyregion/coronavirus-nyc-shutdown.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/15/nyregion/coronavirus-nyc-shutdown.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/05/parenting/parents-distance-learning.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/14/nyregion/school-reopening-nyc.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/14/us/covid-schools-learning-pods.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/15/us/covid-college-tuition.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/16/us/los-angeles-schools-virus-testing.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/us/student-newspaper-schools-reopening.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/luis-ferre-sadurni
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/spotlight/schools-reopening?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/spotlight/schools-reopening?name=styln-coronavirus-schools-reopening
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 148; Done: 19
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/03/15/nyregion/nyc-schools-closed.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/03/15/nyregion/nyc-schools-closed.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/03/15/nyregion/nyc-schools-closed.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/15/nyregion/nyc-schools-closed.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/15/nyregion/nyc-schools-closed.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/15/nyregion/nyc-schools-closed.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/15/nyregion/nyc-schools-closed.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/07/nyregion/nyc-schools-coronavirus.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/13/nyregion/coronavirus-nyc-schools.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/eliza-shapiro
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/spotlight/schools-reopening?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/spotlight/schools-reopening?name=styln-coronavirus-schools-reopening
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 150; Done: 20
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/03/07/nyregion/nyc-schools-coronavirus.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/03/07/nyregion/nyc-schools-coronavirus.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/03/07/nyregion/nyc-schools-coronavirus.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/07/nyregion/nyc-schools-coronavirus.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/07/nyregion/nyc-schools-coronavirus.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/07/nyregion/nyc-schools-coronavirus.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/07/nyregion/nyc-schools-coronavirus.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/04/world/coronavirus-schools-closed.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/07/nyregion/coronavirus-new-york-queens.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/08/nyregion/coronavirus-newyork.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/08/nyregion/coronavirus-nyc.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/09/nyregion/coronavirus-new-york.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/04/16/nyregion/special-education-coronavirus-nyc.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2019/11/19/nyregion/student-homelessness-nyc.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/spotlight/schools-reopening?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/spotlight/schools-reopening?name=styln-coronavirus-schools-reopening
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 156; Done: 21
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/03/04/world/coronavirus-schools-closed.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/03/04/world/coronavirus-schools-closed.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/03/04/world/coronavirus-schools-closed.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/04/world/coronavirus-schools-closed.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/04/world/coronavirus-schools-closed.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/04/world/coronavirus-schools-closed.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/04/world/coronavirus-schools-closed.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/02/23/world/asia/south-korea-coronavirus-moon.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/02/24/world/europe/24coronavirus-milan-italy.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/02/27/world/asia/japan-schools-coronavirus.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/05/world/coronavirus-news.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/10/world/asia/south-korea-coronavirus-shincheonji.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/vivian-wang
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/es/2020/03/05/espanol/mundo/suspension-clases-coronavirus.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/spotlight/schools-reopening?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/spotlight/schools-reopening?name=styln-coronavirus-schools-reopening
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 162; Done: 22
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/02/23/world/asia/south-korea-coronavirus-moon.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/02/23/world/asia/south-korea-coronavirus-moon.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/02/23/world/asia/south-korea-coronavirus-moon.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/02/23/world/asia/south-korea-coronavirus-moon.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/02/23/world/asia/south-korea-coronavirus-moon.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/02/23/world/asia/south-korea-coronavirus-moon.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/02/23/world/asia/south-korea-coronavirus-moon.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2019/11/08/world/asia/jun-kwang-hoon-pastor-.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/02/21/world/asia/south-korea-coronavirus-shincheonji.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/choe-sang-hun
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2020/02/21/business/coronavirus-airline-travel.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2020/world/asia/china-wuhan-coronavirus-maps.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?name=styln-coronavirus-national
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/news-event/coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/news-event/coronavirus?name=styln-coronavirus-national
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/world/asia
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 167; Done: 23
+fetching URL: https://www.nytimes3xbfgragh.onion/2019/11/08/world/asia/jun-kwang-hoon-pastor-.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2019/11/08/world/asia/jun-kwang-hoon-pastor-.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2019/11/08/world/asia/jun-kwang-hoon-pastor-.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2019/11/08/world/asia/jun-kwang-hoon-pastor-.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2019/11/08/world/asia/jun-kwang-hoon-pastor-.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2019/11/08/world/asia/jun-kwang-hoon-pastor-.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2019/11/08/world/asia/jun-kwang-hoon-pastor-.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2019/10/12/world/asia/south-korea-protests.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2019/10/14/world/asia/south-korea-cho-kuk-resigns.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2019/10/21/world/asia/south-korea-cho-kuk-gold-spoon-elite.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 169; Done: 24
+fetching URL: https://www.nytimes3xbfgragh.onion/2019/10/12/world/asia/south-korea-protests.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2019/10/12/world/asia/south-korea-protests.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2019/10/12/world/asia/south-korea-protests.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2019/10/12/world/asia/south-korea-protests.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2019/10/12/world/asia/south-korea-protests.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2019/10/12/world/asia/south-korea-protests.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2019/10/12/world/asia/south-korea-protests.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2016/11/13/world/asia/korea-park-geun-hye-protests.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2018/08/24/world/asia/park-geun-hye-sentenced-south-korea.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2019/01/23/world/asia/south-korea-chief-justice-japan.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 171; Done: 25
+fetching URL: https://www.nytimes3xbfgragh.onion/2016/11/13/world/asia/korea-park-geun-hye-protests.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2016/11/13/world/asia/korea-park-geun-hye-protests.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2016/11/13/world/asia/korea-park-geun-hye-protests.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/11/13/world/asia/korea-park-geun-hye-protests.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/11/13/world/asia/korea-park-geun-hye-protests.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/11/13/world/asia/korea-park-geun-hye-protests.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/11/13/world/asia/korea-park-geun-hye-protests.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 170; Done: 26
+fetching URL: https://www.nytimes3xbfgragh.onion/2018/08/24/world/asia/park-geun-hye-sentenced-south-korea.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2018/08/24/world/asia/park-geun-hye-sentenced-south-korea.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2018/08/24/world/asia/park-geun-hye-sentenced-south-korea.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2018/08/24/world/asia/park-geun-hye-sentenced-south-korea.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2018/08/24/world/asia/park-geun-hye-sentenced-south-korea.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2018/08/24/world/asia/park-geun-hye-sentenced-south-korea.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2018/08/24/world/asia/park-geun-hye-sentenced-south-korea.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2016/11/01/world/asia/south-korea-park-geun-hye-choi-soon-sil.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-president-park-geun-hye-impeached.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2017/01/02/world/asia/south-korea-park-geun-hye-samsung.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2017/03/09/world/asia/park-geun-hye-impeached-south-korea.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2018/02/05/business/samsung-lee-jae-yong-appeal.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2018/04/06/world/asia/park-geun-hye-south-korea.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 175; Done: 27
+fetching URL: https://www.nytimes3xbfgragh.onion/2016/11/01/world/asia/south-korea-park-geun-hye-choi-soon-sil.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2016/11/01/world/asia/south-korea-park-geun-hye-choi-soon-sil.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2016/11/01/world/asia/south-korea-park-geun-hye-choi-soon-sil.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/11/01/world/asia/south-korea-park-geun-hye-choi-soon-sil.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/11/01/world/asia/south-korea-park-geun-hye-choi-soon-sil.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/11/01/world/asia/south-korea-park-geun-hye-choi-soon-sil.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/11/01/world/asia/south-korea-park-geun-hye-choi-soon-sil.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 174; Done: 28
+fetching URL: https://www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-president-park-geun-hye-impeached.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-president-park-geun-hye-impeached.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-president-park-geun-hye-impeached.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-president-park-geun-hye-impeached.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-president-park-geun-hye-impeached.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-president-park-geun-hye-impeached.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-president-park-geun-hye-impeached.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2016/07/08/world/asia/south-korea-and-us-agree-to-deploy-missile-defense-system.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2016/11/26/world/asia/korea-park-geun-hye-protests.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2016/12/08/world/asia/south-korea-park-geun-hye-accusations-impeachment.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-who-could-replace-park.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/topic/subject/north-koreas-nuclear-program
+To-do: 178; Done: 29
+fetching URL: https://www.nytimes3xbfgragh.onion/2016/07/08/world/asia/south-korea-and-us-agree-to-deploy-missile-defense-system.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2016/07/08/world/asia/south-korea-and-us-agree-to-deploy-missile-defense-system.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2016/07/08/world/asia/south-korea-and-us-agree-to-deploy-missile-defense-system.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/07/08/world/asia/south-korea-and-us-agree-to-deploy-missile-defense-system.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/07/08/world/asia/south-korea-and-us-agree-to-deploy-missile-defense-system.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/07/08/world/asia/south-korea-and-us-agree-to-deploy-missile-defense-system.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/07/08/world/asia/south-korea-and-us-agree-to-deploy-missile-defense-system.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 177; Done: 30
+fetching URL: https://www.nytimes3xbfgragh.onion/2016/11/26/world/asia/korea-park-geun-hye-protests.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2016/11/26/world/asia/korea-park-geun-hye-protests.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2016/11/26/world/asia/korea-park-geun-hye-protests.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/11/26/world/asia/korea-park-geun-hye-protests.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/11/26/world/asia/korea-park-geun-hye-protests.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/11/26/world/asia/korea-park-geun-hye-protests.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/11/26/world/asia/korea-park-geun-hye-protests.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 176; Done: 31
+fetching URL: https://www.nytimes3xbfgragh.onion/2016/12/08/world/asia/south-korea-park-geun-hye-accusations-impeachment.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2016/12/08/world/asia/south-korea-park-geun-hye-accusations-impeachment.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2016/12/08/world/asia/south-korea-park-geun-hye-accusations-impeachment.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/12/08/world/asia/south-korea-park-geun-hye-accusations-impeachment.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/12/08/world/asia/south-korea-park-geun-hye-accusations-impeachment.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/12/08/world/asia/south-korea-park-geun-hye-accusations-impeachment.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/12/08/world/asia/south-korea-park-geun-hye-accusations-impeachment.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 175; Done: 32
+fetching URL: https://www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-who-could-replace-park.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-who-could-replace-park.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-who-could-replace-park.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-who-could-replace-park.html.html
