@@ -29,6 +29,12 @@ PARENT_PID=$$
 . ${WEB2PDF_ROOT}/default_vars.sh
 # END IMPORTS #
 
+echo ${PARENT_PID} >> ${WEB2PDF_PID_FILE}
+
+KILL_COMMAND="while IFS= read -r line ; do kill -s TERM ${line} >/dev/null 2>&1 ; done < ${WEB2PDF_PID_FILE}"
+
+trap "${KILL_COMMAND}" ERR EXIT TERM KILL QUIT
+
 # BEGIN web2pdf.sh #
 
 DEFINE_string 'url' '' 'The URL you wish to convert into a document' u
