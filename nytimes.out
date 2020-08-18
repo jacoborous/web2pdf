@@ -851,3 +851,25 @@ To-do: 195; Done: 60
 fetching URL: https://www.nytimes.com/2017/01/23/world/trump-ban-foreign-aid-abortions.html
 Now before generate_all: https://www.nytimes.com/2017/01/23/world/trump-ban-foreign-aid-abortions.html
 Pulling page from https://www.nytimes.com/2017/01/23/world/trump-ban-foreign-aid-abortions.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/23/world/trump-ban-foreign-aid-abortions.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/23/world/trump-ban-foreign-aid-abortions.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/23/world/trump-ban-foreign-aid-abortions.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/23/world/trump-ban-foreign-aid-abortions.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/2017/01/18/health/rate-of-us-abortions-hits-lowest-since-roe-v-wade.html
+checking-in possible sub-url: https://www.nytimes.com/2017/01/21/us/women-march-protest-president-trump.html
+checking-in possible sub-url: https://www.nytimes.com/interactive/2017/01/23/us/politics/spicer-white-house-briefing-live.html
+checking-in possible sub-url: https://www.nytimes.com/section/world/americas
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 198; Done: 61
+fetching URL: https://www.nytimes.com/2017/01/18/health/rate-of-us-abortions-hits-lowest-since-roe-v-wade.html
+Now before generate_all: https://www.nytimes.com/2017/01/18/health/rate-of-us-abortions-hits-lowest-since-roe-v-wade.html
+Pulling page from https://www.nytimes.com/2017/01/18/health/rate-of-us-abortions-hits-lowest-since-roe-v-wade.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/18/health/rate-of-us-abortions-hits-lowest-since-roe-v-wade.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/18/health/rate-of-us-abortions-hits-lowest-since-roe-v-wade.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/18/health/rate-of-us-abortions-hits-lowest-since-roe-v-wade.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/18/health/rate-of-us-abortions-hits-lowest-since-roe-v-wade.html.html.md.tex for URLs to add to /tmp/web2pdf/11572/11774.urls. Prefix: https://www.nytimes.com
+checking-in possible sub-url: https://www.nytimes.com/subscription?campaignId=37WXW
+To-do: 197; Done: 62
+fetching URL: https://www.nytimes.com/2017/01/21/us/women-march-protest-president-trump.html
+Now before generate_all: https://www.nytimes.com/2017/01/21/us/women-march-protest-president-trump.html
+Pulling page from https://www.nytimes.com/2017/01/21/us/women-march-protest-president-trump.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes.com/2017/01/21/us/women-march-protest-president-trump.html.html

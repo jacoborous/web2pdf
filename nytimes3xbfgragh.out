@@ -551,3 +551,22 @@ To-do: 175; Done: 32
 fetching URL: https://www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-who-could-replace-park.html
 Now before generate_all: https://www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-who-could-replace-park.html
 Pulling page from https://www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-who-could-replace-park.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-who-could-replace-park.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-who-could-replace-park.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-who-could-replace-park.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2016/12/09/world/asia/south-korea-who-could-replace-park.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2014/12/20/world/asia/south-korea-disbands-united-progressive-party-sympathetic-to-north-korea.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 175; Done: 33
+fetching URL: https://www.nytimes3xbfgragh.onion/2014/12/20/world/asia/south-korea-disbands-united-progressive-party-sympathetic-to-north-korea.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2014/12/20/world/asia/south-korea-disbands-united-progressive-party-sympathetic-to-north-korea.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2014/12/20/world/asia/south-korea-disbands-united-progressive-party-sympathetic-to-north-korea.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2014/12/20/world/asia/south-korea-disbands-united-progressive-party-sympathetic-to-north-korea.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2014/12/20/world/asia/south-korea-disbands-united-progressive-party-sympathetic-to-north-korea.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2014/12/20/world/asia/south-korea-disbands-united-progressive-party-sympathetic-to-north-korea.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2014/12/20/world/asia/south-korea-disbands-united-progressive-party-sympathetic-to-north-korea.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 174; Done: 34
+fetching URL: https://www.nytimes3xbfgragh.onion/2017/01/02/world/asia/south-korea-park-geun-hye-samsung.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2017/01/02/world/asia/south-korea-park-geun-hye-samsung.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2017/01/02/world/asia/south-korea-park-geun-hye-samsung.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2017/01/02/world/asia/south-korea-park-geun-hye-samsung.html.html
