@@ -16,19 +16,13 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-SOURCE="${BASH_SOURCE[0]}"
-while [ -h "$SOURCE" ]; do
-  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
-  SOURCE="$(readlink "$SOURCE")"
-  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
-done
-THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
-
+WEB2PDF_ROOT=$(web2pdf_root)
+WEB2PDF_SCRIPTS=$(web2pdf_scripts)
 SUBJECT="generate_all.sh"
 
 # BEGIN IMPORTS #
-. ${THIS_DIR}/shFlags/shflags
-. ${THIS_DIR}/helper_functions.sh
+. ${WEB2PDF_ROOT}/shFlags/shflags
+. ${WEB2PDF_ROOT}/helper_functions.sh
 # END IMPORTS #
 
 # BEGIN CMDLINE ARGS #
@@ -109,6 +103,8 @@ function search_sub_urls_from_file() {
                         process_url "$URL" "${WEB2PDF_URLS}" "${WEB2PDF_URLS_DONE}"
 			_echo_err "Now before generate_all: $URL"
                         ERR=$(generate_all "$URL" "gfm" ${3} ${4} ${5} ${6})
+			PID=$!
+			echo $PID >> $WEB2PDF_PID_FILE
 			if [ $(($ERR)) -eq 1 ] ; then
 				_echo_err "Warning: The process for '$URL' returned an error code."
 				exit 1
