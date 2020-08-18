@@ -1,18 +1,28 @@
 #!/bin/bash
 
-WEB2PDF_ROOT=${1}
-INTERVAL=${2}
+if [ -z "${1}" ] ; then
+	echo "Error: Output root not specified."
+	exit 1;
+else
+	OUTPUT_ROOT="${1}"
+	if [ ! -d ${OUTPUT_ROOT} ] ; then
+		echo "Error: Output root directory does not exist."
+		exit 1;
+	fi
+	cd "${OUTPUT_ROOT}"
+fi
 
-cd ${WEB2PDF_ROOT}
+WEB2PDF_ROOT=$(web2pdf_root)
+WEB2PDF_SCRIPTS=$(web2pdf_scripts)
+INTERVAL=3600
 
 if [ -f ${PWD}/autocommit.lock ] ; then
 	echo "Already ongoing commit process here. Exiting."
 	exit;
 else
-	git init
 	REMOTE=$(git remote 2>&1 | grep -c fatal)
 	if [ "$REMOTE" != "0" ] ; then
-		REMOTE_REF=$(git remote get-url origin)
+		REMOTE_REF=$(git remote get-url origin 2>&1)
 	else
 		REMOTE_REF="local"
 	fi
