@@ -1,0 +1,296 @@
+Setting output root to /rw/nytimes-web2pdf
+Pulling page from https://www.nytimes3xbfgragh.onion/, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/13/podcasts/nice-white-parents-school.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/14/us/queer-lesbian-women-suffrage.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/15/opinion/joe-biden-2020-1988-what-it-takes.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/16/nyregion/metropolitan-diary.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/16/opinion/us-coronavirus-testing.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/16/style/does-rapid-covid-testing-work-weddings-parties.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/business/giant-bikes-coronavirus-shortage.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/health/coronavirus-herd-immunity.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/opinion/bernie-sanders-joe-biden.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/opinion/coronavirus-cities-suburbs.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/opinion/coronavirus-schools-teachers.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/opinion/joe-biden-conservative-2020.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/opinion/thailand-protests.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/opinion/trump-biden-harris-democratic-convention.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/opinion/trump-contested-election-protests.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/opinion/trump-post-office-election.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/opinion/trump-us-mail.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/podcasts/the-daily/trump-coronavirus-vaccine-covid.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/upshot/pandemic-recession-cities-fiscal-shortfall.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/us/politics/bernie-sanders-democratic-convention.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/us/politics/china-spying-alexander-yuk-ching-ma.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/us/politics/convention-democratic-night-1.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/us/politics/dejoy-postal-service-mail-in-voting.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/us/politics/democratic-national-convention-recap.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/us/politics/john-kasich-biden.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/us/politics/postal-service-voting.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/us/politics/trump-court-transgender-rights.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/world/coronavirus-covid.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/world/europe/belarus-lukashenko-protests.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/article/republicans-voting-for-biden-not-trump.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/article/Vote-by-mail.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/es/
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/us/dnc-convention
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/newsletters/coronavirus-schools-briefing
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/privacy
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/privacy/cookie-policy
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/arts
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/books
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/business
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/food
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/health
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/magazine
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/nyregion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/opinion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/opinion?pagetype=Homepage
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/politics
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/realestate
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/science
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/sports
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/style
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/technology
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/t-magazine
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/todayspaper
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/travel
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/us
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/world
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/video
+To-do: 59; Done: 0
+fetching URL: https://www.nytimes3xbfgragh.onion/
+Now before generate_all: https://www.nytimes3xbfgragh.onion/
+Pulling page from https://www.nytimes3xbfgragh.onion/, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/opinion?pagetype=Homepage
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 58; Done: 1
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/08/13/podcasts/nice-white-parents-school.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/08/13/podcasts/nice-white-parents-school.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/08/13/podcasts/nice-white-parents-school.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/08/13/podcasts/nice-white-parents-school.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/08/13/podcasts/nice-white-parents-school.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/08/13/podcasts/nice-white-parents-school.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/08/13/podcasts/nice-white-parents-school.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/07/23/podcasts/nice-white-parents-serial.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial-2.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/06/podcasts/episode-three-this-is-our-school-how-dare-you.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/column/nice-white-parents
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/spotlight/podcasts
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 63; Done: 2
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/07/23/podcasts/nice-white-parents-serial.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/07/23/podcasts/nice-white-parents-serial.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/07/23/podcasts/nice-white-parents-serial.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/23/podcasts/nice-white-parents-serial.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/23/podcasts/nice-white-parents-serial.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/23/podcasts/nice-white-parents-serial.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/23/podcasts/nice-white-parents-serial.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 62; Done: 3
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial-2.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial-2.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial-2.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial-2.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial-2.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial-2.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial-2.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 61; Done: 4
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/30/podcasts/nice-white-parents-serial.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 60; Done: 5
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/08/06/podcasts/episode-three-this-is-our-school-how-dare-you.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/08/06/podcasts/episode-three-this-is-our-school-how-dare-you.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/08/06/podcasts/episode-three-this-is-our-school-how-dare-you.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/08/06/podcasts/episode-three-this-is-our-school-how-dare-you.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/08/06/podcasts/episode-three-this-is-our-school-how-dare-you.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/08/06/podcasts/episode-three-this-is-our-school-how-dare-you.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/08/06/podcasts/episode-three-this-is-our-school-how-dare-you.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/14/dining/lobster-salad-recipe.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/15/at-home/coronavirus-at-home-quick-exercises.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/15/at-home/coronavirus-fall-patio-furniture.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2020/at-home/even-more-reporters-editors-diaries-lists-recommendations.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/spotlight/at-home?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 64; Done: 6
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/08/14/dining/lobster-salad-recipe.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/08/14/dining/lobster-salad-recipe.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/08/14/dining/lobster-salad-recipe.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/08/14/dining/lobster-salad-recipe.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/08/14/dining/lobster-salad-recipe.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/08/14/dining/lobster-salad-recipe.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/08/14/dining/lobster-salad-recipe.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/07/03/us/maine-lobster-summer-virus.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/david-tanis
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/newsletters/cooking
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/spotlight/at-home?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 66; Done: 7
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/07/03/us/maine-lobster-summer-virus.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/07/03/us/maine-lobster-summer-virus.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/07/03/us/maine-lobster-summer-virus.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/03/us/maine-lobster-summer-virus.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/03/us/maine-lobster-summer-virus.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/03/us/maine-lobster-summer-virus.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/07/03/us/maine-lobster-summer-virus.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2017/11/12/business/trump-trade-lobster-canada.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2018/06/21/climate/maine-lobsters.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/04/14/health/coronavirus-six-feet.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/05/02/business/economy/loans-coronavirus-small-business.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/05/07/health/coronavirus-antibody-prevalence.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/05/29/us/coronavirus-child-care-centers.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/06/03/business/economy/coronavirus-working-women.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/06/05/us/coronavirus-education-lost-learning.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/06/10/business/Small-business-loans-ppp.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/06/26/us/coronavirus-schools-reopen-fall.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/07/13/us/lausd-san-diego-school-reopening.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/07/22/health/covid-antibodies-herd-immunity.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/us/k-12-schools-reopening.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/article/coronavirus-money-unemployment.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/article/small-business-loans-stimulus-grants-freelancers-coronavirus.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/thomas-gibbons-neff
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2020/05/07/business/small-business-loans-coronavirus.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2020/science/coronavirus-vaccine-tracker.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2020/us/coronavirus-us-cases.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2020/us/maine-coronavirus-cases.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?name=styln-coronavirus-national
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/news-event/coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/news-event/coronavirus?name=styln-coronavirus-national
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 89; Done: 8
+fetching URL: https://www.nytimes3xbfgragh.onion/2017/11/12/business/trump-trade-lobster-canada.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2017/11/12/business/trump-trade-lobster-canada.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2017/11/12/business/trump-trade-lobster-canada.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2017/11/12/business/trump-trade-lobster-canada.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2017/11/12/business/trump-trade-lobster-canada.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2017/11/12/business/trump-trade-lobster-canada.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2017/11/12/business/trump-trade-lobster-canada.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/ana-swanson
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 89; Done: 9
+fetching URL: https://www.nytimes3xbfgragh.onion/2018/06/21/climate/maine-lobsters.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2018/06/21/climate/maine-lobsters.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2018/06/21/climate/maine-lobsters.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2018/06/21/climate/maine-lobsters.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2018/06/21/climate/maine-lobsters.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2018/06/21/climate/maine-lobsters.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2018/06/21/climate/maine-lobsters.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/12/climate/kamala-harris-environmental-justice.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/13/climate/trump-methane.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/08/17/climate/alaska-oil-drilling-anwr.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/livia-albeck-ripka
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2017/10/10/us/aquaculture.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2018/08/30/climate/how-much-hotter-is-your-hometown.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2020/04/19/climate/climate-crash-course-1.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2020/08/06/climate/climate-change-inequality-heat.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2020/climate/trump-environment-rollbacks.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/climate?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/climate?name=styln-climate
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 99; Done: 10
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/04/14/health/coronavirus-six-feet.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/04/14/health/coronavirus-six-feet.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/04/14/health/coronavirus-six-feet.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/04/14/health/coronavirus-six-feet.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/04/14/health/coronavirus-six-feet.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/04/14/health/coronavirus-six-feet.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/04/14/health/coronavirus-six-feet.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/james-gorman
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/kenneth-chang
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/knvul-sheikh
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2020/04/02/us/coronavirus-social-distancing.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/interactive/2020/04/14/science/coronavirus-transmission-cough-6-feet-ar-ul.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?name=styln-coronavirus-national
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/news-event/coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/news-event/coronavirus?name=styln-coronavirus-national
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 103; Done: 11
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/05/02/business/economy/loans-coronavirus-small-business.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/05/02/business/economy/loans-coronavirus-small-business.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/05/02/business/economy/loans-coronavirus-small-business.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/05/02/business/economy/loans-coronavirus-small-business.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/05/02/business/economy/loans-coronavirus-small-business.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/05/02/business/economy/loans-coronavirus-small-business.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/05/02/business/economy/loans-coronavirus-small-business.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/04/26/business/coronavirus-small-business-loans-large-companies.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/04/29/business/economy/us-gdp.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/05/13/business/paycheck-protection-program-small-business.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/06/30/us/politics/ppp-extension.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/07/13/business/small-businesses-coronavirus.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/david-enrich
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/emily-flitter
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/stacy-cowley
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?name=styln-coronavirus-markets
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/news-event/coronavirus?name=styln-coronavirus-markets
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/section/business/economy
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 113; Done: 12
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/04/26/business/coronavirus-small-business-loans-large-companies.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/04/26/business/coronavirus-small-business-loans-large-companies.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/04/26/business/coronavirus-small-business-loans-large-companies.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/04/26/business/coronavirus-small-business-loans-large-companies.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/04/26/business/coronavirus-small-business-loans-large-companies.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/04/26/business/coronavirus-small-business-loans-large-companies.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/04/26/business/coronavirus-small-business-loans-large-companies.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-relief-bill.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/04/20/business/shake-shack-returning-loan-ppp-coronavirus.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/04/26/business/ppp-small-business-loans.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/05/06/business/small-businesses-loans-ppp-coronavirus.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/jesse-drucker
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/jessica-silver-greenberg
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?name=styln-coronavirus-markets
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/news-event/coronavirus?name=styln-coronavirus-markets
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 118; Done: 13
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-relief-bill.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-relief-bill.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-relief-bill.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-relief-bill.html.html
+gfm file successfully generated.
+Translating /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-relief-bill.html.html.md to LaTeX, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-relief-bill.html.html.md.tex
+LaTeX file successfully generated.
+Searching through /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-relief-bill.html.html.md.tex for URLs to add to /tmp/web2pdf/14017/14225.urls. Prefix: https://www.nytimes3xbfgragh.onion
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-unemployment-claims.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/03/26/business/economy/fed-coronavirus-stimulus.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/2020/07/28/us/politics/coronavirus-relief-bills-house-senate.html
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/alan-rappeport
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/david-gelles
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/jim-tankersley
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/by/peter-eavis
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?action=click
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/live/2020/08/17/business/stock-market-today-coronavirus?name=styln-coronavirus-markets
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/news-event/coronavirus?name=styln-coronavirus-markets
+checking-in possible sub-url: https://www.nytimes3xbfgragh.onion/subscription?campaignId=37WXW
+To-do: 124; Done: 14
+fetching URL: https://www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-unemployment-claims.html
+Now before generate_all: https://www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-unemployment-claims.html
+Pulling page from https://www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-unemployment-claims.html, translating to gfm, output: /rw/nytimes-web2pdf/https/www.nytimes3xbfgragh.onion/2020/03/26/business/economy/coronavirus-unemployment-claims.html.html

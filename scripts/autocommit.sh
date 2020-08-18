@@ -9,14 +9,13 @@ else
 		echo "Error: Output root directory does not exist."
 		exit 1;
 	fi
-	cd "${OUTPUT_ROOT}"
 fi
 
 WEB2PDF_ROOT=$(web2pdf_root)
 WEB2PDF_SCRIPTS=$(web2pdf_scripts)
 INTERVAL=3600
 
-if [ -f ${PWD}/autocommit.lock ] ; then
+if [ -f ${OUTPUT_ROOT}/autocommit.lock ] ; then
 	echo "Already ongoing commit process here. Exiting."
 	exit;
 else
@@ -26,8 +25,8 @@ else
 	else
 		REMOTE_REF="local"
 	fi
-	touch ${PWD}/autocommit.lock
-	trap "kill -s TERM $(cat ${PWD}/autocommit.lock) && rm -rf ${PWD}/autocommit.lock" ERR EXIT TERM KILL QUIT
+	touch ${OUTPUT_ROOT}/autocommit.lock
+	trap "kill -s TERM $(cat ${OUTPUT_ROOT}/autocommit.lock) && rm -rf ${OUTPUT_ROOT}/autocommit.lock" ERR EXIT TERM KILL QUIT
 fi
 
 echo "Starting automated GitHub commit daemon. Interval $INTERVAL."
@@ -39,6 +38,6 @@ while [ 1 -lt 2 ] ; do
 	if [ "$REMOTE" != "0" ] ; then git push -u origin master ; fi
 	echo "Commit to $REMOTE_REF completed at $(date)."
 	sleep $INTERVAL &
-	echo $! >> ${PWD}/autocommit.lock
+	echo $! >> ${OUTPUT_ROOT}/autocommit.lock
 	wait
 done
