@@ -363,7 +363,7 @@ function process_url() {
 
 	mv ${TODO} ${TODO}.backup
 
-	cat ${TODO}.backup | egrep -x -v "${URL}" | sort | sed -f $_SED_RMDUPLICATES > ${TODO}
+	cat ${TODO}.backup | egrep -x -v "${URL}" | sort | sed -f $_SED_RMDUPLICATES | sort -R > ${TODO}
 
 	append_to_file_ifnexists "${DONE}" "${URL}"
 
@@ -382,7 +382,7 @@ function append_to_file_ifnexists() {
 
 	mv ${FILE} ${FILE}.backup
 	echo "${ELEM}" >> ${FILE}.backup
-	cat ${FILE}.backup | sort | sed -f $_SED_RMDUPLICATES > ${FILE}
+	cat ${FILE}.backup | sort | sed -f $_SED_RMDUPLICATES | sort -R > ${FILE}
 
 	rm -rf ${FILE}.backup
 	rm -rf ${FILE}.lock
@@ -457,7 +457,7 @@ function _map_1() {
 function filter_links_from_latex() {
 	local FILE="${1}"
 	local DOMAIN="$(str_escape ${2})"
-	local CMD="cat '$FILE' | grep -e '\\\href{' | sed -E 's/.*href\{(.*)\}\{(.*)/\1/g' | sort | sed -f $_SED_RMDUPLICATES | sed -E 's/^\/(.*)/${DOMAIN}\/\1/g' | grep '^${DOMAIN}' | sed -E 's/[\{\}].*//g' | sed -e 's/\\\#.*//g' | sed -E 's/(.*)\.html.*/\1\.html/g'"
+	local CMD="cat '$FILE' | grep -e '\\\href{' | sed -E 's/.*href\{(.*)\}\{(.*)/\1/g' | sort | sed -f $_SED_RMDUPLICATES | sort -R | sed -E 's/^\/(.*)/${DOMAIN}\/\1/g' | grep '^${DOMAIN}' | sed -E 's/[\{\}].*//g' | sed -e 's/\\\#.*//g' | sed -E 's/(.*)\.html.*/\1\.html/g'"
 	_echo_debug "$CMD"
 	echo $(eval $CMD)
 }

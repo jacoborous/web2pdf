@@ -57,26 +57,17 @@ fi
 
 # BEGIN generate_all.sh #
 
-WEB2PDF_URLS="${WEB2PDF_TMP_DIR}/${BASHPID}.urls"
-WEB2PDF_URLS_DONE="${WEB2PDF_URLS}.done"
-
-touch $WEB2PDF_URLS
-touch $WEB2PDF_URLS_DONE
-
-trap "rm -rf $WEB2PDF_URLS" EXIT KILL TERM
-trap "rm -rf $WEB2PDF_URLS_DONE" EXIT KILL TERM
-
 function check_in_links() {
 	local FILE="${1}"
 	local DOMAIN="${2}"
-	if [ ! -f $FILE ] ; then
+	if [ ! -f "$FILE" ] ; then
 		_echo_err "Error: $FILE does not exist."
 		exit 1;
 	fi
 	for i in $(filter_links_from_latex "$FILE" "$DOMAIN") ; do
                 NEW_URL="${i}"
-                COUNT=$(grep -c ${NEW_URL} ${WEB2PDF_URLS}) # not checked in yet
-                COUNT_DONE=$(grep -c ${NEW_URL} ${WEB2PDF_URLS_DONE}) # and not already finished
+                COUNT=$(grep -c "${NEW_URL}" ${WEB2PDF_URLS}) # not checked in yet
+                COUNT_DONE=$(grep -c "${NEW_URL}" ${WEB2PDF_URLS_DONE}) # and not already finished
                 if [ "${COUNT_DONE}" == "0" ] ; then
                         if [ "${COUNT}" == "0" ] ; then
                                 _echo_err "checking-in possible sub-url: ${NEW_URL}"
@@ -102,9 +93,7 @@ function search_sub_urls_from_file() {
                         _echo_err "fetching URL: $URL"
                         process_url "$URL" "${WEB2PDF_URLS}" "${WEB2PDF_URLS_DONE}"
 			_echo_err "Now before generate_all: $URL"
-                        ERR=$(generate_all "$URL" "gfm" ${3} ${4} ${5} ${6})
-			PID=$!
-			echo $PID >> $WEB2PDF_PID_FILE
+                        ERR=$(generate_all "$URL" "gfm" "${3}" "${4}" "${5}" "${6}")
 			if [ $(($ERR)) -eq 1 ] ; then
 				_echo_err "Warning: The process for '$URL' returned an error code."
 				exit 1
