@@ -57,11 +57,16 @@ fi
 
 # BEGIN generate_all.sh #
 
+function _echo_log() {
+	echo "[$(date)]: ${1}" >> ${WEB2PDF_LOG_FILE}
+}
+
 function check_in_links() {
 	local FILE="${1}"
 	local DOMAIN="${2}"
 	if [ ! -f "$FILE" ] ; then
-		_echo_err "Error: $FILE does not exist."
+		_echo_err "[ERROR]: $FILE does not exist."
+		_echo_log "[ERROR]: $FILE does not exist."
 		exit 1;
 	fi
 	for i in $(filter_links_from_latex "$FILE" "$DOMAIN") ; do
@@ -70,7 +75,8 @@ function check_in_links() {
                 COUNT_DONE=$(grep -c "${NEW_URL}" ${WEB2PDF_URLS_DONE}) # and not already finished
                 if [ "${COUNT_DONE}" == "0" ] ; then
                         if [ "${COUNT}" == "0" ] ; then
-                                _echo_err "checking-in possible sub-url: ${NEW_URL}"
+                                _echo_err "[CHECK IN]: ${NEW_URL}"
+				_echo_log "[CHECK IN]: ${NEW_URL}"
                                 append_to_file_ifnexists "${WEB2PDF_URLS}" "${NEW_URL}"
                         fi
                 fi
@@ -90,15 +96,15 @@ function search_sub_urls_from_file() {
         if [ "${TODO_COUNT}" != "0" ] ; then
                 while IFS= read -r line ; do
 			URL="$line"
-                        _echo_err "fetching URL: $URL"
                         process_url "$URL" "${WEB2PDF_URLS}" "${WEB2PDF_URLS_DONE}"
-			_echo_err "Now before generate_all: $URL"
                         ERR=$(generate_all "$URL" "gfm" "${3}" "${4}" "${5}" "${6}")
 			if [ $(($ERR)) -eq 1 ] ; then
-				_echo_err "Warning: The process for '$URL' returned an error code."
+				_echo_err "[ERROR]: The process for '$URL' returned an error code."
+				_echo_log "[ERROR]: $URL returned error."
 				exit 1
 			else
-				_echo_err "Subprocess for '$URL' completed."
+				_echo_log "[SUCCESS]: Extraction of $URL completed."
+				_echo_err "[SUCCESS]: Extraction of $URL completed."
 			fi
                 done < "${WEB2PDF_URLS}"
         else
@@ -115,7 +121,9 @@ function generate_all() {
         local DO_PDF="${5}"
         local DO_arg_recurse="${6}"
         local OUTPUT_MD=$(generate_markdown "${arg_url}" "${MARKDOWN}" ${arg_browser} ${arg_browser})
-	if [ "${OUTPUT_MD}" == "0" ] ; then return 1; fi
+	if [ "${OUTPUT_MD}" == "0" ] ; then
+		return 1;
+	fi
         local OUTPUT_TEX=$(generate_latex_from_file ${OUTPUT_MD} ${MARKDOWN})
 	if [ "${OUTPUT_TEX}" == "0" ] ; then return 1; fi
         local OUTPUT_PDF=$(if [[ "${DO_PDF}" == "true" ]] ; then compile_pdf ${OUTPUT_TEX} ${ENGINE} ; fi)

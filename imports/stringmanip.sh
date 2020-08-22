@@ -179,3 +179,11 @@ function str_escape() {
 	echo $final
 }
 
+function extract_emailaddr() {
+	local FILE="${1}"
+	cat "${FILE}" \
+		| grep 'mailto:' \
+		| egrep -v '\?|<|>' \
+		| sed -E 's/.*\\\href\{mailto:([a-zA-Z0-9@\._\-]*)\}(.*)/\1/g' \
+		| sort | sed -f $_SED_RMDUPLICATES
+}

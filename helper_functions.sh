@@ -261,6 +261,9 @@ function get_url_domain() {
 	echo "${DOMAIN}"
 }
 
+function extension() {
+	echo "${1}" | sed -E 's/.*\.([a-zA-Z0-9]*)$/\1/g'
+}
 
 function generate_markdown() {
 	local URL="${1}"
@@ -268,25 +271,48 @@ function generate_markdown() {
 	local USER_AGENT=$(select_user_agent ${3})
 	local HTTP_ACCEPT_HEADERS=$(select_http_accept ${4})
 	local OUTPUT_FILE="$(printf '%q\n' $(create_dirs_from_url ${URL}))"
+	local EXT=$(extension ${OUTPUT_FILE})
 
 	if [ -d "${OUTPUT_FILE}" ] ; then
-		OUTPUT_FILE="${OUTPUT_FILE}.html"
+		OUTPUT_FILE="${OUTPUT_FILE}.${EXT}"
 	fi
 
-	_echo_err "Pulling page from ${URL}, translating to ${INTERMED}, output: ${OUTPUT_FILE}"
+	case ${EXT} in
+		pdf)
+			_echo_err "[PDF]: PDF discovered!"
+			_echo_log "[PDF]: PDF discovered!"
+			curl_to_file "${URL}" "${OUTPUT_FILE}" "${USER_AGENT}" "${HTTP_ACCEPT_HEADERS}"
+			echo "0"
+		;;
+		html)
+			_echo_err "Pulling page from ${URL}, translating to ${INTERMED}, output: ${OUTPUT_FILE}"
 
-	curl_to_file "${URL}" "${OUTPUT_FILE}" "${USER_AGENT}" "${HTTP_ACCEPT_HEADERS}"
+			curl_to_file "${URL}" "${OUTPUT_FILE}" "${USER_AGENT}" "${HTTP_ACCEPT_HEADERS}"
 
-	pandoc -f html -t "${INTERMED}" -o "${OUTPUT_FILE}.md" "${OUTPUT_FILE}"
+			pandoc -f html -t "${INTERMED}" -o "${OUTPUT_FILE}.md" "${OUTPUT_FILE}"
 
-	if [ -f "${OUTPUT_FILE}.md" ] ; then
-	    _echo_err "${INTERMED} file successfully generated."
-	    rm -rf "${OUTPUT_FILE}" #delete HTML webpage, takes up unneccessary space.
-	    echo "${OUTPUT_FILE}.md"
-	else
-	    _echo_err "File not found! An error must have occurred when running pandoc."
-	    echo "0"
+			if [ -f "${OUTPUT_FILE}.md" ] ; then
+	    			_echo_err "[SUCCESS]: ${INTERMED} file successfully generated."
+				_echo_log "[SUCCESS]: ${INTERMED} file successfully generated."
+			    	rm -rf "${OUTPUT_FILE}" #delete HTML webpage, takes up unneccessary space.
+			    	echo "${OUTPUT_FILE}.md"
+			else
+				_echo_log "[ERROR]: No ${INTERMED} file created for $URL."
+			    	_echo_err "[ERROR]: No ${INTERMED} file created for $URL."
+	    			echo "0"
+			fi
+		;;
+		*)
+		;;
+	esac
+
+
+	local ISPDF=$(echo "${OUTPUT_FILE}" | sed -E 's/.*\.pdf$/true/g')
+	if [ "${ISPDF}" == "true" ] ; then
+		return;
 	fi
+
+
 
 }
 
@@ -300,10 +326,12 @@ function generate_latex_from_file() {
 	pandoc -f "${INTERMED}" -t "latex" -o "${OUTPUT_FILE}" "${FILE}"
 
 	if [ -f "${OUTPUT_FILE}" ] ; then
-	    _echo_err "LaTeX file successfully generated."
+	    _echo_err "[SUCCESS]: LaTeX file successfully generated."
+		_echo_log "[SUCCESS]: LaTeX file successfully generated."
 	    echo "${OUTPUT_FILE}"
 	else
-	    _echo_err "Error: LaTeX file failed to generate. An error must have occurred when running pandoc."
+	    _echo_err "[ERROR]: LaTeX file failed to generate. An error must have occurred when running pandoc."
+		_echo_log "[ERROR]: LaTeX file failed to generate. An error must have occurred when running pandoc."
 	    echo "0"
 	fi
 }
@@ -465,16 +493,14 @@ function filter_links_from_latex() {
 function filter_ext_links_from_latex() {
         local FILE="${1}"
         local DOMAIN="$(str_escape ${2})"
-        echo $(	\
-		cat $FILE \
+	cat $FILE \
 		| grep -e '\\\href{' \
 		| sed -E 's/.*href\{(.*)\}\{(.*)/\1/g' \
 		| sort | sed -f $_SED_RMDUPLICATES \
 		| sed -E 's/^\/(.*)/${DOMAIN}\/\1/g' \
 		| grep '${DOMAIN}' \
 		| sed -E 's/[\{\}].*//g' \
-		| sed -e 's/\\\#.*//g'\
-	)
+		| sed -e 's/\\\#.*//g'
 }
 
 function get_date() {
