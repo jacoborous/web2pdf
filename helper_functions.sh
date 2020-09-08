@@ -252,6 +252,19 @@ function create_dirs_from_url() {
 	echo "${WEB2PDF_DIR}/$(echo $(pylist_get_range "${URL_LIST}" "0" "") | sed -e 's/ /\//g')"
 }
 
+function create_dirs_from_url_2() {
+	local URL="${1}"
+	local NEWFILE=$(echo "${URL}" | sed -E 's/https:\/\/(.*)/\1/g')
+	local NEWDIR=$(echo "$NEWFILE" | sed -E 's/(.*)\/(.*)\.([a-zA-Z]*)/\1\/\2/g')
+	if [ "${NEWDIR}" == "${NEWFILE}" ] ; then
+		NEWFILE="${NEWFILE}.html"
+	fi
+	mkdir -p "${WEB2PDF_DIR}/${NEWDIR}"
+	_echo_debug "[DIR]: ${WEB2PDF_DIR}/${NEWDIR}"
+	_echo_debug "[NEW]: ${WEB2PDF_DIR}/${NEWFILE}"
+	echo "${WEB2PDF_DIR}/${NEWFILE}"
+}
+
 function get_url_domain() {
 	local URL="${1}"
 	local LIST=$(url_to_dir_list ${URL})
@@ -262,7 +275,7 @@ function get_url_domain() {
 }
 
 function extension() {
-	echo "${1}" | sed -E 's/.*\.([a-zA-Z0-9]*)$/\1/g'
+	echo "${1}" | sed -E 's/(.*)\.([a-zA-Z0-9]*)$/\2/g'
 }
 
 function generate_markdown() {
@@ -270,12 +283,8 @@ function generate_markdown() {
 	local INTERMED=$(if [ "${2}" == "gfm" ] ; then echo "gfm" ; else echo "markdown" ; fi)
 	local USER_AGENT=$(select_user_agent ${3})
 	local HTTP_ACCEPT_HEADERS=$(select_http_accept ${4})
-	local OUTPUT_FILE="$(printf '%q\n' $(create_dirs_from_url ${URL}))"
+	local OUTPUT_FILE="$(printf '%q\n' $(create_dirs_from_url_2 ${URL}))"
 	local EXT=$(extension ${OUTPUT_FILE})
-
-	if [ -d "${OUTPUT_FILE}" ] ; then
-		OUTPUT_FILE="${OUTPUT_FILE}.${EXT}"
-	fi
 
 	case ${EXT} in
 		pdf)
