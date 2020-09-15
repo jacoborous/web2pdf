@@ -15,10 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-if [ -z ${1} ] ; then
-	PREFIX='/usr/local'
+#set -x
+
+if [ -z "${1}" ] ; then
+	PREFIX=/usr/local
 else
-	PREFIX='${1}'
+	PREFIX="${1}"
 fi
 
 if [ ! -f ${PWD}/web2pdf.sh ] ; then
@@ -26,17 +28,50 @@ if [ ! -f ${PWD}/web2pdf.sh ] ; then
 	exit 1;
 fi
 
-echo "Installing to: ${PREFIX}/web2pdf"
+mkdir -p /home/web2pdf
+useradd --system --home=/home/web2pdf web2pdf
+chown -R web2pdf:web2pdf /home/web2pdf
 
-if [ ! -d ${PREFIX}/web2pdf ] ; then
-	mkdir -p ${PREFIX}/web2pdf
-fi
+INSTALLDIR="${PREFIX}/web2pdf"
 
-cp -r ${PWD} ${PREFIX}
+echo "Installing to: ${INSTALLDIR}"
+
+mkdir -p ${INSTALLDIR}
+mkdir -p /etc/web2pdf
+mkdir -p /var/log/web2pdf
+mkdir -p /var/run/web2pdf
+mkdir -p /tmp/web2pdf
+mkdir -p "${PREFIX}/share/.web2pdf"
+chown -R web2pdf:web2pdf ${INSTALLDIR}
+chown -R web2pdf:web2pdf /var/log/web2pdf
+chown -R web2pdf:web2pdf /var/run/web2pdf
+chown -R web2pdf:web2pdf /tmp/web2pdf
+chown -R web2pdf:web2pdf "${PREFIX}/share/.web2pdf"
+
+for i in $(find ${PWD}) ; do
+	if [[ $(echo "${i}" | grep -i -c "git") == "0" ]] ; then
+	if [ -d ${i} ] ; then
+		echo "mkdir -p ${INSTALLDIR}/${i}"
+		mkdir -p "${INSTALLDIR}/${i}"
+	fi
+	echo "cp -r ${i} ${INSTALLDIR}/"
+	cp -r "${i}" "${INSTALLDIR}/"
+	fi
+done
+
+echo "chmod -R 755 ${INSTALLDIR}"
+chmod -R 755 ${INSTALLDIR}
 
 ln -sf ${PREFIX}/web2pdf/web2pdf.sh ${PREFIX}/bin/web2pdf
 ln -sf ${PREFIX}/web2pdf/web2pdf_root.sh ${PREFIX}/bin/web2pdf_root
 ln -sf ${PREFIX}/web2pdf/scripts/currdir.sh ${PREFIX}/bin/web2pdf_scripts
 
-echo "web2pdf: $(which web2pdf) -> $(web2pdf_root)"
-echo "to get script dir, run 'web2pdf_scripts' : $(web2pdf_scripts)"
+export PATH="${INSTALLDIR}:${PREFIX}/bin:${PATH}"
+
+install $(web2pdf_scripts)/web2pdf.service -t /usr/lib/systemd/user/
+install $(web2pdf_scripts)/web2pdf.conf -t /etc/web2pdf/
+
+systemctl enable /usr/lib/systemd/user/web2pdf.service
+
+echo "to get web2pdf root dir, run \`web2pdf_root' : $(which web2pdf) -> $(web2pdf_root)"
+echo "to get script dir, run \`web2pdf_scripts' : $(web2pdf_scripts)"

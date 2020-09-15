@@ -1,0 +1,20 @@
+[Unit]
+Description=Web2PDF - scans websites and converts HTML into LaTeX and Markdown.
+Documentation=man:web2pdf(1)
+
+[Service]
+User=web2pdf
+ExecStart=bash $(web2pdf_scripts)/start_all.sh --config=/etc/web2pdf/web2pdf.conf
+ExecStop=bash $(web2pdf_scripts)/stop_all.sh
+Restart=on-failure
+RestartSec=5
+SuccessExitStatus=3 4
+RestartForceExitStatus=3 4
+
+# Hardening
+SystemCallArchitectures=native
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target
