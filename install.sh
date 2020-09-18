@@ -68,7 +68,9 @@ ln -sf ${PREFIX}/web2pdf/scripts/currdir.sh ${PREFIX}/bin/web2pdf_scripts
 
 export PATH="${INSTALLDIR}:${PREFIX}/bin:${PATH}"
 
-install $(web2pdf_scripts)/web2pdf.service -t /usr/lib/systemd/user/
+if [ ! -f "/usr/lib/systemd/user/web2pdf.service" ] ; then install $(web2pdf_scripts)/web2pdf.service -t /usr/lib/systemd/user/ ; fi
+if [ ! -f "/etc/web2pdf/web2pdf.conf" ] ; then install $(web2pdf_scripts)/web2pdf.conf -t /etc/web2pdf/ ; fi
+
 install $(web2pdf_scripts)/web2pdf.conf -t /etc/web2pdf/
 
 systemctl enable /usr/lib/systemd/user/web2pdf.service

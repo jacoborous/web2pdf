@@ -21,11 +21,12 @@ ID=0
 
 WEB2PDF_TARGETS="${WEB2PDF_TMP_DIR}/targets"
 
-cat ${WEB2PDF_CONF} | grep "jobunit" | sed -E "s/jobunit=(.*),(.*),(.*)/\1 \2 \3/g" > ${WEB2PDF_TARGETS}
+cat ${WEB2PDF_CONF} | grep -v '#' | egrep "^jobunit=" | sed -E "s/jobunit=(.*),(.*),(.*)/\1 \2 \3/g" > ${WEB2PDF_TARGETS}
 
 while IFS= read -r line ; do
         URL=$(echo $line | sed -E 's/(.*) (.*) (.*)/\1/g')
         OUTPUT_ROOT=$(echo $line | sed -E 's/(.*) (.*) (.*)/\2/g')
+	if [ ! -d ${OUTPUT_ROOT} ] ; then mkdir -p ${OUTPUT_ROOT} ; fi
         BROWSER=$(echo $line | sed -E 's/(.*) (.*) (.*)/\3/g')
         echo "Got job: URL=$URL OUTPUT_ROOT=$OUTPUT_ROOT"
         web2pdf -r -o ${OUTPUT_ROOT} -u ${URL} -b ${BROWSER} > ${WEB2PDF_LOG_DIR}/web2pdf_${ID}.log 2>&1 &
