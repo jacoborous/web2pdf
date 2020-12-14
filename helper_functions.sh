@@ -289,7 +289,7 @@ function generate_markdown() {
 	case ${EXT} in
 		pdf)
 			_echo_err "[PDF]: PDF discovered!"
-			_echo_log "[PDF]: PDF discovered!"
+			_echo_err "[PDF]: PDF discovered!"
 			curl_to_file "${URL}" "${OUTPUT_FILE}" "${USER_AGENT}" "${HTTP_ACCEPT_HEADERS}"
 			echo "0"
 		;;
@@ -302,11 +302,11 @@ function generate_markdown() {
 
 			if [ -f "${OUTPUT_FILE}.md" ] ; then
 	    			_echo_err "[SUCCESS]: ${INTERMED} file successfully generated."
-				_echo_log "[SUCCESS]: ${INTERMED} file successfully generated."
+				_echo_err "[SUCCESS]: ${INTERMED} file successfully generated."
 			    	rm -rf "${OUTPUT_FILE}" #delete HTML webpage, takes up unneccessary space.
 			    	echo "${OUTPUT_FILE}.md"
 			else
-				_echo_log "[ERROR]: No ${INTERMED} file created for $URL."
+				_echo_err "[ERROR]: No ${INTERMED} file created for $URL."
 			    	_echo_err "[ERROR]: No ${INTERMED} file created for $URL."
 	    			echo "0"
 			fi
@@ -336,11 +336,11 @@ function generate_latex_from_file() {
 
 	if [ -f "${OUTPUT_FILE}" ] ; then
 	    _echo_err "[SUCCESS]: LaTeX file successfully generated."
-		_echo_log "[SUCCESS]: LaTeX file successfully generated."
+		_echo_err "[SUCCESS]: LaTeX file successfully generated."
 	    echo "${OUTPUT_FILE}"
 	else
 	    _echo_err "[ERROR]: LaTeX file failed to generate. An error must have occurred when running pandoc."
-		_echo_log "[ERROR]: LaTeX file failed to generate. An error must have occurred when running pandoc."
+		_echo_err "[ERROR]: LaTeX file failed to generate. An error must have occurred when running pandoc."
 	    echo "0"
 	fi
 }

@@ -1,35 +1,30 @@
 #!/bin/bash
 
 # Copyright (C) 2020 Tristan Miano <jacobeus@protonmail.com>
-# 
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
-# 
 
 
-SOURCE="${BASH_SOURCE[0]}"
-while [ -h "$SOURCE" ]; do
-  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
-  SOURCE="$(readlink "$SOURCE")"
-  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
-done
-THIS_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+WEB2PDF_ROOT=$(web2pdf_root)
+WEB2PDF_SCRIPTS=$(web2pdf_scripts)
 
+PARENT_PID=$$
 
-# BEGIN IMPORTS #
-. ${THIS_DIR}/../../shFlags/shflags
-. ${THIS_DIR}/../../helper_functions.sh
-. ${THIS_DIR}/../../default_vars.sh
+# IMPORTS #
+. ${WEB2PDF_ROOT}/shFlags/shflags
+. ${WEB2PDF_ROOT}/helper_functions.sh
+. ${WEB2PDF_ROOT}/default_vars.sh
 # END IMPORTS #
 
 # BEGIN twitter.sh #
